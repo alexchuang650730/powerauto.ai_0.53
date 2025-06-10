@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # PowerAutomation v0.5.3 統一架構
 
 基於v0.5.2版本設計的三種前端架構統一方案，整合最新release代碼，提供企業級、消費級和開源社區三種不同的使用體驗。
@@ -249,3 +250,7 @@ python -m pytest tests/performance_tests/
 
 **PowerAutomation v0.5.3** - 讓自動化更簡單，讓工作更高效！
 
+=======
+# powerauto.ai_0.53
+powerauto.ai_0.53
+>>>>>>> af7c063e18bcc1603845cc6c8c0a95d34db3c562
