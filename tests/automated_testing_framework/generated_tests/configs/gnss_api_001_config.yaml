@@ -1,0 +1,37 @@
+environment:
+  hardware:
+    android_version: '>=10.0'
+    device_type: Android手机
+    gps_support: true
+    network_connection: true
+  network:
+    base_station_signal: good
+    network_connection: stable
+  permissions:
+    adb_debugging: true
+    developer_options: true
+    usb_debugging: true
+  software:
+    adb_version: '>=1.0.41'
+    python_version: '>=3.8'
+    test_libraries:
+    - requests
+    - subprocess
+expected_results:
+- 命令返回包含location相关的系统属性配置
+- 成功查询到网络位置服务包，包名正确
+- 权限详情包含ACCESS_FINE_LOCATION等权限项目
+failure_criteria:
+- ADB命令执行失败或返回错误
+- 权限信息不完整或不正确
+- API数据格式不符合预期
+preconditions:
+- 设备通过USB连接并被ADB识别
+- 网络位置服务已安装且可访问
+- 设备具有基本的定位权限
+- 系统设置应用可正常访问
+test_info:
+  business_module: BSP_GNSS
+  test_id: GNSS_API_001
+  test_name: 网络定位NLP权限管理API测试
+  test_type: API型测试

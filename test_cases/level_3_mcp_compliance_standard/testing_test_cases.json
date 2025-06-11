@@ -1,0 +1,56 @@
+[
+  {
+    "test_id": "L3_TESTING_001",
+    "test_name": "標準化測試驗證",
+    "test_level": "level_3_mcp_compliance_standard",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "驗證測試生成引擎的標準化合規性",
+    "preconditions": [
+      "Level 1-2測試通過",
+      "測試標準已定義"
+    ],
+    "test_steps": [
+      "1. 檢查測試用例格式標準化",
+      "2. 驗證測試數據標準化",
+      "3. 測試報告格式合規性",
+      "4. 檢查測試執行標準",
+      "5. 驗證測試質量標準"
+    ],
+    "expected_results": [
+      "測試用例格式標準化",
+      "測試數據符合規範",
+      "報告格式合規",
+      "執行標準一致",
+      "質量標準達標"
+    ],
+    "test_data": {
+      "test_standards": {
+        "case_format": "IEEE_829",
+        "data_format": "JSON_Schema",
+        "report_format": "JUnit_XML",
+        "quality_threshold": 0.85
+      }
+    },
+    "priority": "high",
+    "estimated_duration": 30,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "standardization",
+      "test_compliance",
+      "quality_assurance"
+    ],
+    "metadata": {
+      "standards_count": 5,
+      "compliance_validation": true
+    }
+  }
+]

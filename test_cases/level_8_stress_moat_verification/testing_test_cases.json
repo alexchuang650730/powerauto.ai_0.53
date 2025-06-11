@@ -1,0 +1,71 @@
+[
+  {
+    "test_id": "L8_TESTING_001",
+    "test_name": "測試生成引擎壓力測試",
+    "test_level": "level_8_stress_moat_verification",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "測試模板測試生成引擎的極限處理能力",
+    "preconditions": [
+      "Level 1-7測試通過",
+      "大規模測試數據已準備"
+    ],
+    "test_steps": [
+      "1. 批量生成10000個測試用例",
+      "2. 並發執行500個生成任務",
+      "3. 測試內存使用極限",
+      "4. 驗證質量保證機制",
+      "5. 測試系統韌性",
+      "6. 檢查護城河效果"
+    ],
+    "expected_results": [
+      "大批量生成成功",
+      "並發處理穩定",
+      "內存使用可控",
+      "質量保證有效",
+      "系統韌性良好",
+      "護城河機制工作"
+    ],
+    "test_data": {
+      "batch_sizes": [
+        1000,
+        5000,
+        10000
+      ],
+      "concurrent_jobs": [
+        100,
+        300,
+        500
+      ],
+      "quality_thresholds": {
+        "min_quality": 0.7,
+        "avg_quality": 0.8,
+        "generation_speed": 100
+      }
+    },
+    "priority": "high",
+    "estimated_duration": 75,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "stress_test",
+      "batch_processing",
+      "quality_assurance"
+    ],
+    "metadata": {
+      "max_batch_size": 10000,
+      "quality_monitoring": true
+    }
+  }
+]

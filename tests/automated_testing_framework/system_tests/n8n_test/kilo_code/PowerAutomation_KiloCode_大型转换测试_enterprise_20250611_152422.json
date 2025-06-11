@@ -1,0 +1,608 @@
+{
+  "id": "9b5139c4-3070-422d-9c70-f71c105573e4",
+  "name": "PowerAutomation_KiloCode_大型转换测试_enterprise",
+  "active": true,
+  "nodes": [
+    {
+      "id": "32a86a56-4bf5-4ef7-a904-c47766be8da4",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {},
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "1cd8f74c-8959-4a9c-8ba4-dd3b19fec00f",
+      "name": "Webhook_Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kilo-code-test",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": "fd22f3d1-1fac-445c-b19b-3cd21b2443b8",
+      "disabled": false
+    },
+    {
+      "id": "8b40e856-73f7-4ab3-8f90-6bc5d797134f",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 0\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_000\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "52623298-5aca-4bbb-9c7e-4ca15707e775",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        840,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 1\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_001\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "2bc920a0-53e5-46d2-abe9-7eccb5153e9b",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 2\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_002\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "5cede2bc-fd39-4c82-a18b-6771d393818b",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 3\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_003\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "b232d7c9-e511-41f6-9e12-602ee45a15fb",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 4\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_004\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "ca0af8e2-6880-456c-ae80-822864c2dd23",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 5\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_005\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "235d7dcc-1253-488c-af35-1f50b6cd028f",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 6\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_006\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "14f37b8e-efe6-4ae8-81f9-5939f1e80a4d",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2040,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 7\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_007\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "4abf2329-d65e-4bbb-8cec-cc5f27b7c02e",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2240,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 8\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_008\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "040034e9-453c-4ad8-8649-f65bc217514e",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2440,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 9\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_009\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "817bcd61-e42b-4668-bf76-411d50acb72a",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 10\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_010\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "18ccafb4-ae35-448b-8b7b-1b49caa5b56f",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        2840,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 11\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_011\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "012da0a4-7f5c-477e-9042-0222c01f1d8b",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3040,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 12\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_012\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "16c3d37f-43a5-48c7-b473-a10fa663c90d",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3240,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 13\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_013\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "1632e923-ec28-4288-9016-7350d433aced",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3440,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 14\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_014\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "96f7f294-06bf-4c80-ab2a-8f524f1c6a4e",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 15\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_015\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "75994262-8dfa-4db9-ab1c-389d79be74c4",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        3840,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 16\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_016\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "aa0a7127-37d6-4161-89a1-5b4b5b8c3b4d",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4040,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 17\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_017\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "4671887f-25db-4206-8c6f-e9a7fc7a9faa",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4240,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 18\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_018\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "47d14520-cc80-41ce-8413-9fe60cffeabc",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4440,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"index\": 19\n};\nconst confidenceScore = 0.9;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"event_019\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "ffb84fe4-bbb8-4225-aad8-172b89fe39c6",
+      "name": "Final_Validation",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        4640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// 最终验证逻辑\nconst recordingStats = {\n  \"total_kilo_code_events\": 20\n};\nconst kiloCodeEvents = 20;\nconst totalActions = 0;\n\n// 验证标准\nconst validationCriteria = {\n  min_kilo_code_events: 1,\n  max_average_response_time: 3.0,\n  min_accuracy_rate: 0.85\n};\n\n// 执行验证\nconst avgResponseTime = recordingStats.average_kilo_code_response_time || 0;\nconst avgAccuracy = recordingStats.average_accuracy || 0;\n\nconst validationResult = {\n  recording_id: \"large_test_001\",\n  validation_timestamp: new Date().toISOString(),\n  kilo_code_events_count: kiloCodeEvents,\n  total_actions_count: totalActions,\n  average_response_time: avgResponseTime,\n  average_accuracy: avgAccuracy,\n  validations: {\n    kilo_code_events_sufficient: kiloCodeEvents >= validationCriteria.min_kilo_code_events,\n    response_time_acceptable: avgResponseTime <= validationCriteria.max_average_response_time,\n    accuracy_acceptable: avgAccuracy >= validationCriteria.min_accuracy_rate\n  },\n  overall_status: \"UNKNOWN\"\n};\n\n// 计算总体状态\nconst allValidationsPassed = Object.values(validationResult.validations).every(v => v === true);\nvalidationResult.overall_status = allValidationsPassed ? \"PASS\" : \"FAIL\";\n\nreturn [validationResult];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "62cfdf90-4ae4-4826-82db-7576e68d8cb4",
+      "name": "Test_Results_Output",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        4840,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "{{$env.POWERAUTOMATION_API_URL}}/test-results",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "powerautomationApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "recording_id",
+              "value": "large_test_001"
+            },
+            {
+              "name": "test_results",
+              "value": "{{JSON.stringify($json)}}"
+            },
+            {
+              "name": "timestamp",
+              "value": "{{new Date().toISOString()}}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Webhook_Trigger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook_Trigger": {
+      "main": [
+        [
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect_struggle_mode_1": {
+      "main": [
+        [
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Final_Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final_Validation": {
+      "main": [
+        [
+          {
+            "node": "Test_Results_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "",
+    "timezone": "Asia/Shanghai"
+  },
+  "staticData": {},
+  "tags": [
+    "powerautomation",
+    "kilo-code",
+    "testing",
+    "automation"
+  ],
+  "meta": {
+    "powerautomation_recording_id": "large_test_001",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T15:24:22.955382",
+    "converter_version": "1.0.0",
+    "template_type": "kilo_code_detection"
+  }
+}

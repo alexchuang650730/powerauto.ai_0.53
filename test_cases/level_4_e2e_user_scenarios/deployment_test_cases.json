@@ -1,0 +1,60 @@
+[
+  {
+    "test_id": "L4_DEPLOYMENT_001",
+    "test_name": "部署工作流端到端測試",
+    "test_level": "level_4_e2e_user_scenarios",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試完整的部署工作流用戶場景",
+    "preconditions": [
+      "Level 1-3測試通過",
+      "部署環境已配置"
+    ],
+    "test_steps": [
+      "1. 用戶輸入部署需求：'部署到生產環境'",
+      "2. 系統識別部署意圖",
+      "3. Release Manager準備部署包",
+      "4. 執行預部署檢查",
+      "5. 執行部署操作",
+      "6. 進行部署後驗證",
+      "7. 生成部署報告"
+    ],
+    "expected_results": [
+      "部署意圖識別正確",
+      "部署包準備完整",
+      "預檢查通過",
+      "部署操作成功",
+      "驗證結果正常",
+      "報告生成完整"
+    ],
+    "test_data": {
+      "deployment_scenarios": [
+        "production_deployment",
+        "staging_deployment",
+        "rollback_scenario",
+        "blue_green_deployment"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 50,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "e2e_test",
+      "deployment_workflow",
+      "production_ready"
+    ],
+    "metadata": {
+      "deployment_types": 4,
+      "rollback_testing": true
+    }
+  }
+]

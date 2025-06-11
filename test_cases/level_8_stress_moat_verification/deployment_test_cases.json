@@ -1,0 +1,62 @@
+[
+  {
+    "test_id": "L8_DEPLOYMENT_001",
+    "test_name": "Release Manager壓力測試",
+    "test_level": "level_8_stress_moat_verification",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager在高頻部署場景下的表現",
+    "preconditions": [
+      "Level 1-7測試通過",
+      "多環境部署已配置"
+    ],
+    "test_steps": [
+      "1. 並發50個部署任務",
+      "2. 測試快速連續部署",
+      "3. 模擬部署失敗場景",
+      "4. 測試大規模回滾",
+      "5. 驗證資源競爭處理",
+      "6. 檢查系統穩定性"
+    ],
+    "expected_results": [
+      "並發部署成功率 > 90%",
+      "連續部署穩定",
+      "失敗處理正確",
+      "回滾機制有效",
+      "資源競爭解決",
+      "系統保持穩定"
+    ],
+    "test_data": {
+      "deployment_stress": {
+        "concurrent_deployments": 50,
+        "deployment_frequency": 10,
+        "failure_injection_rate": 0.1,
+        "rollback_scenarios": 5
+      }
+    },
+    "priority": "medium",
+    "estimated_duration": 80,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "stress_test",
+      "deployment_stress",
+      "failure_handling"
+    ],
+    "metadata": {
+      "stress_scenarios": 4,
+      "failure_injection": true
+    }
+  }
+]

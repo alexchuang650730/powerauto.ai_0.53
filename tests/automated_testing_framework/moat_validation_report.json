@@ -1,0 +1,25 @@
+{
+  "timestamp": "2025-06-09T14:11:07.069212",
+  "metrics": {
+    "test_coverage": 0.955,
+    "test_quality": 0.7146596858638743,
+    "performance_score": 0.9,
+    "security_score": 1.0,
+    "compatibility_score": 1.0,
+    "ai_capability_score": 0.775,
+    "overall_strength": 0.9016989528795811,
+    "moat_level": "堡壘級護城河"
+  },
+  "thresholds": {
+    "coverage_threshold": 0.85,
+    "quality_threshold": 0.7,
+    "performance_threshold": 0.75,
+    "security_threshold": 0.9,
+    "compatibility_threshold": 0.85,
+    "ai_capability_threshold": 0.7,
+    "fortress_threshold": 0.85
+  },
+  "recommendations": [
+    "建議改進測試用例質量，增加文檔和錯誤處理"
+  ]
+}

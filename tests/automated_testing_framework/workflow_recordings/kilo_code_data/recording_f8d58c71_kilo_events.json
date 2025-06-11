@@ -1,0 +1,14 @@
+[
+  {
+    "event_id": "kilo_event_001",
+    "timestamp": "2025-06-11T00:58:44.409228",
+    "detection_type": "struggle_mode_1",
+    "detection_data": {
+      "integration_test": true
+    },
+    "confidence_score": 0.95,
+    "response_time": 1.0,
+    "screenshot_path": null,
+    "visual_verification": null
+  }
+]

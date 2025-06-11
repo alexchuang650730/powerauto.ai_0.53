@@ -1,0 +1,132 @@
+[
+  {
+    "test_id": "L1_CODING_001",
+    "test_name": "Kilo Code引擎單元測試",
+    "test_level": "level_1_unit_code_quality",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎的代碼生成功能",
+    "preconditions": [
+      "Kilo Code引擎已初始化",
+      "測試環境已準備"
+    ],
+    "test_steps": [
+      "1. 輸入代碼生成請求：'寫一個Python排序函數'",
+      "2. 調用Kilo Code引擎生成代碼",
+      "3. 驗證生成的代碼語法正確性",
+      "4. 驗證代碼功能正確性",
+      "5. 檢查代碼質量指標"
+    ],
+    "expected_results": [
+      "生成語法正確的Python代碼",
+      "代碼實現排序功能",
+      "代碼質量評分 > 0.8",
+      "執行時間 < 5秒"
+    ],
+    "test_data": {
+      "input_request": "寫一個Python排序函數",
+      "expected_function_name": "sort_function",
+      "test_inputs": [
+        [
+          3,
+          1,
+          4,
+          1,
+          5
+        ],
+        [
+          9,
+          2,
+          6,
+          5,
+          3
+        ]
+      ],
+      "expected_outputs": [
+        [
+          1,
+          1,
+          3,
+          4,
+          5
+        ],
+        [
+          2,
+          3,
+          5,
+          6,
+          9
+        ]
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 10,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [],
+    "automation_level": "full",
+    "tags": [
+      "unit_test",
+      "code_generation",
+      "kilo_code"
+    ],
+    "metadata": {
+      "complexity": "medium",
+      "coverage_target": 0.9
+    }
+  },
+  {
+    "test_id": "L1_CODING_002",
+    "test_name": "代碼質量檢查測試",
+    "test_level": "level_1_unit_code_quality",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試生成代碼的質量檢查功能",
+    "preconditions": [
+      "代碼已生成",
+      "質量檢查工具已配置"
+    ],
+    "test_steps": [
+      "1. 生成測試代碼",
+      "2. 運行pylint代碼質量檢查",
+      "3. 運行black代碼格式化檢查",
+      "4. 計算代碼複雜度",
+      "5. 生成質量報告"
+    ],
+    "expected_results": [
+      "pylint評分 > 8.0",
+      "代碼格式符合PEP8標準",
+      "圈複雜度 < 10",
+      "生成詳細質量報告"
+    ],
+    "test_data": {
+      "quality_thresholds": {
+        "pylint_score": 8.0,
+        "complexity_limit": 10,
+        "line_length_limit": 88
+      }
+    },
+    "priority": "high",
+    "estimated_duration": 8,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [],
+    "automation_level": "full",
+    "tags": [
+      "unit_test",
+      "code_quality",
+      "static_analysis"
+    ],
+    "metadata": {
+      "quality_gates": [
+        "pylint",
+        "black",
+        "complexity"
+      ]
+    }
+  }
+]

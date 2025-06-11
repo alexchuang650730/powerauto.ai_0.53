@@ -1,0 +1,53 @@
+[
+  {
+    "test_id": "L2_CODING_001",
+    "test_name": "Kilo Code引擎集成測試",
+    "test_level": "level_2_integration_agent_collab",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎與其他組件的集成",
+    "preconditions": [
+      "Level 1測試通過",
+      "所有組件已部署"
+    ],
+    "test_steps": [
+      "1. 啟動Kilo Code引擎",
+      "2. 測試與模板系統的集成",
+      "3. 測試與測試生成引擎的協作",
+      "4. 驗證代碼生成到測試的完整流程",
+      "5. 檢查組件間通信"
+    ],
+    "expected_results": [
+      "組件間通信正常",
+      "完整流程執行成功",
+      "數據傳遞無丟失",
+      "協作效率 > 0.8"
+    ],
+    "test_data": {
+      "integration_scenarios": [
+        "code_generation_to_test",
+        "template_to_code",
+        "multi_component_workflow"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 20,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "integration_test",
+      "kilo_code",
+      "component_collaboration"
+    ],
+    "metadata": {
+      "integration_points": 3,
+      "data_flow_validation": true
+    }
+  }
+]

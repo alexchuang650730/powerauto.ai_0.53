@@ -1,0 +1,227 @@
+{
+  "id": "88601b25-fff4-4bb1-a8db-4f935c5f0d39",
+  "name": "PowerAutomation_Test_general_test_20250611_005844",
+  "active": true,
+  "nodes": [
+    {
+      "id": "9ba0e637-1c94-40c9-af4d-7b64156bc91a",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {},
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "8ef494c7-8150-4874-8d6d-b615f3c4d33e",
+      "name": "Click_action_001",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        440,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "{{$env.POWERAUTOMATION_API_URL}}/ui/click",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "element_selector",
+              "value": ""
+            },
+            {
+              "name": "element_text",
+              "value": ""
+            },
+            {
+              "name": "coordinates",
+              "value": "{}"
+            },
+            {
+              "name": "action_id",
+              "value": "action_001"
+            }
+          ]
+        }
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "55cceacf-ffbe-46bd-aa83-eab895df753d",
+      "name": "Input_action_002",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        640,
+        400
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "{{$env.POWERAUTOMATION_API_URL}}/ui/input",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "element_selector",
+              "value": ""
+            },
+            {
+              "name": "input_text",
+              "value": ""
+            },
+            {
+              "name": "clear_first",
+              "value": "True"
+            },
+            {
+              "name": "action_id",
+              "value": "action_002"
+            }
+          ]
+        }
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "f20b2c7c-aae6-4f5d-b786-bd3700e71adf",
+      "name": "Final_Validation",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        840,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// 最终验证逻辑\nconst recordingStats = {\n  \"total_actions\": 2\n};\nconst kiloCodeEvents = 0;\nconst totalActions = 2;\n\n// 验证标准\nconst validationCriteria = {\n  min_kilo_code_events: 1,\n  max_average_response_time: 3.0,\n  min_accuracy_rate: 0.85\n};\n\n// 执行验证\nconst avgResponseTime = recordingStats.average_kilo_code_response_time || 0;\nconst avgAccuracy = recordingStats.average_accuracy || 0;\n\nconst validationResult = {\n  recording_id: \"general_001\",\n  validation_timestamp: new Date().toISOString(),\n  kilo_code_events_count: kiloCodeEvents,\n  total_actions_count: totalActions,\n  average_response_time: avgResponseTime,\n  average_accuracy: avgAccuracy,\n  validations: {\n    kilo_code_events_sufficient: kiloCodeEvents >= validationCriteria.min_kilo_code_events,\n    response_time_acceptable: avgResponseTime <= validationCriteria.max_average_response_time,\n    accuracy_acceptable: avgAccuracy >= validationCriteria.min_accuracy_rate\n  },\n  overall_status: \"UNKNOWN\"\n};\n\n// 计算总体状态\nconst allValidationsPassed = Object.values(validationResult.validations).every(v => v === true);\nvalidationResult.overall_status = allValidationsPassed ? \"PASS\" : \"FAIL\";\n\nreturn [validationResult];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "244dfc84-1f5b-4eac-a5ff-a16cdf5df600",
+      "name": "Test_Results_Output",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1040,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "{{$env.POWERAUTOMATION_API_URL}}/test-results",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "powerautomationApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "recording_id",
+              "value": "general_001"
+            },
+            {
+              "name": "test_results",
+              "value": "{{JSON.stringify($json)}}"
+            },
+            {
+              "name": "timestamp",
+              "value": "{{new Date().toISOString()}}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Click_action_001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Click_action_001": {
+      "main": [
+        [
+          {
+            "node": "Input_action_002",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Input_action_002": {
+      "main": [
+        [
+          {
+            "node": "Final_Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final_Validation": {
+      "main": [
+        [
+          {
+            "node": "Test_Results_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "staticData": {},
+  "tags": [
+    "powerautomation",
+    "testing",
+    "automation"
+  ],
+  "meta": {
+    "powerautomation_recording_id": "general_001",
+    "recording_mode": "general_test",
+    "target_version": "personal_pro",
+    "generated_at": "2025-06-11T00:58:44.373809",
+    "converter_version": "1.0.0",
+    "template_type": "general_test"
+  }
+}

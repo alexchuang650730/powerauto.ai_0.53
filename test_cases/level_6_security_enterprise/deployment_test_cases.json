@@ -1,0 +1,62 @@
+[
+  {
+    "test_id": "L6_DEPLOYMENT_001",
+    "test_name": "部署安全測試",
+    "test_level": "level_6_security_enterprise",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager的部署安全機制",
+    "preconditions": [
+      "Level 1-5測試通過",
+      "安全策略已配置"
+    ],
+    "test_steps": [
+      "1. 測試部署權限控制",
+      "2. 驗證部署包簽名",
+      "3. 檢查網絡安全配置",
+      "4. 測試秘鑰管理",
+      "5. 驗證安全掃描",
+      "6. 檢查合規性"
+    ],
+    "expected_results": [
+      "權限控制有效",
+      "部署包簽名驗證通過",
+      "網絡配置安全",
+      "秘鑰管理規範",
+      "安全掃描通過",
+      "合規性滿足"
+    ],
+    "test_data": {
+      "security_controls": [
+        "rbac_permissions",
+        "package_signing",
+        "network_policies",
+        "secret_management",
+        "vulnerability_scanning"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 45,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "security_test",
+      "deployment_security",
+      "enterprise_security"
+    ],
+    "metadata": {
+      "security_level": "enterprise",
+      "compliance_required": true
+    }
+  }
+]

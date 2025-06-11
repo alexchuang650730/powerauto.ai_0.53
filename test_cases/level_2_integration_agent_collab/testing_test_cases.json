@@ -1,0 +1,61 @@
+[
+  {
+    "test_id": "L2_TESTING_001",
+    "test_name": "智能體協作測試",
+    "test_level": "level_2_integration_agent_collab",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "測試多智能體協作的測試生成功能",
+    "preconditions": [
+      "Level 1測試通過",
+      "多智能體系統已啟動"
+    ],
+    "test_steps": [
+      "1. 啟動編碼智能體",
+      "2. 啟動測試智能體",
+      "3. 啟動協調智能體",
+      "4. 執行協作測試生成任務",
+      "5. 驗證智能體間通信和協作效果"
+    ],
+    "expected_results": [
+      "智能體間通信正常",
+      "協作任務完成率 > 90%",
+      "生成的測試用例質量高",
+      "協作效率提升明顯"
+    ],
+    "test_data": {
+      "agent_types": [
+        "coding_agent",
+        "testing_agent",
+        "coordination_agent"
+      ],
+      "collaboration_metrics": [
+        "communication_latency",
+        "task_completion_rate",
+        "quality_score"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 25,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "integration_test",
+      "multi_agent",
+      "collaboration"
+    ],
+    "metadata": {
+      "agent_count": 3,
+      "collaboration_patterns": [
+        "sequential",
+        "parallel"
+      ]
+    }
+  }
+]

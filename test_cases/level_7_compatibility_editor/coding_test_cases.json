@@ -1,0 +1,74 @@
+[
+  {
+    "test_id": "L7_CODING_001",
+    "test_name": "跨平台編碼兼容性測試",
+    "test_level": "level_7_compatibility_editor",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎在不同平台和編輯器的兼容性",
+    "preconditions": [
+      "Level 1-6測試通過",
+      "多平台環境已準備"
+    ],
+    "test_steps": [
+      "1. 在Windows平台測試代碼生成",
+      "2. 在Mac平台測試代碼生成",
+      "3. 測試VS Code集成",
+      "4. 測試其他編輯器集成",
+      "5. 驗證跨平台代碼兼容性",
+      "6. 檢查編輯器插件功能"
+    ],
+    "expected_results": [
+      "Windows平台功能正常",
+      "Mac平台功能正常",
+      "VS Code集成完善",
+      "其他編輯器支持良好",
+      "跨平台代碼兼容",
+      "插件功能完整"
+    ],
+    "test_data": {
+      "platforms": [
+        "windows_10",
+        "windows_11",
+        "macos_monterey",
+        "macos_ventura"
+      ],
+      "editors": [
+        "vscode",
+        "sublime",
+        "atom",
+        "vim"
+      ],
+      "languages": [
+        "python",
+        "javascript",
+        "java",
+        "go"
+      ]
+    },
+    "priority": "medium",
+    "estimated_duration": 50,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "compatibility_test",
+      "cross_platform",
+      "editor_integration"
+    ],
+    "metadata": {
+      "platform_count": 4,
+      "editor_count": 4,
+      "language_count": 4
+    }
+  }
+]

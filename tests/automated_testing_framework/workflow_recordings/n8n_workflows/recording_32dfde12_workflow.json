@@ -1,0 +1,255 @@
+{
+  "name": "PowerAutomation_kilo_code_detection_recording_32dfde12",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "error_type": "missing_semicolon",
+          "line": 42
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.2,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_struggle_mode_1_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "struggle_mode_2",
+        "detection_data": {
+          "error_type": "infinite_loop",
+          "complexity": "medium"
+        },
+        "confidence_score": 0.88,
+        "response_time": 2.1,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_struggle_mode_2_2",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "struggle_mode_3",
+        "detection_data": {
+          "issue_type": "memory_leak",
+          "severity": "high"
+        },
+        "confidence_score": 0.92,
+        "response_time": 1.8,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_struggle_mode_3_3",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "intervention_trigger",
+        "detection_data": {
+          "intervention_type": "code_suggestion",
+          "intervention_data": {
+            "suggestion": "添加分号",
+            "confidence": 0.95
+          },
+          "success_rate": 0.9
+        },
+        "confidence_score": 0.9,
+        "response_time": 0.8,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_intervention_trigger_4",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "intervention_trigger",
+        "detection_data": {
+          "intervention_type": "error_fix",
+          "intervention_data": {
+            "fix_type": "loop_condition",
+            "auto_fix": true
+          },
+          "success_rate": 0.85
+        },
+        "confidence_score": 0.85,
+        "response_time": 1.5,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_intervention_trigger_5",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "accuracy_validation",
+        "detection_data": {
+          "total_detections": 3,
+          "correct_detections": 3,
+          "false_positives": 0,
+          "false_negatives": 0
+        },
+        "confidence_score": 0.9166666666666666,
+        "response_time": 0.1,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_accuracy_validation_6",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "total_events": 6,
+        "average_response_time": 1.2499999999999998,
+        "validation_criteria": {
+          "max_response_time": 3.0,
+          "min_confidence": 0.85,
+          "required_detection_types": [
+            "struggle_mode_1",
+            "struggle_mode_2",
+            "intervention_decision"
+          ]
+        }
+      },
+      "name": "Validation",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1640,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_struggle_mode_1_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_struggle_mode_1_1": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_struggle_mode_2_2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_struggle_mode_2_2": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_struggle_mode_3_3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_struggle_mode_3_3": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_intervention_trigger_4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_intervention_trigger_4": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_intervention_trigger_5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_intervention_trigger_5": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_accuracy_validation_6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_accuracy_validation_6": {
+      "main": [
+        [
+          {
+            "node": "Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "staticData": {},
+  "meta": {
+    "powerautomation_recording_id": "recording_32dfde12",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T00:52:56.840887"
+  }
+}

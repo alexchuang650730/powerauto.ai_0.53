@@ -1,0 +1,55 @@
+{
+  "id": "flow_a193923c",
+  "name": "基础功能测试_general_test",
+  "description": "测试工作流录制器基础功能 | 模式: general_test | 版本: enterprise",
+  "start_time": "2025-06-11T00:58:44.259155",
+  "end_time": "2025-06-11T00:58:44.269294",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_user_test_action",
+      "timestamp": "2025-06-11T00:58:44.269242",
+      "element_info": {},
+      "action_data": {
+        "test": "data"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "click",
+      "timestamp": "2025-06-11T00:58:44.269277",
+      "element_info": {
+        "selector": ".test-button",
+        "text": "",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_3c11dbb2",
+    "recording_mode": "general_test",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "general_test",
+      "target_version": "enterprise",
+      "enable_visual_verification": false,
+      "enable_screenshot": false,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}

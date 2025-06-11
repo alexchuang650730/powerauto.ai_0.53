@@ -1,0 +1,66 @@
+[
+  {
+    "test_id": "L4_CODING_001",
+    "test_name": "編碼工作流端到端測試",
+    "test_level": "level_4_e2e_user_scenarios",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試完整的編碼工作流用戶場景",
+    "preconditions": [
+      "Level 1-3測試通過",
+      "完整系統已部署"
+    ],
+    "test_steps": [
+      "1. 用戶輸入編碼需求：'創建一個Web API'",
+      "2. 系統識別編碼意圖",
+      "3. Kilo Code引擎生成代碼",
+      "4. 自動生成測試用例",
+      "5. 執行測試驗證",
+      "6. 生成部署包",
+      "7. 用戶確認最終結果"
+    ],
+    "expected_results": [
+      "意圖識別準確率 > 95%",
+      "代碼生成成功",
+      "測試用例覆蓋率 > 80%",
+      "測試執行通過率 > 90%",
+      "部署包生成成功",
+      "用戶滿意度 > 4.0/5.0"
+    ],
+    "test_data": {
+      "user_scenarios": [
+        "create_rest_api",
+        "implement_algorithm",
+        "fix_bug",
+        "optimize_performance"
+      ],
+      "success_criteria": {
+        "intent_accuracy": 0.95,
+        "code_quality": 0.8,
+        "test_coverage": 0.8,
+        "user_satisfaction": 4.0
+      }
+    },
+    "priority": "high",
+    "estimated_duration": 45,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "e2e_test",
+      "user_scenario",
+      "coding_workflow"
+    ],
+    "metadata": {
+      "scenario_count": 4,
+      "user_journey_validation": true
+    }
+  }
+]

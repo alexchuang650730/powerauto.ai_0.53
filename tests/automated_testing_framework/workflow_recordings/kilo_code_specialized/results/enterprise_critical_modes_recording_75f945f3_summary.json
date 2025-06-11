@@ -1,0 +1,10 @@
+{
+  "scenario_id": "enterprise_critical_modes",
+  "recording_id": "recording_75f945f3",
+  "timestamp": "2025-06-11T00:56:43.193129",
+  "quality_score": 0.7999999999999999,
+  "performance_grade": "A+",
+  "coverage_grade": "D",
+  "average_response_time": 1.0,
+  "average_accuracy": 0.95
+}

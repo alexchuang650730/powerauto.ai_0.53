@@ -1,0 +1,498 @@
+{
+  "recording_id": "recording_1e133e37",
+  "recording_name": "KiloCode_企业版关键模式测试_kilo_code_detection",
+  "recording_mode": "kilo_code_detection",
+  "target_version": "enterprise",
+  "start_time": "2025-06-11T00:52:36.872000",
+  "end_time": "2025-06-11T00:52:36.884156",
+  "config": {
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "enable_visual_verification": true,
+    "enable_screenshot": true,
+    "auto_generate_n8n": true,
+    "recording_quality": "high",
+    "max_recording_duration": 300,
+    "screenshot_interval": 2.0
+  },
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.883980",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "error_type": "missing_semicolon",
+          "line": 42
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.2,
+        "event_id": "kilo_event_001"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.884024",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_2",
+        "detection_data": {
+          "error_type": "infinite_loop",
+          "complexity": "medium"
+        },
+        "confidence_score": 0.88,
+        "response_time": 2.1,
+        "event_id": "kilo_event_002"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_003",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.884067",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_3",
+        "detection_data": {
+          "issue_type": "memory_leak",
+          "severity": "high"
+        },
+        "confidence_score": 0.92,
+        "response_time": 1.8,
+        "event_id": "kilo_event_003"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_004",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.884090",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "intervention_trigger",
+        "detection_data": {
+          "intervention_type": "code_suggestion",
+          "intervention_data": {
+            "suggestion": "添加分号",
+            "confidence": 0.95
+          },
+          "success_rate": 0.9
+        },
+        "confidence_score": 0.9,
+        "response_time": 0.8,
+        "event_id": "kilo_event_004"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_005",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.884113",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "intervention_trigger",
+        "detection_data": {
+          "intervention_type": "error_fix",
+          "intervention_data": {
+            "fix_type": "loop_condition",
+            "auto_fix": true
+          },
+          "success_rate": 0.85
+        },
+        "confidence_score": 0.85,
+        "response_time": 1.5,
+        "event_id": "kilo_event_005"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_006",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:52:36.884136",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "accuracy_validation",
+        "detection_data": {
+          "total_detections": 3,
+          "correct_detections": 3,
+          "false_positives": 0,
+          "false_negatives": 0
+        },
+        "confidence_score": 0.9166666666666666,
+        "response_time": 0.1,
+        "event_id": "kilo_event_006"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "kilo_code_events": [
+    {
+      "event_id": "kilo_event_001",
+      "timestamp": "2025-06-11T00:52:36.883965",
+      "detection_type": "struggle_mode_1",
+      "detection_data": {
+        "error_type": "missing_semicolon",
+        "line": 42
+      },
+      "confidence_score": 0.95,
+      "response_time": 1.2,
+      "screenshot_path": null,
+      "visual_verification": null
+    },
+    {
+      "event_id": "kilo_event_002",
+      "timestamp": "2025-06-11T00:52:36.884018",
+      "detection_type": "struggle_mode_2",
+      "detection_data": {
+        "error_type": "infinite_loop",
+        "complexity": "medium"
+      },
+      "confidence_score": 0.88,
+      "response_time": 2.1,
+      "screenshot_path": null,
+      "visual_verification": null
+    },
+    {
+      "event_id": "kilo_event_003",
+      "timestamp": "2025-06-11T00:52:36.884063",
+      "detection_type": "struggle_mode_3",
+      "detection_data": {
+        "issue_type": "memory_leak",
+        "severity": "high"
+      },
+      "confidence_score": 0.92,
+      "response_time": 1.8,
+      "screenshot_path": null,
+      "visual_verification": null
+    },
+    {
+      "event_id": "kilo_event_004",
+      "timestamp": "2025-06-11T00:52:36.884086",
+      "detection_type": "intervention_trigger",
+      "detection_data": {
+        "intervention_type": "code_suggestion",
+        "intervention_data": {
+          "suggestion": "添加分号",
+          "confidence": 0.95
+        },
+        "success_rate": 0.9
+      },
+      "confidence_score": 0.9,
+      "response_time": 0.8,
+      "screenshot_path": null,
+      "visual_verification": null
+    },
+    {
+      "event_id": "kilo_event_005",
+      "timestamp": "2025-06-11T00:52:36.884109",
+      "detection_type": "intervention_trigger",
+      "detection_data": {
+        "intervention_type": "error_fix",
+        "intervention_data": {
+          "fix_type": "loop_condition",
+          "auto_fix": true
+        },
+        "success_rate": 0.85
+      },
+      "confidence_score": 0.85,
+      "response_time": 1.5,
+      "screenshot_path": null,
+      "visual_verification": null
+    },
+    {
+      "event_id": "kilo_event_006",
+      "timestamp": "2025-06-11T00:52:36.884132",
+      "detection_type": "accuracy_validation",
+      "detection_data": {
+        "total_detections": 3,
+        "correct_detections": 3,
+        "false_positives": 0,
+        "false_negatives": 0
+      },
+      "confidence_score": 0.9166666666666666,
+      "response_time": 0.1,
+      "screenshot_path": null,
+      "visual_verification": null
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "statistics": {
+    "total_actions": 6,
+    "total_kilo_code_events": 6,
+    "total_screenshots": 0,
+    "average_kilo_code_response_time": 1.2499999999999998,
+    "recording_duration": 0.012156
+  },
+  "n8n_workflow": {
+    "name": "PowerAutomation_kilo_code_detection_recording_1e133e37",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "position": [
+          240,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "struggle_mode_1",
+          "detection_data": {
+            "error_type": "missing_semicolon",
+            "line": 42
+          },
+          "confidence_score": 0.95,
+          "response_time": 1.2,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_struggle_mode_1_1",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          440,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "struggle_mode_2",
+          "detection_data": {
+            "error_type": "infinite_loop",
+            "complexity": "medium"
+          },
+          "confidence_score": 0.88,
+          "response_time": 2.1,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_struggle_mode_2_2",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          640,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "struggle_mode_3",
+          "detection_data": {
+            "issue_type": "memory_leak",
+            "severity": "high"
+          },
+          "confidence_score": 0.92,
+          "response_time": 1.8,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_struggle_mode_3_3",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          840,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "intervention_trigger",
+          "detection_data": {
+            "intervention_type": "code_suggestion",
+            "intervention_data": {
+              "suggestion": "添加分号",
+              "confidence": 0.95
+            },
+            "success_rate": 0.9
+          },
+          "confidence_score": 0.9,
+          "response_time": 0.8,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_intervention_trigger_4",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          1040,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "intervention_trigger",
+          "detection_data": {
+            "intervention_type": "error_fix",
+            "intervention_data": {
+              "fix_type": "loop_condition",
+              "auto_fix": true
+            },
+            "success_rate": 0.85
+          },
+          "confidence_score": 0.85,
+          "response_time": 1.5,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_intervention_trigger_5",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          1240,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "accuracy_validation",
+          "detection_data": {
+            "total_detections": 3,
+            "correct_detections": 3,
+            "false_positives": 0,
+            "false_negatives": 0
+          },
+          "confidence_score": 0.9166666666666666,
+          "response_time": 0.1,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_accuracy_validation_6",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          1440,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "total_events": 6,
+          "average_response_time": 1.2499999999999998,
+          "validation_criteria": {
+            "max_response_time": 3.0,
+            "min_confidence": 0.85,
+            "required_detection_types": [
+              "struggle_mode_1",
+              "struggle_mode_2",
+              "intervention_decision"
+            ]
+          }
+        },
+        "name": "Validation",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          1640,
+          300
+        ]
+      }
+    ],
+    "connections": {
+      "Start": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_struggle_mode_1_1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_struggle_mode_1_1": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_struggle_mode_2_2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_struggle_mode_2_2": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_struggle_mode_3_3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_struggle_mode_3_3": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_intervention_trigger_4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_intervention_trigger_4": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_intervention_trigger_5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_intervention_trigger_5": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_accuracy_validation_6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_accuracy_validation_6": {
+        "main": [
+          [
+            {
+              "node": "Validation",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "active": true,
+    "settings": {},
+    "staticData": {},
+    "meta": {
+      "powerautomation_recording_id": "recording_1e133e37",
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "generated_at": "2025-06-11T00:52:36.884980"
+    }
+  }
+}

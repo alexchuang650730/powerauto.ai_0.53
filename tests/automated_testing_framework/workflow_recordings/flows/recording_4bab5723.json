@@ -1,0 +1,150 @@
+{
+  "recording_id": "recording_4bab5723",
+  "recording_name": "KiloCode_个人专业版学习场景_kilo_code_detection",
+  "recording_mode": "kilo_code_detection",
+  "target_version": "personal_pro",
+  "start_time": "2025-06-11T00:58:44.352531",
+  "end_time": "2025-06-11T00:58:44.369735",
+  "config": {
+    "recording_mode": "kilo_code_detection",
+    "target_version": "personal_pro",
+    "enable_visual_verification": true,
+    "enable_screenshot": true,
+    "auto_generate_n8n": true,
+    "recording_quality": "high",
+    "max_recording_duration": 300,
+    "screenshot_interval": 2.0
+  },
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:58:44.369687",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "scenario": "personal_pro_learning"
+        },
+        "confidence_score": 0.9,
+        "response_time": 1.5,
+        "event_id": "kilo_event_001"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "kilo_code_events": [
+    {
+      "event_id": "kilo_event_001",
+      "timestamp": "2025-06-11T00:58:44.369651",
+      "detection_type": "struggle_mode_1",
+      "detection_data": {
+        "scenario": "personal_pro_learning"
+      },
+      "confidence_score": 0.9,
+      "response_time": 1.5,
+      "screenshot_path": null,
+      "visual_verification": null
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "statistics": {
+    "total_actions": 1,
+    "total_kilo_code_events": 1,
+    "total_screenshots": 0,
+    "average_kilo_code_response_time": 1.5,
+    "recording_duration": 0.017204
+  },
+  "n8n_workflow": {
+    "name": "PowerAutomation_kilo_code_detection_recording_4bab5723",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "position": [
+          240,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "detection_type": "struggle_mode_1",
+          "detection_data": {
+            "scenario": "personal_pro_learning"
+          },
+          "confidence_score": 0.9,
+          "response_time": 1.5,
+          "expected_response_time": 3.0,
+          "expected_confidence": 0.85
+        },
+        "name": "KiloCode_struggle_mode_1_1",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          440,
+          300
+        ]
+      },
+      {
+        "parameters": {
+          "total_events": 1,
+          "average_response_time": 1.5,
+          "validation_criteria": {
+            "max_response_time": 3.0,
+            "min_confidence": 0.85,
+            "required_detection_types": [
+              "struggle_mode_1",
+              "struggle_mode_2",
+              "intervention_decision"
+            ]
+          }
+        },
+        "name": "Validation",
+        "type": "n8n-nodes-base.function",
+        "typeVersion": 1,
+        "position": [
+          640,
+          300
+        ]
+      }
+    ],
+    "connections": {
+      "Start": {
+        "main": [
+          [
+            {
+              "node": "KiloCode_struggle_mode_1_1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "KiloCode_struggle_mode_1_1": {
+        "main": [
+          [
+            {
+              "node": "Validation",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "active": true,
+    "settings": {},
+    "staticData": {},
+    "meta": {
+      "powerautomation_recording_id": "recording_4bab5723",
+      "recording_mode": "kilo_code_detection",
+      "target_version": "personal_pro",
+      "generated_at": "2025-06-11T00:58:44.370239"
+    }
+  }
+}

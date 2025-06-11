@@ -1,0 +1,62 @@
+[
+  {
+    "test_id": "L3_CODING_001",
+    "test_name": "MCP協議合規性測試",
+    "test_level": "level_3_mcp_compliance_standard",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎的MCP協議合規性",
+    "preconditions": [
+      "Level 1-2測試通過",
+      "MCP協議規範已定義"
+    ],
+    "test_steps": [
+      "1. 驗證MCP消息格式合規性",
+      "2. 測試MCP工具調用標準",
+      "3. 檢查MCP錯誤處理機制",
+      "4. 驗證MCP安全性要求",
+      "5. 測試MCP性能標準"
+    ],
+    "expected_results": [
+      "MCP消息格式100%合規",
+      "工具調用符合標準",
+      "錯誤處理機制完善",
+      "安全性要求滿足",
+      "性能指標達標"
+    ],
+    "test_data": {
+      "mcp_version": "1.0",
+      "compliance_checklist": [
+        "message_format",
+        "tool_calling",
+        "error_handling",
+        "security",
+        "performance"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 35,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "mcp_compliance",
+      "protocol_testing",
+      "standardization"
+    ],
+    "metadata": {
+      "compliance_score_target": 1.0,
+      "mcp_features": [
+        "tools",
+        "resources",
+        "prompts"
+      ]
+    }
+  }
+]

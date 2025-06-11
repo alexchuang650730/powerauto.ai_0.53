@@ -1,0 +1,25 @@
+{
+  "name": "PowerAutomation_performance_test_recording_bc36433b",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    }
+  ],
+  "connections": {},
+  "active": true,
+  "settings": {},
+  "staticData": {},
+  "meta": {
+    "powerautomation_recording_id": "recording_bc36433b",
+    "recording_mode": "performance_test",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T15:24:22.954451"
+  }
+}

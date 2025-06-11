@@ -1,0 +1,74 @@
+[
+  {
+    "test_id": "L9_CODING_001",
+    "test_name": "GAIA編碼能力基準測試",
+    "test_level": "level_9_gaia_benchmark_competitor",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "使用GAIA基準測試Kilo Code引擎的編碼能力",
+    "preconditions": [
+      "Level 1-8測試通過",
+      "GAIA測試集已準備"
+    ],
+    "test_steps": [
+      "1. 加載GAIA編碼測試集",
+      "2. 執行標準化編碼任務",
+      "3. 評估代碼質量和正確性",
+      "4. 與競對產品比較",
+      "5. 分析性能差異",
+      "6. 生成基準報告"
+    ],
+    "expected_results": [
+      "GAIA評分 > 80分",
+      "代碼正確率 > 90%",
+      "性能優於競對平均水平",
+      "在複雜任務上表現優秀",
+      "基準報告詳細"
+    ],
+    "test_data": {
+      "gaia_tasks": [
+        "algorithm_implementation",
+        "data_structure_design",
+        "api_development",
+        "bug_fixing",
+        "code_optimization"
+      ],
+      "competitors": [
+        "github_copilot",
+        "amazon_codewhisperer",
+        "tabnine"
+      ],
+      "evaluation_metrics": [
+        "correctness",
+        "efficiency",
+        "readability",
+        "maintainability"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 120,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7",
+      "level_8"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "gaia_benchmark",
+      "competitive_analysis",
+      "coding_capability"
+    ],
+    "metadata": {
+      "benchmark_version": "GAIA_v1.0",
+      "competitor_count": 3
+    }
+  }
+]

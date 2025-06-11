@@ -1,0 +1,69 @@
+[
+  {
+    "test_id": "L7_TESTING_001",
+    "test_name": "測試工具兼容性測試",
+    "test_level": "level_7_compatibility_editor",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "測試模板測試生成引擎與各種測試工具的兼容性",
+    "preconditions": [
+      "Level 1-6測試通過",
+      "測試工具已安裝"
+    ],
+    "test_steps": [
+      "1. 測試pytest集成",
+      "2. 測試unittest集成",
+      "3. 測試Jest集成",
+      "4. 測試JUnit集成",
+      "5. 驗證測試報告格式兼容性",
+      "6. 檢查CI/CD工具集成"
+    ],
+    "expected_results": [
+      "pytest集成正常",
+      "unittest支持完善",
+      "Jest集成有效",
+      "JUnit兼容良好",
+      "報告格式標準",
+      "CI/CD集成順暢"
+    ],
+    "test_data": {
+      "test_frameworks": [
+        "pytest",
+        "unittest",
+        "jest",
+        "junit",
+        "mocha",
+        "rspec"
+      ],
+      "ci_tools": [
+        "jenkins",
+        "github_actions",
+        "gitlab_ci",
+        "azure_devops"
+      ]
+    },
+    "priority": "medium",
+    "estimated_duration": 40,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "compatibility_test",
+      "test_frameworks",
+      "ci_integration"
+    ],
+    "metadata": {
+      "framework_count": 6,
+      "ci_tool_count": 4
+    }
+  }
+]

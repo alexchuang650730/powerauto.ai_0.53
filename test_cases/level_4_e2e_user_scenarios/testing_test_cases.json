@@ -1,0 +1,59 @@
+[
+  {
+    "test_id": "L4_TESTING_001",
+    "test_name": "測試工作流端到端測試",
+    "test_level": "level_4_e2e_user_scenarios",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "測試完整的測試生成和執行工作流",
+    "preconditions": [
+      "Level 1-3測試通過",
+      "測試環境已準備"
+    ],
+    "test_steps": [
+      "1. 用戶輸入測試需求：'為這個函數生成測試'",
+      "2. 系統識別測試意圖",
+      "3. 模板測試生成引擎分析代碼",
+      "4. 生成多種類型測試用例",
+      "5. 執行測試用例",
+      "6. 生成測試報告",
+      "7. 提供優化建議"
+    ],
+    "expected_results": [
+      "測試意圖識別準確",
+      "生成測試用例完整",
+      "測試執行成功",
+      "報告內容詳細",
+      "優化建議有效"
+    ],
+    "test_data": {
+      "test_scenarios": [
+        "unit_test_generation",
+        "integration_test_creation",
+        "performance_test_setup",
+        "security_test_design"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 40,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "e2e_test",
+      "test_workflow",
+      "automated_testing"
+    ],
+    "metadata": {
+      "test_types": 4,
+      "report_validation": true
+    }
+  }
+]

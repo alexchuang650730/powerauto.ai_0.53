@@ -1,0 +1,212 @@
+{
+  "validation_timestamp": "2025-06-11T00:22:18.836555",
+  "framework_version": "PowerAutomation v2.0",
+  "validation_status": "excellent",
+  "components": {
+    "test_case_generator": {
+      "path": "test_case_generator.py",
+      "status": "available",
+      "description": "测试用例生成器",
+      "file_size": 29208
+    },
+    "enhanced_preconditions": {
+      "path": "enhanced_test_preconditions.py",
+      "status": "available",
+      "description": "增强前置条件系统",
+      "file_size": 22819
+    },
+    "visual_tester": {
+      "path": "powerautomation_visual_tester.py",
+      "status": "available",
+      "description": "视觉测试框架",
+      "file_size": 24560
+    },
+    "visual_integrator": {
+      "path": "visual_test_integrator.py",
+      "status": "available",
+      "description": "视觉测试集成器",
+      "file_size": 26197
+    },
+    "framework_integrator": {
+      "path": "enhanced_test_framework_integrator.py",
+      "status": "available",
+      "description": "测试框架集成器",
+      "file_size": 15071
+    }
+  },
+  "integration_status": {
+    "test_generator_integration": {
+      "description": "测试用例生成器集成",
+      "status": "integrated",
+      "details": "测试用例生成器已集成到兜底自动化测试"
+    },
+    "visual_testing_integration": {
+      "description": "视觉测试集成",
+      "status": "integrated",
+      "details": "所有视觉测试组件已集成 (5/5)"
+    },
+    "precondition_integration": {
+      "description": "前置条件系统集成",
+      "status": "integrated",
+      "details": "前置条件系统被 2 个测试文件引用"
+    },
+    "fallback_automation_integration": {
+      "description": "兜底自动化集成",
+      "status": "integrated",
+      "details": "兜底自动化目录包含 6 个测试文件"
+    }
+  },
+  "recommendations": [],
+  "summary": {
+    "total_components": 5,
+    "available_components": 5,
+    "total_integrations": 4,
+    "successful_integrations": 4,
+    "test_layers_count": 3,
+    "available_test_layers": 3,
+    "visual_testing_score": 100.0,
+    "precondition_score": 100.0,
+    "overall_score": 100.0,
+    "framework_status": "unknown"
+  },
+  "test_layers": {
+    "level1": {
+      "path": "level1",
+      "description": "Level 1 - 基础单元测试",
+      "status": "available",
+      "test_files": [
+        "level1/mcp_adapters/test_cloud_edge_data_mcp_unit.py",
+        "level1/mcp_adapters/test_smart_routing_mcp_unit.py",
+        "level1/mcp_adapters/test_dev_deploy_loop_coordinator_unit.py",
+        "level1/mcp_adapters/test_mcp_registry_integration_unit.py",
+        "level1/mcp_adapters/test_kilocode_adapter_unit.py",
+        "level1/mcp_adapters/test_manus_interaction_collector_unit.py",
+        "level1/mcp_adapters/test_adapter_interface_unit.py",
+        "level1/mcp_adapters/test_mcp_node_health_monitor_unit.py",
+        "level1/mcp_adapters/test_mcp_load_balancer_unit.py",
+        "level1/mcp_adapters/test_mcp_circuit_breaker_unit.py",
+        "level1/mcp_adapters/test_mcp_retry_mechanism_unit.py",
+        "level1/mcp_adapters/test_mcp_timeout_handler_unit.py",
+        "level1/mcp_adapters/test_mcp_cache_manager_unit.py",
+        "level1/mcp_adapters/test_mcp_metrics_collector_unit.py",
+        "level1/mcp_adapters/test_mcp_security_validator_unit.py",
+        "level1/core_tools/test_data_flow_manager_unit.py",
+        "level1/core_tools/test_intelligent_mcp_selector_unit.py",
+        "level1/core_tools/test_standardized_logging_system_unit.py",
+        "level1/core_tools/test_performance_monitor_unit.py",
+        "level1/core_tools/test_error_handler_unit.py",
+        "level1/core_tools/test_config_manager_unit.py",
+        "level1/core_tools/test_event_dispatcher_unit.py",
+        "level1/core_tools/test_task_scheduler_unit.py",
+        "level1/core_tools/test_resource_manager_unit.py",
+        "level1/core_tools/test_security_manager_unit.py",
+        "level1/data_processing/test_data_validator_unit.py",
+        "level1/data_processing/test_data_transformer_unit.py",
+        "level1/data_processing/test_data_serializer_unit.py",
+        "level1/data_processing/test_data_compressor_unit.py",
+        "level1/data_processing/test_data_encryptor_unit.py",
+        "level1/data_processing/test_data_backup_manager_unit.py",
+        "level1/data_processing/test_data_migration_tool_unit.py",
+        "level1/data_processing/test_data_quality_checker_unit.py",
+        "level1/routing_intelligence/test_intent_classifier_unit.py",
+        "level1/routing_intelligence/test_capability_matcher_unit.py",
+        "level1/routing_intelligence/test_load_predictor_unit.py",
+        "level1/routing_intelligence/test_route_optimizer_unit.py",
+        "level1/routing_intelligence/test_fallback_router_unit.py",
+        "level1/routing_intelligence/test_routing_analytics_unit.py",
+        "level1/routing_intelligence/test_routing_cache_unit.py",
+        "level1/performance_monitoring/test_latency_tracker_unit.py",
+        "level1/performance_monitoring/test_throughput_monitor_unit.py",
+        "level1/performance_monitoring/test_resource_usage_tracker_unit.py",
+        "level1/performance_monitoring/test_performance_alerter_unit.py",
+        "level1/performance_monitoring/test_performance_reporter_unit.py",
+        "level1/error_handling/test_exception_handler_unit.py",
+        "level1/error_handling/test_error_recovery_unit.py",
+        "level1/error_handling/test_error_reporter_unit.py",
+        "level1/error_handling/test_error_analytics_unit.py",
+        "level1/error_handling/test_error_prevention_unit.py",
+        "level1/configuration/test_config_loader_unit.py",
+        "level1/configuration/test_config_validator_unit.py",
+        "level1/configuration/test_config_updater_unit.py",
+        "level1/logging/test_log_formatter_unit.py",
+        "level1/logging/test_log_aggregator_unit.py"
+      ],
+      "test_count": 55
+    },
+    "level5": {
+      "path": "level5",
+      "description": "Level 5 - 性能测试",
+      "status": "available",
+      "test_files": [],
+      "test_count": 0
+    },
+    "end_to_end": {
+      "path": "end_to_end",
+      "description": "端到端测试层",
+      "status": "available",
+      "sublayers": {
+        "client_side": {
+          "status": "available",
+          "test_count": 2,
+          "test_files": [
+            "end_to_end/client_side/test_client_e2e.py",
+            "end_to_end/client_side/test_client_e2e_visual.py"
+          ]
+        },
+        "server_side": {
+          "status": "available",
+          "test_count": 1,
+          "test_files": [
+            "end_to_end/server_side/test_server_e2e.py"
+          ]
+        },
+        "integration": {
+          "status": "available",
+          "test_count": 1,
+          "test_files": [
+            "end_to_end/integration/test_integration_e2e.py"
+          ]
+        },
+        "fallback_automation": {
+          "status": "available",
+          "test_count": 6,
+          "test_files": [
+            "end_to_end/fallback_automation/test_case_generator.py",
+            "end_to_end/fallback_automation/test_fa_op_001.py",
+            "end_to_end/fallback_automation/test_ii_op_001.py",
+            "end_to_end/fallback_automation/test_dfc_op_001.py",
+            "end_to_end/fallback_automation/test_vv_op_001.py",
+            "end_to_end/fallback_automation/test_fallback_visual.py"
+          ]
+        }
+      },
+      "test_files": [
+        "end_to_end/fallback_automation/test_case_generator.py",
+        "end_to_end/fallback_automation/test_fa_op_001.py",
+        "end_to_end/fallback_automation/test_ii_op_001.py",
+        "end_to_end/fallback_automation/test_dfc_op_001.py",
+        "end_to_end/fallback_automation/test_vv_op_001.py",
+        "end_to_end/fallback_automation/test_fallback_visual.py",
+        "end_to_end/client_side/test_client_e2e.py",
+        "end_to_end/client_side/test_client_e2e_visual.py",
+        "end_to_end/server_side/test_server_e2e.py",
+        "end_to_end/integration/test_integration_e2e.py"
+      ],
+      "test_count": 10
+    }
+  },
+  "visual_testing": {
+    "playwright_available": true,
+    "visual_tester_functional": true,
+    "demo_execution": true,
+    "report_generation": true,
+    "integration_complete": true
+  },
+  "preconditions": {
+    "system_available": true,
+    "platform_detection": true,
+    "resource_validation": true,
+    "capability_detection": true,
+    "integration_working": true
+  }
+}

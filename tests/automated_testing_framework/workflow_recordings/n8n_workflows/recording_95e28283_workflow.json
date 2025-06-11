@@ -1,0 +1,25 @@
+{
+  "name": "PowerAutomation_kilo_code_detection_recording_95e28283",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    }
+  ],
+  "connections": {},
+  "active": true,
+  "settings": {},
+  "staticData": {},
+  "meta": {
+    "powerautomation_recording_id": "recording_95e28283",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T00:56:43.191034"
+  }
+}

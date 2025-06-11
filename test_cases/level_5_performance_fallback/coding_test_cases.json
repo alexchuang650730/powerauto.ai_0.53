@@ -1,0 +1,71 @@
+[
+  {
+    "test_id": "L5_CODING_001",
+    "test_name": "Kilo Code引擎性能測試",
+    "test_level": "level_5_performance_fallback",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎在高負載下的性能表現",
+    "preconditions": [
+      "Level 1-4測試通過",
+      "性能測試環境已準備"
+    ],
+    "test_steps": [
+      "1. 配置性能測試參數",
+      "2. 執行並發代碼生成請求",
+      "3. 監控系統資源使用",
+      "4. 測試四層兜底機制",
+      "5. 分析性能瓶頸",
+      "6. 生成性能報告"
+    ],
+    "expected_results": [
+      "並發處理能力 > 100 req/s",
+      "平均響應時間 < 2秒",
+      "CPU使用率 < 80%",
+      "內存使用率 < 70%",
+      "兜底機制有效",
+      "性能報告詳細"
+    ],
+    "test_data": {
+      "performance_targets": {
+        "concurrent_requests": 100,
+        "response_time_p95": 2000,
+        "cpu_threshold": 0.8,
+        "memory_threshold": 0.7,
+        "error_rate_threshold": 0.01
+      },
+      "fallback_layers": [
+        "local_cache",
+        "simplified_generation",
+        "template_fallback",
+        "error_response"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 60,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "performance_test",
+      "load_testing",
+      "fallback_mechanism"
+    ],
+    "metadata": {
+      "load_patterns": [
+        "steady",
+        "spike",
+        "stress"
+      ],
+      "fallback_layers": 4
+    }
+  }
+]

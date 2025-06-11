@@ -1,0 +1,218 @@
+{
+  "id": "90e2fc1a-a217-45cd-bb86-009846a38c69",
+  "name": "PowerAutomation_KiloCode_KiloCode_企业版关键模式测试_kilo_code_detection_enterprise",
+  "active": true,
+  "nodes": [
+    {
+      "id": "b6a3a035-c540-4ebb-8996-f917619e8c8d",
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ],
+      "parameters": {},
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "cd806ceb-94b9-4ed1-9550-555ecc4fe23b",
+      "name": "Webhook_Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        440,
+        300
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "kilo-code-test",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": "98d93e91-20a0-4662-ba72-e429a8e60ca9",
+      "disabled": false
+    },
+    {
+      "id": "9cb9da59-35dd-4630-a775-0b18a4553dd0",
+      "name": "Detect_struggle_mode_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// Kilo Code挣扎模式检测: struggle_mode_1\nconst detectionData = {\n  \"integration_test\": true\n};\nconst confidenceScore = 0.95;\nconst responseTime = 1.0;\n\n// 验证检测结果\nconst isValid = confidenceScore >= 0.85 && responseTime <= 3.0;\n\n// 记录检测事件\nconst result = {\n  event_id: \"kilo_event_001\",\n  detection_type: \"struggle_mode_1\",\n  detection_data: detectionData,\n  confidence_score: confidenceScore,\n  response_time: responseTime,\n  timestamp: new Date().toISOString(),\n  validation_passed: isValid,\n  performance_metrics: {\n    accuracy_threshold: 0.85,\n    response_time_threshold: 3.0,\n    accuracy_status: confidenceScore >= 0.85 ? \"PASS\" : \"FAIL\",\n    response_time_status: responseTime <= 3.0 ? \"PASS\" : \"FAIL\"\n  }\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "a9f913e6-85f5-4232-9ca6-c563143f6707",
+      "name": "Action_action_001",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        840,
+        400
+      ],
+      "parameters": {
+        "functionCode": "\n// 通用动作处理\nconst actionData = {\n  \"id\": \"action_001\",\n  \"type\": \"custom_kilo_code_detection\",\n  \"timestamp\": \"2025-06-11T15:24:22.968050\",\n  \"element_info\": {},\n  \"action_data\": {\n    \"detection_type\": \"struggle_mode_1\",\n    \"detection_data\": {\n      \"integration_test\": true\n    },\n    \"confidence_score\": 0.95,\n    \"response_time\": 1.0,\n    \"event_id\": \"kilo_event_001\"\n  },\n  \"screenshot_path\": null,\n  \"visual_verification\": null,\n  \"metadata\": {}\n};\n\n// 处理动作数据\nconst result = {\n  ...actionData,\n  processed_at: new Date().toISOString(),\n  node_type: \"generic_action\"\n};\n\nreturn [result];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "0c377a81-9572-483f-88ff-8ec7f7bec67b",
+      "name": "Final_Validation",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ],
+      "parameters": {
+        "functionCode": "\n// 最终验证逻辑\nconst recordingStats = {\n  \"total_actions\": 1,\n  \"total_kilo_code_events\": 1,\n  \"total_screenshots\": 0,\n  \"average_kilo_code_response_time\": 1.0,\n  \"recording_duration\": 0.010522\n};\nconst kiloCodeEvents = 1;\nconst totalActions = 1;\n\n// 验证标准\nconst validationCriteria = {\n  min_kilo_code_events: 1,\n  max_average_response_time: 3.0,\n  min_accuracy_rate: 0.85\n};\n\n// 执行验证\nconst avgResponseTime = recordingStats.average_kilo_code_response_time || 0;\nconst avgAccuracy = recordingStats.average_accuracy || 0;\n\nconst validationResult = {\n  recording_id: \"recording_e19eb3f8\",\n  validation_timestamp: new Date().toISOString(),\n  kilo_code_events_count: kiloCodeEvents,\n  total_actions_count: totalActions,\n  average_response_time: avgResponseTime,\n  average_accuracy: avgAccuracy,\n  validations: {\n    kilo_code_events_sufficient: kiloCodeEvents >= validationCriteria.min_kilo_code_events,\n    response_time_acceptable: avgResponseTime <= validationCriteria.max_average_response_time,\n    accuracy_acceptable: avgAccuracy >= validationCriteria.min_accuracy_rate\n  },\n  overall_status: \"UNKNOWN\"\n};\n\n// 计算总体状态\nconst allValidationsPassed = Object.values(validationResult.validations).every(v => v === true);\nvalidationResult.overall_status = allValidationsPassed ? \"PASS\" : \"FAIL\";\n\nreturn [validationResult];\n",
+        "options": {}
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    },
+    {
+      "id": "1a541411-a025-4a5b-b402-b3363882dada",
+      "name": "Test_Results_Output",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1240,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "{{$env.POWERAUTOMATION_API_URL}}/test-results",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "powerautomationApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "recording_id",
+              "value": "recording_e19eb3f8"
+            },
+            {
+              "name": "test_results",
+              "value": "{{JSON.stringify($json)}}"
+            },
+            {
+              "name": "timestamp",
+              "value": "{{new Date().toISOString()}}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 10000
+        }
+      },
+      "credentials": null,
+      "webhookId": null,
+      "disabled": false
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Webhook_Trigger",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook_Trigger": {
+      "main": [
+        [
+          {
+            "node": "Detect_struggle_mode_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Detect_struggle_mode_1": {
+      "main": [
+        [
+          {
+            "node": "Action_action_001",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Action_action_001": {
+      "main": [
+        [
+          {
+            "node": "Final_Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Final_Validation": {
+      "main": [
+        [
+          {
+            "node": "Test_Results_Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "",
+    "timezone": "Asia/Shanghai"
+  },
+  "staticData": {},
+  "tags": [
+    "powerautomation",
+    "kilo-code",
+    "testing",
+    "automation"
+  ],
+  "meta": {
+    "powerautomation_recording_id": "recording_e19eb3f8",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T15:24:22.969776",
+    "converter_version": "1.0.0",
+    "template_type": "kilo_code_detection"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "flow_f91d9b89",
+  "name": "示例测试流程",
+  "description": "演示录制功能",
+  "start_time": "2025-06-11T00:36:17.634004",
+  "end_time": "2025-06-11T00:36:19.641445",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "navigate",
+      "timestamp": "2025-06-11T00:36:17.641122",
+      "element_info": {},
+      "action_data": {
+        "url": "https://www.google.com",
+        "wait_time": 2.0
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "wait",
+      "timestamp": "2025-06-11T00:36:19.641293",
+      "element_info": {},
+      "action_data": {
+        "wait_type": "time",
+        "wait_value": 2.0,
+        "timeout": 10.0
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_003",
+      "type": "click",
+      "timestamp": "2025-06-11T00:36:19.641393",
+      "element_info": {
+        "selector": "input[name='q']",
+        "text": "搜索框",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_004",
+      "type": "input",
+      "timestamp": "2025-06-11T00:36:19.641406",
+      "element_info": {
+        "selector": "input[name='q']"
+      },
+      "action_data": {
+        "text": "PowerAutomation",
+        "clear_first": true
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_005",
+      "type": "verify",
+      "timestamp": "2025-06-11T00:36:19.641416",
+      "element_info": {
+        "selector": "input[name='q']"
+      },
+      "action_data": {
+        "verification_type": "element_present",
+        "expected_value": true
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_006",
+      "type": "custom_search_submit",
+      "timestamp": "2025-06-11T00:36:19.641430",
+      "element_info": {},
+      "action_data": {
+        "method": "enter_key",
+        "search_term": "PowerAutomation"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {},
+  "status": "completed"
+}

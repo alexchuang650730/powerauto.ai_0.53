@@ -1,0 +1,56 @@
+[
+  {
+    "test_id": "L3_DEPLOYMENT_001",
+    "test_name": "部署標準化驗證",
+    "test_level": "level_3_mcp_compliance_standard",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "驗證Release Manager的部署標準化",
+    "preconditions": [
+      "Level 1-2測試通過",
+      "部署標準已制定"
+    ],
+    "test_steps": [
+      "1. 檢查部署包標準化",
+      "2. 驗證配置文件標準",
+      "3. 測試部署流程標準化",
+      "4. 檢查監控標準",
+      "5. 驗證文檔標準"
+    ],
+    "expected_results": [
+      "部署包格式標準化",
+      "配置文件符合規範",
+      "部署流程一致",
+      "監控指標標準化",
+      "文檔完整規範"
+    ],
+    "test_data": {
+      "deployment_standards": {
+        "package_format": "Docker",
+        "config_schema": "YAML",
+        "monitoring_format": "Prometheus",
+        "documentation_standard": "OpenAPI"
+      }
+    },
+    "priority": "medium",
+    "estimated_duration": 25,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "deployment_standards",
+      "configuration",
+      "documentation"
+    ],
+    "metadata": {
+      "standard_types": 4,
+      "validation_automated": true
+    }
+  }
+]

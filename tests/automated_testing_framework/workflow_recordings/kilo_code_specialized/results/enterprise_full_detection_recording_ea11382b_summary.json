@@ -1,0 +1,10 @@
+{
+  "scenario_id": "enterprise_full_detection",
+  "recording_id": "recording_ea11382b",
+  "timestamp": "2025-06-11T15:24:22.909073",
+  "quality_score": 0.7285714285714285,
+  "performance_grade": "A+",
+  "coverage_grade": "D",
+  "average_response_time": 1.5,
+  "average_accuracy": 0.9
+}

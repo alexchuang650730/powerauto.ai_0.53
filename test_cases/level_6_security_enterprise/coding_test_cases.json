@@ -1,0 +1,70 @@
+[
+  {
+    "test_id": "L6_CODING_001",
+    "test_name": "代碼生成安全測試",
+    "test_level": "level_6_security_enterprise",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎生成代碼的安全性",
+    "preconditions": [
+      "Level 1-5測試通過",
+      "安全掃描工具已配置"
+    ],
+    "test_steps": [
+      "1. 生成包含潛在安全風險的代碼",
+      "2. 運行靜態安全分析",
+      "3. 檢查SQL注入漏洞",
+      "4. 測試XSS防護",
+      "5. 驗證輸入驗證機制",
+      "6. 生成安全報告"
+    ],
+    "expected_results": [
+      "無高危安全漏洞",
+      "SQL注入防護有效",
+      "XSS防護機制完善",
+      "輸入驗證嚴格",
+      "安全評分 > 8.0/10",
+      "安全報告詳細"
+    ],
+    "test_data": {
+      "security_tests": [
+        "sql_injection",
+        "xss_prevention",
+        "input_validation",
+        "authentication_bypass",
+        "authorization_check"
+      ],
+      "security_tools": [
+        "bandit",
+        "semgrep",
+        "sonarqube"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 40,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "security_test",
+      "code_security",
+      "vulnerability_scan"
+    ],
+    "metadata": {
+      "security_standards": [
+        "OWASP",
+        "CWE"
+      ],
+      "scan_depth": "deep"
+    }
+  }
+]

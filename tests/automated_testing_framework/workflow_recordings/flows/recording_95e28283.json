@@ -1,0 +1,71 @@
+{
+  "recording_id": "recording_95e28283",
+  "recording_name": "Visual_Kilo Code企业版视觉集成测试_kilo_code_detection",
+  "recording_mode": "kilo_code_detection",
+  "target_version": "enterprise",
+  "start_time": "2025-06-11T00:56:43.168427",
+  "end_time": "2025-06-11T00:56:43.190675",
+  "config": {
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "enable_visual_verification": true,
+    "enable_screenshot": true,
+    "auto_generate_n8n": true,
+    "recording_quality": "high",
+    "max_recording_duration": 300,
+    "screenshot_interval": 2.0
+  },
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "click",
+      "timestamp": "2025-06-11T00:56:43.190625",
+      "element_info": {
+        "selector": ".kilo-code-panel",
+        "text": "智能介入面板",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "kilo_code_events": [],
+  "screenshots": [],
+  "visual_verifications": [],
+  "statistics": {
+    "total_actions": 1,
+    "total_kilo_code_events": 0,
+    "total_screenshots": 0,
+    "average_kilo_code_response_time": 0.0,
+    "recording_duration": 0.022248
+  },
+  "n8n_workflow": {
+    "name": "PowerAutomation_kilo_code_detection_recording_95e28283",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "position": [
+          240,
+          300
+        ]
+      }
+    ],
+    "connections": {},
+    "active": true,
+    "settings": {},
+    "staticData": {},
+    "meta": {
+      "powerautomation_recording_id": "recording_95e28283",
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "generated_at": "2025-06-11T00:56:43.191034"
+    }
+  }
+}

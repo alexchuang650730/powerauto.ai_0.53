@@ -1,0 +1,147 @@
+{
+  "id": "flow_3c9931f5",
+  "name": "性能测试_performance_test",
+  "description": " | 模式: performance_test | 版本: enterprise",
+  "start_time": "2025-06-11T15:24:22.948335",
+  "end_time": "2025-06-11T15:24:22.953864",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_user_action_0",
+      "timestamp": "2025-06-11T15:24:22.953772",
+      "element_info": {},
+      "action_data": {
+        "index": 0
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "custom_user_action_1",
+      "timestamp": "2025-06-11T15:24:22.953787",
+      "element_info": {},
+      "action_data": {
+        "index": 1
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_003",
+      "type": "custom_user_action_2",
+      "timestamp": "2025-06-11T15:24:22.953797",
+      "element_info": {},
+      "action_data": {
+        "index": 2
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_004",
+      "type": "custom_user_action_3",
+      "timestamp": "2025-06-11T15:24:22.953806",
+      "element_info": {},
+      "action_data": {
+        "index": 3
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_005",
+      "type": "custom_user_action_4",
+      "timestamp": "2025-06-11T15:24:22.953814",
+      "element_info": {},
+      "action_data": {
+        "index": 4
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_006",
+      "type": "custom_user_action_5",
+      "timestamp": "2025-06-11T15:24:22.953822",
+      "element_info": {},
+      "action_data": {
+        "index": 5
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_007",
+      "type": "custom_user_action_6",
+      "timestamp": "2025-06-11T15:24:22.953831",
+      "element_info": {},
+      "action_data": {
+        "index": 6
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_008",
+      "type": "custom_user_action_7",
+      "timestamp": "2025-06-11T15:24:22.953841",
+      "element_info": {},
+      "action_data": {
+        "index": 7
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_009",
+      "type": "custom_user_action_8",
+      "timestamp": "2025-06-11T15:24:22.953848",
+      "element_info": {},
+      "action_data": {
+        "index": 8
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_010",
+      "type": "custom_user_action_9",
+      "timestamp": "2025-06-11T15:24:22.953855",
+      "element_info": {},
+      "action_data": {
+        "index": 9
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_bc36433b",
+    "recording_mode": "performance_test",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "performance_test",
+      "target_version": "enterprise",
+      "enable_visual_verification": false,
+      "enable_screenshot": false,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}

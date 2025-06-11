@@ -1,0 +1,69 @@
+[
+  {
+    "test_id": "L8_CODING_001",
+    "test_name": "Kilo Code引擎極限壓力測試",
+    "test_level": "level_8_stress_moat_verification",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "測試Kilo Code引擎在極限負載下的表現和護城河機制",
+    "preconditions": [
+      "Level 1-7測試通過",
+      "壓力測試環境已準備"
+    ],
+    "test_steps": [
+      "1. 配置極限負載參數",
+      "2. 執行1000並發請求",
+      "3. 測試內存耗盡情況",
+      "4. 測試CPU滿載情況",
+      "5. 驗證護城河降級機制",
+      "6. 測試系統恢復能力"
+    ],
+    "expected_results": [
+      "系統在極限負載下不崩潰",
+      "護城河機制有效觸發",
+      "降級服務正常工作",
+      "系統能自動恢復",
+      "數據完整性保持",
+      "用戶體驗可接受"
+    ],
+    "test_data": {
+      "stress_parameters": {
+        "concurrent_users": 1000,
+        "request_rate": 500,
+        "test_duration": 3600,
+        "memory_limit": "8GB",
+        "cpu_cores": 8
+      },
+      "moat_mechanisms": [
+        "rate_limiting",
+        "circuit_breaker",
+        "graceful_degradation",
+        "auto_scaling"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 90,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "stress_test",
+      "extreme_load",
+      "moat_verification"
+    ],
+    "metadata": {
+      "load_multiplier": 10,
+      "chaos_engineering": true
+    }
+  }
+]

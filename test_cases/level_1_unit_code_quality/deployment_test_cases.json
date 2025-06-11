@@ -1,0 +1,54 @@
+[
+  {
+    "test_id": "L1_DEPLOYMENT_001",
+    "test_name": "Release Manager單元測試",
+    "test_level": "level_1_unit_code_quality",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager的基本部署功能",
+    "preconditions": [
+      "Release Manager已初始化",
+      "部署環境已準備"
+    ],
+    "test_steps": [
+      "1. 創建測試部署包",
+      "2. 調用Release Manager部署功能",
+      "3. 驗證部署包完整性",
+      "4. 檢查部署配置",
+      "5. 驗證部署狀態"
+    ],
+    "expected_results": [
+      "部署包創建成功",
+      "部署配置正確",
+      "部署狀態為成功",
+      "部署日誌完整"
+    ],
+    "test_data": {
+      "deployment_target": "test_environment",
+      "package_format": "zip",
+      "config_files": [
+        "config.json",
+        "requirements.txt"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 15,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [],
+    "automation_level": "full",
+    "tags": [
+      "unit_test",
+      "deployment",
+      "release_manager"
+    ],
+    "metadata": {
+      "deployment_types": [
+        "local",
+        "staging"
+      ]
+    }
+  }
+]

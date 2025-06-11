@@ -1,0 +1,58 @@
+[
+  {
+    "test_id": "L2_DEPLOYMENT_001",
+    "test_name": "Release Manager集成測試",
+    "test_level": "level_2_integration_agent_collab",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager與CI/CD系統的集成",
+    "preconditions": [
+      "Level 1測試通過",
+      "CI/CD系統已配置"
+    ],
+    "test_steps": [
+      "1. 配置Release Manager與CI/CD集成",
+      "2. 觸發自動化部署流程",
+      "3. 測試多環境部署",
+      "4. 驗證回滾機制",
+      "5. 檢查部署監控和日誌"
+    ],
+    "expected_results": [
+      "CI/CD集成正常",
+      "多環境部署成功",
+      "回滾機制有效",
+      "監控數據完整"
+    ],
+    "test_data": {
+      "environments": [
+        "development",
+        "staging",
+        "production"
+      ],
+      "deployment_strategies": [
+        "blue_green",
+        "rolling",
+        "canary"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 30,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "integration_test",
+      "cicd",
+      "multi_environment"
+    ],
+    "metadata": {
+      "environment_count": 3,
+      "rollback_testing": true
+    }
+  }
+]

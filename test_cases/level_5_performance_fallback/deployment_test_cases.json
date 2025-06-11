@@ -1,0 +1,63 @@
+[
+  {
+    "test_id": "L5_DEPLOYMENT_001",
+    "test_name": "Release Manager性能測試",
+    "test_level": "level_5_performance_fallback",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager的部署性能和兜底策略",
+    "preconditions": [
+      "Level 1-4測試通過",
+      "多環境部署已配置"
+    ],
+    "test_steps": [
+      "1. 並發多環境部署測試",
+      "2. 大型應用部署性能測試",
+      "3. 部署失敗兜底機制測試",
+      "4. 回滾性能測試",
+      "5. 監控部署資源使用",
+      "6. 優化部署流程"
+    ],
+    "expected_results": [
+      "並發部署成功率 > 95%",
+      "大型應用部署時間 < 10分鐘",
+      "兜底機制響應時間 < 30秒",
+      "回滾時間 < 2分鐘",
+      "資源使用優化"
+    ],
+    "test_data": {
+      "deployment_performance": {
+        "concurrent_deployments": 5,
+        "large_app_size": "500MB",
+        "deployment_timeout": 600,
+        "rollback_timeout": 120
+      }
+    },
+    "priority": "medium",
+    "estimated_duration": 55,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "performance_test",
+      "deployment",
+      "rollback"
+    ],
+    "metadata": {
+      "deployment_sizes": [
+        "small",
+        "medium",
+        "large"
+      ],
+      "rollback_scenarios": 3
+    }
+  }
+]

@@ -1,0 +1,152 @@
+{
+  "generation_timestamp": "2025-06-11T06:44:50.522253",
+  "powerautomation_version": "v0.575",
+  "edition": "personal_professional",
+  "total_test_cases": 31,
+  "levels_summary": {
+    "level_1_unit_code_quality": {
+      "total_cases": 4,
+      "estimated_duration": 45,
+      "high_priority_cases": 4,
+      "automation_level": {
+        "full": 4,
+        "partial": 0,
+        "manual": 0
+      }
+    },
+    "level_2_integration_agent_collab": {
+      "total_cases": 3,
+      "estimated_duration": 75,
+      "high_priority_cases": 3,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_3_mcp_compliance_standard": {
+      "total_cases": 3,
+      "estimated_duration": 90,
+      "high_priority_cases": 2,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_4_e2e_user_scenarios": {
+      "total_cases": 3,
+      "estimated_duration": 135,
+      "high_priority_cases": 3,
+      "automation_level": {
+        "full": 1,
+        "partial": 2,
+        "manual": 0
+      }
+    },
+    "level_5_performance_fallback": {
+      "total_cases": 3,
+      "estimated_duration": 160,
+      "high_priority_cases": 2,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_6_security_enterprise": {
+      "total_cases": 3,
+      "estimated_duration": 120,
+      "high_priority_cases": 3,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_7_compatibility_editor": {
+      "total_cases": 3,
+      "estimated_duration": 150,
+      "high_priority_cases": 0,
+      "automation_level": {
+        "full": 1,
+        "partial": 2,
+        "manual": 0
+      }
+    },
+    "level_8_stress_moat_verification": {
+      "total_cases": 3,
+      "estimated_duration": 245,
+      "high_priority_cases": 2,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_9_gaia_benchmark_competitor": {
+      "total_cases": 3,
+      "estimated_duration": 310,
+      "high_priority_cases": 2,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    },
+    "level_10_ai_capability_standard": {
+      "total_cases": 3,
+      "estimated_duration": 390,
+      "high_priority_cases": 2,
+      "automation_level": {
+        "full": 2,
+        "partial": 1,
+        "manual": 0
+      }
+    }
+  },
+  "intention_summary": {
+    "coding": {
+      "total_cases": 11,
+      "estimated_duration": 628,
+      "levels_covered": 10
+    },
+    "testing": {
+      "total_cases": 10,
+      "estimated_duration": 532,
+      "levels_covered": 10
+    },
+    "deployment": {
+      "total_cases": 10,
+      "estimated_duration": 560,
+      "levels_covered": 10
+    }
+  },
+  "workflow_engine_summary": {
+    "kilo_code_engine": {
+      "total_cases": 11,
+      "estimated_duration": 628
+    },
+    "template_test_generator": {
+      "total_cases": 10,
+      "estimated_duration": 532
+    },
+    "release_manager": {
+      "total_cases": 10,
+      "estimated_duration": 560
+    }
+  },
+  "statistics": {
+    "total_estimated_duration": 1720,
+    "average_case_duration": 55.483870967741936,
+    "platform_coverage": {
+      "windows": 31,
+      "mac": 31
+    },
+    "priority_distribution": {
+      "high": 23,
+      "medium": 8,
+      "low": 0
+    }
+  }
+}

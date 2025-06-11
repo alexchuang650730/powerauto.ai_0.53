@@ -1,0 +1,55 @@
+[
+  {
+    "test_id": "L1_TESTING_001",
+    "test_name": "模板測試生成引擎單元測試",
+    "test_level": "level_1_unit_code_quality",
+    "intention_type": "testing",
+    "workflow_engine": "template_test_generator",
+    "description": "測試模板測試生成引擎的基本功能",
+    "preconditions": [
+      "模板測試生成引擎已初始化"
+    ],
+    "test_steps": [
+      "1. 輸入測試生成請求",
+      "2. 調用模板測試生成引擎",
+      "3. 驗證生成的測試用例結構",
+      "4. 檢查測試覆蓋率",
+      "5. 驗證測試用例可執行性"
+    ],
+    "expected_results": [
+      "生成結構正確的測試用例",
+      "測試覆蓋率 > 80%",
+      "所有生成的測試用例可執行",
+      "測試用例包含斷言"
+    ],
+    "test_data": {
+      "target_function": "sort_function",
+      "coverage_target": 0.8,
+      "test_types": [
+        "positive",
+        "negative",
+        "edge_case"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 12,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [],
+    "automation_level": "full",
+    "tags": [
+      "unit_test",
+      "test_generation",
+      "template_engine"
+    ],
+    "metadata": {
+      "test_patterns": [
+        "boundary",
+        "equivalence",
+        "error"
+      ]
+    }
+  }
+]

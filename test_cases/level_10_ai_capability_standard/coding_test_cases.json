@@ -1,0 +1,78 @@
+[
+  {
+    "test_id": "L10_CODING_001",
+    "test_name": "AI編碼能力綜合評估",
+    "test_level": "level_10_ai_capability_standard",
+    "intention_type": "coding",
+    "workflow_engine": "kilo_code_engine",
+    "description": "全面評估Kilo Code引擎的AI編碼能力",
+    "preconditions": [
+      "Level 1-9測試通過",
+      "AI評估框架已部署"
+    ],
+    "test_steps": [
+      "1. 執行創造性編碼任務",
+      "2. 測試複雜問題解決能力",
+      "3. 評估代碼理解和重構能力",
+      "4. 測試多語言編程能力",
+      "5. 評估學習和適應能力",
+      "6. 生成AI能力報告"
+    ],
+    "expected_results": [
+      "創造性評分 > 85分",
+      "問題解決能力優秀",
+      "代碼理解準確率 > 95%",
+      "多語言支持完善",
+      "學習適應能力強",
+      "整體AI能力評級為優秀"
+    ],
+    "test_data": {
+      "ai_capability_tests": [
+        "creative_problem_solving",
+        "code_comprehension",
+        "refactoring_ability",
+        "multi_language_support",
+        "learning_adaptation",
+        "context_understanding"
+      ],
+      "evaluation_frameworks": [
+        "HumanEval",
+        "MBPP",
+        "CodeT5",
+        "CodeBERT"
+      ],
+      "complexity_levels": [
+        "basic",
+        "intermediate",
+        "advanced",
+        "expert"
+      ]
+    },
+    "priority": "high",
+    "estimated_duration": 150,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7",
+      "level_8",
+      "level_9"
+    ],
+    "automation_level": "full",
+    "tags": [
+      "ai_evaluation",
+      "coding_capability",
+      "comprehensive_assessment"
+    ],
+    "metadata": {
+      "ai_dimensions": 6,
+      "evaluation_depth": "comprehensive"
+    }
+  }
+]

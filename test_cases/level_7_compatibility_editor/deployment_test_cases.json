@@ -1,0 +1,72 @@
+[
+  {
+    "test_id": "L7_DEPLOYMENT_001",
+    "test_name": "部署平台兼容性測試",
+    "test_level": "level_7_compatibility_editor",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "測試Release Manager在不同部署平台的兼容性",
+    "preconditions": [
+      "Level 1-6測試通過",
+      "部署平台已配置"
+    ],
+    "test_steps": [
+      "1. 測試AWS部署",
+      "2. 測試Azure部署",
+      "3. 測試GCP部署",
+      "4. 測試本地部署",
+      "5. 驗證容器化部署",
+      "6. 檢查Kubernetes集成"
+    ],
+    "expected_results": [
+      "AWS部署成功",
+      "Azure部署正常",
+      "GCP部署有效",
+      "本地部署穩定",
+      "容器化部署順暢",
+      "Kubernetes集成完善"
+    ],
+    "test_data": {
+      "cloud_platforms": [
+        "aws",
+        "azure",
+        "gcp",
+        "alibaba_cloud"
+      ],
+      "deployment_types": [
+        "vm",
+        "container",
+        "serverless",
+        "kubernetes"
+      ],
+      "container_runtimes": [
+        "docker",
+        "containerd",
+        "cri-o"
+      ]
+    },
+    "priority": "medium",
+    "estimated_duration": 60,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "compatibility_test",
+      "cloud_deployment",
+      "containerization"
+    ],
+    "metadata": {
+      "cloud_count": 4,
+      "deployment_types": 4
+    }
+  }
+]

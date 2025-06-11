@@ -1,0 +1,72 @@
+[
+  {
+    "test_id": "L10_DEPLOYMENT_001",
+    "test_name": "智能部署系統評估",
+    "test_level": "level_10_ai_capability_standard",
+    "intention_type": "deployment",
+    "workflow_engine": "release_manager",
+    "description": "評估Release Manager的智能化部署能力",
+    "preconditions": [
+      "Level 1-9測試通過",
+      "智能部署評估環境已配置"
+    ],
+    "test_steps": [
+      "1. 測試智能部署決策",
+      "2. 評估自動化程度",
+      "3. 測試預測性維護",
+      "4. 評估智能回滾",
+      "5. 測試自我優化能力",
+      "6. 生成智能化評估報告"
+    ],
+    "expected_results": [
+      "部署決策智能化",
+      "自動化程度 > 95%",
+      "預測準確率 > 85%",
+      "智能回滾有效",
+      "自我優化能力強",
+      "整體智能化水平優秀"
+    ],
+    "test_data": {
+      "intelligent_deployment_features": [
+        "smart_decision_making",
+        "predictive_maintenance",
+        "intelligent_rollback",
+        "self_optimization",
+        "adaptive_scaling",
+        "anomaly_response"
+      ],
+      "automation_metrics": [
+        "decision_automation",
+        "process_automation",
+        "error_recovery",
+        "optimization_effectiveness"
+      ]
+    },
+    "priority": "medium",
+    "estimated_duration": 110,
+    "platform_requirements": [
+      "windows",
+      "mac"
+    ],
+    "dependencies": [
+      "level_1",
+      "level_2",
+      "level_3",
+      "level_4",
+      "level_5",
+      "level_7",
+      "level_8",
+      "level_9"
+    ],
+    "automation_level": "partial",
+    "tags": [
+      "ai_evaluation",
+      "intelligent_deployment",
+      "automation_assessment"
+    ],
+    "metadata": {
+      "intelligence_features": 6,
+      "automation_target": 0.95
+    }
+  }
+]

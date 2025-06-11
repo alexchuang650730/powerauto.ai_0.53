@@ -1,0 +1,47 @@
+{
+  "report_info": {
+    "generation_time": "2025-06-11T00:20:28.473890",
+    "test_framework": "PowerAutomation Visual Testing",
+    "browser_type": "chromium",
+    "visual_threshold": 0.1
+  },
+  "test_summary": {
+    "total_tests": 2,
+    "passed_tests": 2,
+    "failed_tests": 0,
+    "error_tests": 0,
+    "success_rate": 100.0
+  },
+  "test_results": [
+    {
+      "test_name": "simple_page_test",
+      "test_id": "DEMO_SIMPLE_PAGE_TEST",
+      "passed": true,
+      "current_image": "visual_tests_demo/screenshots/simple_page_test_20250611_002025.png",
+      "baseline_image": "visual_tests_demo/baseline/simple_page_test_baseline.png",
+      "diff_image": null,
+      "mismatched_pixels": 0,
+      "total_pixels": 0,
+      "mismatch_percentage": 0.0,
+      "threshold": 0.1,
+      "error": "基线图片已创建/更新",
+      "timestamp": "2025-06-11T00:20:25.573626",
+      "execution_time": 0.005541
+    },
+    {
+      "test_name": "google_homepage",
+      "test_id": "DEMO_GOOGLE_HOMEPAGE",
+      "passed": true,
+      "current_image": "visual_tests_demo/screenshots/google_homepage_20250611_002028.png",
+      "baseline_image": "visual_tests_demo/baseline/google_homepage_baseline.png",
+      "diff_image": null,
+      "mismatched_pixels": 0,
+      "total_pixels": 0,
+      "mismatch_percentage": 0.0,
+      "threshold": 0.1,
+      "error": "基线图片已创建/更新",
+      "timestamp": "2025-06-11T00:20:28.472739",
+      "execution_time": 0.001084
+    }
+  ]
+}
