@@ -1,0 +1,298 @@
+{
+  "test_summary": {
+    "test_config": {
+      "test_all_scenarios": true,
+      "test_performance": true,
+      "test_error_handling": true,
+      "test_integration": true,
+      "generate_comprehensive_report": true,
+      "cleanup_test_data": false
+    },
+    "execution_time": "2025-06-11T00:58:44.411495",
+    "system_metrics": {
+      "total_tests": 16,
+      "passed_tests": 16,
+      "failed_tests": 0,
+      "total_duration": 0.1525096893310547,
+      "average_test_duration": 0.00951424241065979,
+      "performance_metrics": {
+        "recording_speed": 893.6790744252445,
+        "conversion_speed": 27342.26857887875,
+        "memory_usage": {
+          "initial_memory_mb": 32.23046875,
+          "peak_memory_mb": 32.23046875,
+          "final_memory_mb": 32.23046875,
+          "memory_increase_mb": 0.0,
+          "memory_recovered_mb": 0.0
+        }
+      },
+      "error_summary": {},
+      "test_types": {
+        "basic": {
+          "total": 3,
+          "passed": 3,
+          "failed": 0
+        },
+        "scenario": {
+          "total": 4,
+          "passed": 4,
+          "failed": 0
+        },
+        "conversion": {
+          "total": 2,
+          "passed": 2,
+          "failed": 0
+        },
+        "integration": {
+          "total": 2,
+          "passed": 2,
+          "failed": 0
+        },
+        "performance": {
+          "total": 3,
+          "passed": 3,
+          "failed": 0
+        },
+        "error": {
+          "total": 2,
+          "passed": 2,
+          "failed": 0
+        }
+      }
+    },
+    "success_rate": 1.0
+  },
+  "detailed_results": [
+    {
+      "test_name": "workflow_recorder_basic",
+      "test_type": "basic",
+      "success": true,
+      "duration": 0.011614561080932617,
+      "error_message": null,
+      "metrics": {
+        "recording_id": "recording_3c11dbb2",
+        "actions_count": 2,
+        "duration": 0.010139
+      }
+    },
+    {
+      "test_name": "kilo_code_recorder_basic",
+      "test_type": "basic",
+      "success": true,
+      "duration": 0.021158218383789062,
+      "error_message": null,
+      "metrics": {
+        "recording_id": "recording_33825107",
+        "kilo_events_count": 2,
+        "quality_score": 0.7999999999999999
+      }
+    },
+    {
+      "test_name": "n8n_converter_basic",
+      "test_type": "basic",
+      "success": true,
+      "duration": 0.0013554096221923828,
+      "error_message": null,
+      "metrics": {
+        "workflow_name": "PowerAutomation_KiloCode_n8n转换测试_enterprise",
+        "nodes_count": 6,
+        "connections_count": 5,
+        "workflow_path": "/home/ubuntu/projects/Powerauto.ai/test/system_tests/n8n_test/kilo_code/PowerAutomation_KiloCode_n8n转换测试_enterprise_20250611_005844.json"
+      }
+    },
+    {
+      "test_name": "kilo_scenario_enterprise_full_detection",
+      "test_type": "scenario",
+      "success": true,
+      "duration": 0.019551992416381836,
+      "error_message": null,
+      "metrics": {
+        "scenario_id": "enterprise_full_detection",
+        "recording_id": "recording_e3fe1778",
+        "quality_score": 0.7285714285714285
+      }
+    },
+    {
+      "test_name": "kilo_scenario_enterprise_critical_modes",
+      "test_type": "scenario",
+      "success": true,
+      "duration": 0.019707679748535156,
+      "error_message": null,
+      "metrics": {
+        "scenario_id": "enterprise_critical_modes",
+        "recording_id": "recording_c680972a",
+        "quality_score": 0.7666666666666666
+      }
+    },
+    {
+      "test_name": "kilo_scenario_personal_pro_basic",
+      "test_type": "scenario",
+      "success": true,
+      "duration": 0.01992201805114746,
+      "error_message": null,
+      "metrics": {
+        "scenario_id": "personal_pro_basic",
+        "recording_id": "recording_0ec1ca44",
+        "quality_score": 0.7666666666666666
+      }
+    },
+    {
+      "test_name": "kilo_scenario_personal_pro_learning",
+      "test_type": "scenario",
+      "success": true,
+      "duration": 0.019814252853393555,
+      "error_message": null,
+      "metrics": {
+        "scenario_id": "personal_pro_learning",
+        "recording_id": "recording_4bab5723",
+        "quality_score": 0.7999999999999999
+      }
+    },
+    {
+      "test_name": "n8n_kilo_code_conversion",
+      "test_type": "conversion",
+      "success": true,
+      "duration": 0.0013866424560546875,
+      "error_message": null,
+      "metrics": {
+        "nodes_count": 6,
+        "has_kilo_nodes": false,
+        "workflow_path": "/home/ubuntu/projects/Powerauto.ai/test/system_tests/n8n_test/kilo_code/PowerAutomation_KiloCode_复杂Kilo_Code测试_enterprise_20250611_005844.json"
+      }
+    },
+    {
+      "test_name": "n8n_general_conversion",
+      "test_type": "conversion",
+      "success": true,
+      "duration": 0.0063076019287109375,
+      "error_message": null,
+      "metrics": {
+        "nodes_count": 5,
+        "workflow_path": "/home/ubuntu/projects/Powerauto.ai/test/system_tests/n8n_test/general/PowerAutomation_Test_general_test_20250611_005844_20250611_005844.json"
+      }
+    },
+    {
+      "test_name": "visual_integration_config",
+      "test_type": "integration",
+      "success": true,
+      "duration": 2.002716064453125e-05,
+      "error_message": null,
+      "metrics": {
+        "recording_config_valid": true,
+        "visual_config_valid": true,
+        "integration_ready": true
+      }
+    },
+    {
+      "test_name": "performance_recording_speed",
+      "test_type": "performance",
+      "success": true,
+      "duration": 0.011206388473510742,
+      "error_message": null,
+      "metrics": {
+        "total_duration": 0.011189699172973633,
+        "actions_count": 10,
+        "actions_per_second": 893.6790744252445
+      }
+    },
+    {
+      "test_name": "performance_conversion_speed",
+      "test_type": "performance",
+      "success": true,
+      "duration": 0.0031118392944335938,
+      "error_message": null,
+      "metrics": {
+        "conversion_duration": 0.0007314682006835938,
+        "save_duration": 0.002331972122192383,
+        "total_duration": 0.0030634403228759766,
+        "events_converted": 20,
+        "nodes_generated": 24
+      }
+    },
+    {
+      "test_name": "performance_memory_usage",
+      "test_type": "performance",
+      "success": true,
+      "duration": 0.0007410049438476562,
+      "error_message": null,
+      "metrics": {
+        "initial_memory_mb": 32.23046875,
+        "peak_memory_mb": 32.23046875,
+        "final_memory_mb": 32.23046875,
+        "memory_increase_mb": 0.0,
+        "memory_recovered_mb": 0.0
+      }
+    },
+    {
+      "test_name": "error_invalid_config",
+      "test_type": "error",
+      "success": true,
+      "duration": 1.9073486328125e-05,
+      "error_message": null,
+      "metrics": {
+        "error_handled": true,
+        "error_type": "ValueError",
+        "error_message": "未知的测试场景: invalid_scenario_id"
+      }
+    },
+    {
+      "test_name": "error_invalid_data",
+      "test_type": "error",
+      "success": true,
+      "duration": 0.00013136863708496094,
+      "error_message": null,
+      "metrics": {
+        "error_handled": false,
+        "error_type": "none"
+      }
+    },
+    {
+      "test_name": "e2e_complete_workflow",
+      "test_type": "integration",
+      "success": true,
+      "duration": 0.016179800033569336,
+      "error_message": null,
+      "metrics": {
+        "kilo_recording_success": true,
+        "n8n_conversion_success": true,
+        "workflow_save_success": true,
+        "end_to_end_success": true,
+        "workflow_path": "/home/ubuntu/projects/Powerauto.ai/test/system_tests/n8n_test/kilo_code/PowerAutomation_KiloCode_KiloCode_企业版关键模式测试_kilo_code_detection_enterprise_20250611_005844.json"
+      }
+    }
+  ],
+  "component_status": {
+    "workflow_recorder": {
+      "status": "healthy",
+      "success_rate": 1.0,
+      "tests_passed": 1,
+      "tests_total": 1,
+      "issues": []
+    },
+    "kilo_code_recorder": {
+      "status": "healthy",
+      "success_rate": 1.0,
+      "tests_passed": 2,
+      "tests_total": 2,
+      "issues": []
+    },
+    "n8n_converter": {
+      "status": "healthy",
+      "success_rate": 1.0,
+      "tests_passed": 3,
+      "tests_total": 3,
+      "issues": []
+    },
+    "visual_integrator": {
+      "status": "healthy",
+      "success_rate": 1.0,
+      "tests_passed": 1,
+      "tests_total": 1,
+      "issues": []
+    }
+  },
+  "recommendations": [
+    "系统运行良好，建议继续保持当前配置"
+  ],
+  "system_health": "excellent"
+}

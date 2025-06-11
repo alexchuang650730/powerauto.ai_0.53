@@ -1,0 +1,41 @@
+{
+  "validation_timestamp": "2025-06-11T00:22:01.075085",
+  "framework_version": "PowerAutomation v2.0",
+  "validation_status": "excellent",
+  "components": {
+    "test_case_generator": {
+      "path": "test_case_generator.py",
+      "status": "available",
+      "description": "测试用例生成器",
+      "file_size": 29208
+    },
+    "enhanced_preconditions": {
+      "path": "enhanced_test_preconditions.py",
+      "status": "available",
+      "description": "增强前置条件系统",
+      "file_size": 22819
+    },
+    "visual_tester": {
+      "path": "powerautomation_visual_tester.py",
+      "status": "available",
+      "description": "视觉测试框架",
+      "file_size": 24560
+    },
+    "visual_integrator": {
+      "path": "visual_test_integrator.py",
+      "status": "available",
+      "description": "视觉测试集成器",
+      "file_size": 26197
+    },
+    "framework_integrator": {
+      "path": "enhanced_test_framework_integrator.py",
+      "status": "available",
+      "description": "测试框架集成器",
+      "file_size": 15071
+    }
+  },
+  "integration_status": {
+    "test_generator_integration": {
+      "description": "测试用例生成器集成",
+      "status": "integrated",
+      "check_method": 

@@ -1,0 +1,7 @@
+{
+  "scenario_info": {
+    "scenario_id": "enterprise_critical_modes",
+    "scenario_name": "企业版关键模式测试",
+    "target_version": "enterprise",
+    "struggle_modes": [
+      

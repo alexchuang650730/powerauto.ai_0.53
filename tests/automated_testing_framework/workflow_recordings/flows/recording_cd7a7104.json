@@ -1,0 +1,175 @@
+{
+  "recording_id": "recording_cd7a7104",
+  "recording_name": "性能测试_performance_test",
+  "recording_mode": "performance_test",
+  "target_version": "enterprise",
+  "start_time": "2025-06-11T00:58:44.380199",
+  "end_time": "2025-06-11T00:58:44.389263",
+  "config": {
+    "recording_mode": "performance_test",
+    "target_version": "enterprise",
+    "enable_visual_verification": false,
+    "enable_screenshot": false,
+    "auto_generate_n8n": true,
+    "recording_quality": "high",
+    "max_recording_duration": 300,
+    "screenshot_interval": 2.0
+  },
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_user_action_0",
+      "timestamp": "2025-06-11T00:58:44.389116",
+      "element_info": {},
+      "action_data": {
+        "index": 0
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "custom_user_action_1",
+      "timestamp": "2025-06-11T00:58:44.389141",
+      "element_info": {},
+      "action_data": {
+        "index": 1
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_003",
+      "type": "custom_user_action_2",
+      "timestamp": "2025-06-11T00:58:44.389155",
+      "element_info": {},
+      "action_data": {
+        "index": 2
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_004",
+      "type": "custom_user_action_3",
+      "timestamp": "2025-06-11T00:58:44.389167",
+      "element_info": {},
+      "action_data": {
+        "index": 3
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_005",
+      "type": "custom_user_action_4",
+      "timestamp": "2025-06-11T00:58:44.389178",
+      "element_info": {},
+      "action_data": {
+        "index": 4
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_006",
+      "type": "custom_user_action_5",
+      "timestamp": "2025-06-11T00:58:44.389193",
+      "element_info": {},
+      "action_data": {
+        "index": 5
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_007",
+      "type": "custom_user_action_6",
+      "timestamp": "2025-06-11T00:58:44.389208",
+      "element_info": {},
+      "action_data": {
+        "index": 6
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_008",
+      "type": "custom_user_action_7",
+      "timestamp": "2025-06-11T00:58:44.389221",
+      "element_info": {},
+      "action_data": {
+        "index": 7
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_009",
+      "type": "custom_user_action_8",
+      "timestamp": "2025-06-11T00:58:44.389235",
+      "element_info": {},
+      "action_data": {
+        "index": 8
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_010",
+      "type": "custom_user_action_9",
+      "timestamp": "2025-06-11T00:58:44.389250",
+      "element_info": {},
+      "action_data": {
+        "index": 9
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "kilo_code_events": [],
+  "screenshots": [],
+  "visual_verifications": [],
+  "statistics": {
+    "total_actions": 10,
+    "total_kilo_code_events": 0,
+    "total_screenshots": 0,
+    "average_kilo_code_response_time": 0.0,
+    "recording_duration": 0.009064
+  },
+  "n8n_workflow": {
+    "name": "PowerAutomation_performance_test_recording_cd7a7104",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "position": [
+          240,
+          300
+        ]
+      }
+    ],
+    "connections": {},
+    "active": true,
+    "settings": {},
+    "staticData": {},
+    "meta": {
+      "powerautomation_recording_id": "recording_cd7a7104",
+      "recording_mode": "performance_test",
+      "target_version": "enterprise",
+      "generated_at": "2025-06-11T00:58:44.390302"
+    }
+  }
+}

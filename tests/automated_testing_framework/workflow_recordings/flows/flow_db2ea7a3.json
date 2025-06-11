@@ -1,0 +1,43 @@
+{
+  "id": "flow_db2ea7a3",
+  "name": "Visual_Kilo Code企业版视觉集成测试_kilo_code_detection",
+  "description": "视觉集成录制会话: Kilo Code企业版视觉集成测试 | 模式: kilo_code_detection | 版本: enterprise",
+  "start_time": "2025-06-11T00:56:43.168427",
+  "end_time": "2025-06-11T00:56:43.190675",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "click",
+      "timestamp": "2025-06-11T00:56:43.190625",
+      "element_info": {
+        "selector": ".kilo-code-panel",
+        "text": "智能介入面板",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_95e28283",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "enable_visual_verification": true,
+      "enable_screenshot": true,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}

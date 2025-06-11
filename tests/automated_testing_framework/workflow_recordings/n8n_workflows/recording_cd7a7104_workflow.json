@@ -1,0 +1,25 @@
+{
+  "name": "PowerAutomation_performance_test_recording_cd7a7104",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    }
+  ],
+  "connections": {},
+  "active": true,
+  "settings": {},
+  "staticData": {},
+  "meta": {
+    "powerautomation_recording_id": "recording_cd7a7104",
+    "recording_mode": "performance_test",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T00:58:44.390302"
+  }
+}

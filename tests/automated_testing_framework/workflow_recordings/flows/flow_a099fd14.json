@@ -1,0 +1,115 @@
+{
+  "id": "flow_a099fd14",
+  "name": "Kilo Code智能介入测试_kilo_code_detection",
+  "description": "测试7种挣扎模式检测 | 模式: kilo_code_detection | 版本: enterprise",
+  "start_time": "2025-06-11T00:51:01.533227",
+  "end_time": "2025-06-11T00:51:01.545966",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:51:01.545833",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "code_complexity": "high",
+          "error_rate": 0.15
+        },
+        "confidence_score": 0.92,
+        "response_time": 1.8,
+        "event_id": "kilo_event_001"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:51:01.545890",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "intervention_decision",
+        "detection_data": {
+          "intervention_type": "code_suggestion",
+          "priority": "high"
+        },
+        "confidence_score": 0.88,
+        "response_time": 2.1,
+        "event_id": "kilo_event_002"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_003",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:51:01.545916",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "accuracy_check",
+        "detection_data": {
+          "accuracy_rate": 0.87,
+          "test_coverage": 0.92
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.2,
+        "event_id": "kilo_event_003"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_004",
+      "type": "click",
+      "timestamp": "2025-06-11T00:51:01.545936",
+      "element_info": {
+        "selector": ".kilo-code-panel",
+        "text": "智能介入面板",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_005",
+      "type": "input",
+      "timestamp": "2025-06-11T00:51:01.545951",
+      "element_info": {
+        "selector": "#code-input"
+      },
+      "action_data": {
+        "text": "function testKiloCode() { return true; }",
+        "clear_first": true
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_bc4f1103",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "enable_visual_verification": true,
+      "enable_screenshot": true,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}

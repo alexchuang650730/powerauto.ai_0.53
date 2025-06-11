@@ -1,0 +1,83 @@
+{
+  "recording_id": "recording_3c11dbb2",
+  "recording_name": "基础功能测试_general_test",
+  "recording_mode": "general_test",
+  "target_version": "enterprise",
+  "start_time": "2025-06-11T00:58:44.259155",
+  "end_time": "2025-06-11T00:58:44.269294",
+  "config": {
+    "recording_mode": "general_test",
+    "target_version": "enterprise",
+    "enable_visual_verification": false,
+    "enable_screenshot": false,
+    "auto_generate_n8n": true,
+    "recording_quality": "high",
+    "max_recording_duration": 300,
+    "screenshot_interval": 2.0
+  },
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_user_test_action",
+      "timestamp": "2025-06-11T00:58:44.269242",
+      "element_info": {},
+      "action_data": {
+        "test": "data"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "click",
+      "timestamp": "2025-06-11T00:58:44.269277",
+      "element_info": {
+        "selector": ".test-button",
+        "text": "",
+        "coordinates": null
+      },
+      "action_data": {
+        "click_type": "element"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "kilo_code_events": [],
+  "screenshots": [],
+  "visual_verifications": [],
+  "statistics": {
+    "total_actions": 2,
+    "total_kilo_code_events": 0,
+    "total_screenshots": 0,
+    "average_kilo_code_response_time": 0.0,
+    "recording_duration": 0.010139
+  },
+  "n8n_workflow": {
+    "name": "PowerAutomation_general_test_recording_3c11dbb2",
+    "nodes": [
+      {
+        "parameters": {},
+        "name": "Start",
+        "type": "n8n-nodes-base.start",
+        "typeVersion": 1,
+        "position": [
+          240,
+          300
+        ]
+      }
+    ],
+    "connections": {},
+    "active": true,
+    "settings": {},
+    "staticData": {},
+    "meta": {
+      "powerautomation_recording_id": "recording_3c11dbb2",
+      "recording_mode": "general_test",
+      "target_version": "enterprise",
+      "generated_at": "2025-06-11T00:58:44.270007"
+    }
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "name": "PowerAutomation_kilo_code_detection_recording_bc4f1103",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "code_complexity": "high",
+          "error_rate": 0.15
+        },
+        "confidence_score": 0.92,
+        "response_time": 1.8,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_struggle_mode_1_1",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        440,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "intervention_decision",
+        "detection_data": {
+          "intervention_type": "code_suggestion",
+          "priority": "high"
+        },
+        "confidence_score": 0.88,
+        "response_time": 2.1,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_intervention_decision_2",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "detection_type": "accuracy_check",
+        "detection_data": {
+          "accuracy_rate": 0.87,
+          "test_coverage": 0.92
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.2,
+        "expected_response_time": 3.0,
+        "expected_confidence": 0.85
+      },
+      "name": "KiloCode_accuracy_check_3",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        840,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "total_events": 3,
+        "average_response_time": 1.7000000000000002,
+        "validation_criteria": {
+          "max_response_time": 3.0,
+          "min_confidence": 0.85,
+          "required_detection_types": [
+            "struggle_mode_1",
+            "struggle_mode_2",
+            "intervention_decision"
+          ]
+        }
+      },
+      "name": "Validation",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_struggle_mode_1_1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_struggle_mode_1_1": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_intervention_decision_2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_intervention_decision_2": {
+      "main": [
+        [
+          {
+            "node": "KiloCode_accuracy_check_3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "KiloCode_accuracy_check_3": {
+      "main": [
+        [
+          {
+            "node": "Validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "staticData": {},
+  "meta": {
+    "powerautomation_recording_id": "recording_bc4f1103",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "generated_at": "2025-06-11T00:51:01.552337"
+  }
+}

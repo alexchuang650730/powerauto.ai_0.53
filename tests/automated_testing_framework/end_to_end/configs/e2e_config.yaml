@@ -1,0 +1,56 @@
+end_to_end_tests:
+  execution_order:
+  - server_side
+  - client_side
+  - integration
+  - fallback_automation
+  parallel_execution:
+    enabled: true
+    max_workers: 4
+  reporting:
+    format:
+    - html
+    - json
+    - xml
+    output_dir: e2e_reports
+  test_levels:
+    client_side:
+      description: 客户端端到端测试
+      platforms:
+      - windows
+      - macos
+      test_types:
+      - ui_test
+      - automation_test
+      timeout: 300
+    fallback_automation:
+      description: 兜底自动化端到端测试
+      platforms:
+      - windows
+      - macos
+      - linux
+      test_types:
+      - fallback_test
+      - automation_test
+      - ui_test
+      timeout: 600
+    integration:
+      description: 集成端到端测试
+      platforms:
+      - windows
+      - macos
+      - linux
+      test_types:
+      - integration_test
+      - api_test
+      - ui_test
+      timeout: 900
+    server_side:
+      description: 服务端端到端测试
+      platforms:
+      - linux
+      test_types:
+      - api_test
+      - data_test
+      - performance_test
+      timeout: 600

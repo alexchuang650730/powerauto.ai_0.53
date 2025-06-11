@@ -1,0 +1,30 @@
+[
+  {
+    "event_id": "kilo_event_001",
+    "timestamp": "2025-06-11T00:58:44.288510",
+    "detection_type": "struggle_mode_1",
+    "detection_data": {
+      "error_type": "test_error"
+    },
+    "confidence_score": 0.95,
+    "response_time": 1.0,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_002",
+    "timestamp": "2025-06-11T00:58:44.288580",
+    "detection_type": "intervention_trigger",
+    "detection_data": {
+      "intervention_type": "code_suggestion",
+      "intervention_data": {
+        "suggestion": "test_suggestion"
+      },
+      "success_rate": 0.9
+    },
+    "confidence_score": 0.9,
+    "response_time": 0.5,
+    "screenshot_path": null,
+    "visual_verification": null
+  }
+]

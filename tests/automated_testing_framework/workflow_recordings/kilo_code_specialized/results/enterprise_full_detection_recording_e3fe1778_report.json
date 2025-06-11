@@ -1,0 +1,233 @@
+{
+  "scenario_info": {
+    "scenario_id": "enterprise_full_detection",
+    "scenario_name": "企业版完整检测测试",
+    "target_version": "enterprise",
+    "struggle_modes": [
+      "struggle_mode_1",
+      "struggle_mode_2",
+      "struggle_mode_3",
+      "struggle_mode_4",
+      "struggle_mode_5",
+      "struggle_mode_6",
+      "struggle_mode_7"
+    ],
+    "expected_interventions": [
+      "code_suggestion",
+      "error_fix",
+      "refactor_advice",
+      "performance_tip",
+      "best_practice",
+      "documentation",
+      "testing_guide"
+    ],
+    "performance_requirements": {
+      "max_response_time": 3.0,
+      "min_accuracy_rate": 0.85,
+      "min_intervention_success_rate": 0.8
+    },
+    "test_data": {
+      "code_complexity": "high",
+      "team_size": "large",
+      "project_type": "enterprise_application"
+    }
+  },
+  "recording_info": {
+    "recording_id": "recording_e3fe1778",
+    "start_time": "2025-06-11T00:58:44.293351",
+    "end_time": "2025-06-11T00:58:44.310257",
+    "duration": 0.016906
+  },
+  "performance_analysis": {
+    "average_response_time": 1.5,
+    "max_response_time": 1.5,
+    "min_response_time": 1.5,
+    "average_accuracy": 0.9,
+    "response_time_compliance": 1.0,
+    "accuracy_compliance": 1.0
+  },
+  "coverage_analysis": {
+    "struggle_mode_coverage": 0.14285714285714285,
+    "intervention_coverage": 0.0,
+    "detected_struggle_modes": [
+      "struggle_mode_1"
+    ],
+    "triggered_interventions": [],
+    "missing_struggle_modes": [
+      "struggle_mode_2",
+      "struggle_mode_3",
+      "struggle_mode_4",
+      "struggle_mode_5",
+      "struggle_mode_6",
+      "struggle_mode_7"
+    ],
+    "missing_interventions": [
+      "code_suggestion",
+      "error_fix",
+      "refactor_advice",
+      "performance_tip",
+      "best_practice",
+      "documentation",
+      "testing_guide"
+    ]
+  },
+  "quality_assessment": {
+    "overall_quality_score": 0.7285714285714285,
+    "performance_grade": "A+",
+    "coverage_grade": "D",
+    "recommendations": [
+      "建议增强以下挣扎模式的检测能力: struggle_mode_2, struggle_mode_3, struggle_mode_4, struggle_mode_5, struggle_mode_6, struggle_mode_7",
+      "建议完善以下介入类型的触发机制: code_suggestion, error_fix, refactor_advice, performance_tip, best_practice, documentation, testing_guide"
+    ]
+  },
+  "raw_recording_data": {
+    "recording_id": "recording_e3fe1778",
+    "recording_name": "KiloCode_企业版完整检测测试_kilo_code_detection",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "start_time": "2025-06-11T00:58:44.293351",
+    "end_time": "2025-06-11T00:58:44.310257",
+    "config": {
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "enable_visual_verification": true,
+      "enable_screenshot": true,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    },
+    "actions": [
+      {
+        "id": "action_001",
+        "type": "custom_kilo_code_detection",
+        "timestamp": "2025-06-11T00:58:44.310213",
+        "element_info": {},
+        "action_data": {
+          "detection_type": "struggle_mode_1",
+          "detection_data": {
+            "scenario": "enterprise_full_detection"
+          },
+          "confidence_score": 0.9,
+          "response_time": 1.5,
+          "event_id": "kilo_event_001"
+        },
+        "screenshot_path": null,
+        "visual_verification": null,
+        "metadata": {}
+      }
+    ],
+    "kilo_code_events": [
+      {
+        "event_id": "kilo_event_001",
+        "timestamp": "2025-06-11T00:58:44.310194",
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "scenario": "enterprise_full_detection"
+        },
+        "confidence_score": 0.9,
+        "response_time": 1.5,
+        "screenshot_path": null,
+        "visual_verification": null
+      }
+    ],
+    "screenshots": [],
+    "visual_verifications": [],
+    "statistics": {
+      "total_actions": 1,
+      "total_kilo_code_events": 1,
+      "total_screenshots": 0,
+      "average_kilo_code_response_time": 1.5,
+      "recording_duration": 0.016906
+    },
+    "n8n_workflow": {
+      "name": "PowerAutomation_kilo_code_detection_recording_e3fe1778",
+      "nodes": [
+        {
+          "parameters": {},
+          "name": "Start",
+          "type": "n8n-nodes-base.start",
+          "typeVersion": 1,
+          "position": [
+            240,
+            300
+          ]
+        },
+        {
+          "parameters": {
+            "detection_type": "struggle_mode_1",
+            "detection_data": {
+              "scenario": "enterprise_full_detection"
+            },
+            "confidence_score": 0.9,
+            "response_time": 1.5,
+            "expected_response_time": 3.0,
+            "expected_confidence": 0.85
+          },
+          "name": "KiloCode_struggle_mode_1_1",
+          "type": "n8n-nodes-base.function",
+          "typeVersion": 1,
+          "position": [
+            440,
+            300
+          ]
+        },
+        {
+          "parameters": {
+            "total_events": 1,
+            "average_response_time": 1.5,
+            "validation_criteria": {
+              "max_response_time": 3.0,
+              "min_confidence": 0.85,
+              "required_detection_types": [
+                "struggle_mode_1",
+                "struggle_mode_2",
+                "intervention_decision"
+              ]
+            }
+          },
+          "name": "Validation",
+          "type": "n8n-nodes-base.function",
+          "typeVersion": 1,
+          "position": [
+            640,
+            300
+          ]
+        }
+      ],
+      "connections": {
+        "Start": {
+          "main": [
+            [
+              {
+                "node": "KiloCode_struggle_mode_1_1",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        },
+        "KiloCode_struggle_mode_1_1": {
+          "main": [
+            [
+              {
+                "node": "Validation",
+                "type": "main",
+                "index": 0
+              }
+            ]
+          ]
+        }
+      },
+      "active": true,
+      "settings": {},
+      "staticData": {},
+      "meta": {
+        "powerautomation_recording_id": "recording_e3fe1778",
+        "recording_mode": "kilo_code_detection",
+        "target_version": "enterprise",
+        "generated_at": "2025-06-11T00:58:44.310732"
+      }
+    }
+  }
+}

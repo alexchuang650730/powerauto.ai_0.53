@@ -1,0 +1,10 @@
+{
+  "scenario_id": "enterprise_critical_modes",
+  "recording_id": "recording_32dfde12",
+  "timestamp": "2025-06-11T00:52:56.843181",
+  "quality_score": 0.8333333333333333,
+  "performance_grade": "B",
+  "coverage_grade": "B",
+  "average_response_time": 1.48,
+  "average_accuracy": 0.9166666666666666
+}

@@ -1,0 +1,31 @@
+end_to_end:
+  client_side_testing: true
+  enabled: true
+  fallback_automation: true
+preconditions:
+  enabled: true
+  platform_selection: true
+  validation_required: true
+test_generator:
+  default_environment:
+    hardware:
+      device_type: 通用设备
+      min_cpu_cores: 2
+      min_memory_gb: 4
+    network:
+      connection_required: true
+      max_latency_ms: 100
+    permissions:
+      admin_required: false
+      debug_mode: true
+    software:
+      python_version: '>=3.8'
+      required_packages:
+      - pytest
+      - uiautomator2
+  enabled: true
+  output_dir: generated_tests
+  supported_types:
+  - operation
+  - api
+  template_file: simplified_test_cases_template.md

@@ -1,0 +1,45 @@
+{
+  "id": "flow_1982cf9d",
+  "name": "KiloCode_企业版关键模式测试_kilo_code_detection",
+  "description": "Kilo Code场景测试: 企业版关键模式测试 | 模式: kilo_code_detection | 版本: enterprise",
+  "start_time": "2025-06-11T00:58:44.395406",
+  "end_time": "2025-06-11T00:58:44.409279",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:58:44.409243",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "integration_test": true
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.0,
+        "event_id": "kilo_event_001"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_f8d58c71",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "enable_visual_verification": true,
+      "enable_screenshot": true,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}

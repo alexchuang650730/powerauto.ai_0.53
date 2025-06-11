@@ -1,0 +1,90 @@
+[
+  {
+    "event_id": "kilo_event_001",
+    "timestamp": "2025-06-11T00:52:36.883965",
+    "detection_type": "struggle_mode_1",
+    "detection_data": {
+      "error_type": "missing_semicolon",
+      "line": 42
+    },
+    "confidence_score": 0.95,
+    "response_time": 1.2,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_002",
+    "timestamp": "2025-06-11T00:52:36.884018",
+    "detection_type": "struggle_mode_2",
+    "detection_data": {
+      "error_type": "infinite_loop",
+      "complexity": "medium"
+    },
+    "confidence_score": 0.88,
+    "response_time": 2.1,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_003",
+    "timestamp": "2025-06-11T00:52:36.884063",
+    "detection_type": "struggle_mode_3",
+    "detection_data": {
+      "issue_type": "memory_leak",
+      "severity": "high"
+    },
+    "confidence_score": 0.92,
+    "response_time": 1.8,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_004",
+    "timestamp": "2025-06-11T00:52:36.884086",
+    "detection_type": "intervention_trigger",
+    "detection_data": {
+      "intervention_type": "code_suggestion",
+      "intervention_data": {
+        "suggestion": "添加分号",
+        "confidence": 0.95
+      },
+      "success_rate": 0.9
+    },
+    "confidence_score": 0.9,
+    "response_time": 0.8,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_005",
+    "timestamp": "2025-06-11T00:52:36.884109",
+    "detection_type": "intervention_trigger",
+    "detection_data": {
+      "intervention_type": "error_fix",
+      "intervention_data": {
+        "fix_type": "loop_condition",
+        "auto_fix": true
+      },
+      "success_rate": 0.85
+    },
+    "confidence_score": 0.85,
+    "response_time": 1.5,
+    "screenshot_path": null,
+    "visual_verification": null
+  },
+  {
+    "event_id": "kilo_event_006",
+    "timestamp": "2025-06-11T00:52:36.884132",
+    "detection_type": "accuracy_validation",
+    "detection_data": {
+      "total_detections": 3,
+      "correct_detections": 3,
+      "false_positives": 0,
+      "false_negatives": 0
+    },
+    "confidence_score": 0.9166666666666666,
+    "response_time": 0.1,
+    "screenshot_path": null,
+    "visual_verification": null
+  }
+]

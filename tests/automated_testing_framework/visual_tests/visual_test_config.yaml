@@ -1,0 +1,38 @@
+visual_testing:
+  browser_config:
+    browser_type: chromium
+    disable_animations: true
+    headless: true
+    viewport:
+      height: 1080
+      width: 1920
+  comparison_config:
+    auto_update_baseline: false
+    full_page_screenshot: true
+    screenshot_format: png
+    visual_threshold: 0.05
+  enabled: true
+  reporting:
+    formats:
+    - json
+    - html
+    include_diff_images: true
+    include_screenshots: true
+    output_directory: visual_test_reports
+  test_scenarios:
+    client_side:
+      enabled: true
+      test_types:
+      - ui_verification
+      - workflow_validation
+    fallback_automation:
+      enabled: true
+      test_types:
+      - trae_intervention
+      - manus_intervention
+      - data_acquisition
+    integration:
+      enabled: true
+      test_types:
+      - end_to_end_flow
+      - cross_platform_consistency

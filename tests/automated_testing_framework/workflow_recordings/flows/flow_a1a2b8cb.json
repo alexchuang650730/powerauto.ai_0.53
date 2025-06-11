@@ -1,0 +1,67 @@
+{
+  "id": "flow_a1a2b8cb",
+  "name": "KiloCode_企业版关键模式测试_kilo_code_detection",
+  "description": "Kilo Code场景测试: 企业版关键模式测试 | 模式: kilo_code_detection | 版本: enterprise",
+  "start_time": "2025-06-11T00:58:44.270793",
+  "end_time": "2025-06-11T00:58:44.288621",
+  "actions": [
+    {
+      "id": "action_001",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:58:44.288532",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "struggle_mode_1",
+        "detection_data": {
+          "error_type": "test_error"
+        },
+        "confidence_score": 0.95,
+        "response_time": 1.0,
+        "event_id": "kilo_event_001"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    },
+    {
+      "id": "action_002",
+      "type": "custom_kilo_code_detection",
+      "timestamp": "2025-06-11T00:58:44.288587",
+      "element_info": {},
+      "action_data": {
+        "detection_type": "intervention_trigger",
+        "detection_data": {
+          "intervention_type": "code_suggestion",
+          "intervention_data": {
+            "suggestion": "test_suggestion"
+          },
+          "success_rate": 0.9
+        },
+        "confidence_score": 0.9,
+        "response_time": 0.5,
+        "event_id": "kilo_event_002"
+      },
+      "screenshot_path": null,
+      "visual_verification": null,
+      "metadata": {}
+    }
+  ],
+  "screenshots": [],
+  "visual_verifications": [],
+  "metadata": {
+    "recording_id": "recording_33825107",
+    "recording_mode": "kilo_code_detection",
+    "target_version": "enterprise",
+    "config": {
+      "recording_mode": "kilo_code_detection",
+      "target_version": "enterprise",
+      "enable_visual_verification": true,
+      "enable_screenshot": true,
+      "auto_generate_n8n": true,
+      "recording_quality": "high",
+      "max_recording_duration": 300,
+      "screenshot_interval": 2.0
+    }
+  },
+  "status": "completed"
+}
