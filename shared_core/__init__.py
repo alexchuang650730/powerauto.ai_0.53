@@ -19,10 +19,25 @@ from abc import ABC, abstractmethod
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # 導入核心組件
-from architecture.unified_architecture import UnifiedArchitecture
-from architecture.interaction_log_manager import InteractionLogManager
-from engines.rl_srt_learning_system import RLSRTLearningSystem
-from utils.standardized_logging_system import StandardizedLogger
+try:
+    from architecture.unified_architecture import UnifiedArchitectureCoordinator as UnifiedArchitecture
+except ImportError:
+    UnifiedArchitecture = None
+
+try:
+    from architecture.interaction_log_manager import InteractionLogManager
+except ImportError:
+    InteractionLogManager = None
+
+try:
+    from engines.rl_srt_learning_system import RLSRTLearningSystem
+except ImportError:
+    RLSRTLearningSystem = None
+
+try:
+    from utils.standardized_logging_system import StandardizedLogger
+except ImportError:
+    StandardizedLogger = logging.getLogger
 
 logger = logging.getLogger(__name__)
 
@@ -99,24 +114,45 @@ class SharedCoreManager:
         """初始化核心組件"""
         try:
             # 統一架構組件
-            self.unified_architecture = UnifiedArchitecture(
-                architecture_type=self.config.architecture_type.value
-            )
+            if UnifiedArchitecture:
+                self.unified_architecture = UnifiedArchitecture(
+                    config={"architecture_type": self.config.architecture_type.value}
+                )
+            else:
+                self.unified_architecture = None
+                self.logger.warning("UnifiedArchitecture 不可用")
             
             # 交互日誌管理器
-            self.interaction_manager = InteractionLogManager()
+            if InteractionLogManager:
+                self.interaction_manager = InteractionLogManager()
+            else:
+                self.interaction_manager = None
+                self.logger.warning("InteractionLogManager 不可用")
             
             # RL-SRT學習系統
-            self.learning_system = RLSRTLearningSystem()
+            if RLSRTLearningSystem:
+                self.learning_system = RLSRTLearningSystem()
+            else:
+                self.learning_system = None
+                self.logger.warning("RLSRTLearningSystem 不可用")
+            
+            available_components = [
+                name for name, obj in [
+                    ("unified_architecture", self.unified_architecture),
+                    ("interaction_manager", self.interaction_manager),
+                    ("learning_system", self.learning_system)
+                ] if obj is not None
+            ]
             
             self.logger.info("核心組件初始化完成", {
                 "architecture_type": self.config.architecture_type.value,
-                "components": ["unified_architecture", "interaction_manager", "learning_system"]
+                "available_components": available_components
             })
             
         except Exception as e:
             self.logger.error("核心組件初始化失敗", {"error": str(e)})
-            raise
+            # 不抛出异常，允许部分组件可用
+            pass
     
     async def start_all_components(self) -> bool:
         """啟動所有組件"""
