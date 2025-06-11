@@ -398,6 +398,7 @@ def log_critical(category: Union[str, LogCategory], message: str,
 
 # 性能監控裝飾器
 def performance_monitor(operation_name: str = None):
+<<<<<<< HEAD
     """性能監控裝飾器 - 支持異步函數"""
     def decorator(func):
         import asyncio
@@ -466,6 +467,38 @@ def performance_monitor(operation_name: str = None):
             
             return sync_wrapper
     
+=======
+    """性能監控裝飾器"""
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            op_name = operation_name or f"{func.__module__}.{func.__name__}"
+            start_time = time.time()
+            
+            try:
+                result = func(*args, **kwargs)
+                execution_time = time.time() - start_time
+                
+                log_performance(op_name, {
+                    'execution_time_seconds': execution_time,
+                    'success': True
+                })
+                
+                return result
+                
+            except Exception as e:
+                execution_time = time.time() - start_time
+                
+                log_performance(op_name, {
+                    'execution_time_seconds': execution_time,
+                    'success': False
+                })
+                
+                log_error(LogCategory.ERROR, f"函數執行失敗: {op_name}", 
+                         {'function': func.__name__}, e)
+                raise
+        
+        return wrapper
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
     return decorator
 
 if __name__ == "__main__":

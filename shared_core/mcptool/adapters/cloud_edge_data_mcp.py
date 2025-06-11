@@ -65,10 +65,13 @@ class InteractionType(Enum):
     DOCUMENTATION = "documentation"
     ERROR_FIX = "error_fix"
     OPTIMIZATION = "optimization"
+<<<<<<< HEAD
     PERFORMANCE_TEST = "performance_test"
     NORMAL_LOAD_TEST = "normal_load_test"
     HIGH_LOAD_TEST = "high_load_test"
     EXTREME_LOAD_TEST = "extreme_load_test"
+=======
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
 
 class DataStatus(Enum):
     """數據狀態枚舉"""
@@ -163,7 +166,11 @@ class CloudEdgeDataMCP(BaseMCP):
             (self.data_dir / dir_path).mkdir(parents=True, exist_ok=True)
     
     def process(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
+<<<<<<< HEAD
         """MCP標準處理接口 - 線程安全版本"""
+=======
+        """MCP標準處理接口"""
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
         try:
             operation = input_data.get("operation", "receive_data")
             params = input_data.get("params", {})
@@ -177,8 +184,14 @@ class CloudEdgeDataMCP(BaseMCP):
             
             # 執行對應操作
             if asyncio.iscoroutinefunction(self.operations[operation]):
+<<<<<<< HEAD
                 # 異步操作 - 線程安全處理
                 result = self._run_async_operation(self.operations[operation], params)
+=======
+                # 異步操作
+                loop = asyncio.get_event_loop()
+                result = loop.run_until_complete(self.operations[operation](**params))
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
             else:
                 # 同步操作
                 result = self.operations[operation](**params)
@@ -200,6 +213,7 @@ class CloudEdgeDataMCP(BaseMCP):
                 "message": f"處理失敗: {str(e)}"
             }
     
+<<<<<<< HEAD
     def _run_async_operation(self, async_func, params: Dict[str, Any]) -> Dict[str, Any]:
         """線程安全的異步操作執行器"""
         import threading
@@ -247,6 +261,12 @@ class CloudEdgeDataMCP(BaseMCP):
                 'metadata': kwargs.get('metadata', {})
             }
             
+=======
+    @performance_monitor("receive_interaction_data")
+    async def receive_interaction_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """接收來自VS Code插件的交互數據"""
+        try:
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
             # 驗證數據格式
             interaction = InteractionData.from_dict(data)
             
@@ -259,12 +279,17 @@ class CloudEdgeDataMCP(BaseMCP):
             # 更新統計信息
             self._update_statistics(interaction)
             
+<<<<<<< HEAD
             # 觸發數據處理（不等待完成，避免阻塞）
             try:
                 asyncio.create_task(self._process_interaction_data(data_id, interaction))
             except Exception:
                 # 如果創建任務失敗，記錄但不影響主流程
                 pass
+=======
+            # 觸發數據處理
+            asyncio.create_task(self._process_interaction_data(data_id, interaction))
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
             
             return {
                 "status": "success",
@@ -285,6 +310,7 @@ class CloudEdgeDataMCP(BaseMCP):
         return hashlib.sha256(content.encode()).hexdigest()[:16]
     
     async def _store_raw_data(self, data_id: str, data: Dict[str, Any]):
+<<<<<<< HEAD
         """存儲原始數據 - 線程安全版本"""
         import threading
         
@@ -339,6 +365,48 @@ class CloudEdgeDataMCP(BaseMCP):
             if interaction_type not in self.stats["type_interactions"]:
                 self.stats["type_interactions"][interaction_type] = 0
             self.stats["type_interactions"][interaction_type] += 1
+=======
+        """存儲原始數據"""
+        # 按日期存儲
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        daily_dir = self.data_dir / "interaction_data" / "daily" / date_str
+        daily_dir.mkdir(parents=True, exist_ok=True)
+        
+        file_path = daily_dir / f"{data_id}.json"
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        
+        # 按用戶存儲
+        user_id = data.get('user_id', 'unknown')
+        user_dir = self.data_dir / "interaction_data" / "by_user" / user_id[:8]
+        user_dir.mkdir(parents=True, exist_ok=True)
+        
+        user_file = user_dir / f"{data_id}.json"
+        with open(user_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    
+    def _update_statistics(self, interaction: InteractionData):
+        """更新統計信息"""
+        self.stats["total_interactions"] += 1
+        
+        # 按日期統計
+        date_str = datetime.now().strftime("%Y-%m-%d")
+        if date_str not in self.stats["daily_interactions"]:
+            self.stats["daily_interactions"][date_str] = 0
+        self.stats["daily_interactions"][date_str] += 1
+        
+        # 按用戶統計
+        user_id = interaction.user_id[:8]
+        if user_id not in self.stats["user_interactions"]:
+            self.stats["user_interactions"][user_id] = 0
+        self.stats["user_interactions"][user_id] += 1
+        
+        # 按類型統計
+        interaction_type = interaction.interaction_type.value
+        if interaction_type not in self.stats["type_interactions"]:
+            self.stats["type_interactions"][interaction_type] = 0
+        self.stats["type_interactions"][interaction_type] += 1
+>>>>>>> 6af444569ed6c361dbe3f9d73a4f244239b0fe5c
     
     async def _process_interaction_data(self, data_id: str, interaction: InteractionData):
         """處理交互數據"""
