@@ -1,0 +1,156 @@
+# PowerAutomation v0.571 部署配置
+
+# 生产环境配置
+production:
+  aws:
+    region: "us-east-1"
+    account_id: "123456789012"
+  
+  vpc:
+    cidr_block: "10.0.0.0/16"
+    subnets:
+      public_cidrs: ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+      private_cidrs: ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
+      database_cidrs: ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+  
+  rds:
+    engine_version: "15.4"
+    instance_class: "db.r6g.2xlarge"
+    allocated_storage: 2000
+    backup_retention: 30
+    multi_az: true
+    deletion_protection: true
+  
+  elasticache:
+    node_type: "cache.r6g.xlarge"
+    num_nodes: 6
+    engine_version: "7.0"
+  
+  ecs:
+    enterprise:
+      cpu: 8192
+      memory: 16384
+      desired_count: 8
+      min_capacity: 4
+      max_capacity: 20
+    
+    personal_pro:
+      cpu: 4096
+      memory: 8192
+      desired_count: 4
+      min_capacity: 2
+      max_capacity: 12
+    
+    kilo_code:
+      cpu: 16384
+      memory: 32768
+      desired_count: 6
+      min_capacity: 3
+      max_capacity: 15
+  
+  monitoring:
+    notification_email: "alerts@powerautomation.ai"
+    log_retention_days: 90
+    metrics_retention_days: 365
+  
+  security:
+    ssl_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012"
+    cloudfront_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/87654321-4321-4321-4321-210987654321"
+    cognito_user_pool_arn: "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_XXXXXXXXX"
+
+# Staging环境配置
+staging:
+  aws:
+    region: "us-east-1"
+    account_id: "123456789012"
+  
+  vpc:
+    cidr_block: "10.1.0.0/16"
+    subnets:
+      public_cidrs: ["10.1.1.0/24", "10.1.2.0/24"]
+      private_cidrs: ["10.1.11.0/24", "10.1.12.0/24"]
+      database_cidrs: ["10.1.21.0/24", "10.1.22.0/24"]
+  
+  rds:
+    engine_version: "15.4"
+    instance_class: "db.r6g.large"
+    allocated_storage: 500
+    backup_retention: 7
+    multi_az: false
+    deletion_protection: false
+  
+  elasticache:
+    node_type: "cache.r6g.large"
+    num_nodes: 2
+    engine_version: "7.0"
+  
+  ecs:
+    enterprise:
+      cpu: 4096
+      memory: 8192
+      desired_count: 2
+      min_capacity: 1
+      max_capacity: 4
+    
+    personal_pro:
+      cpu: 2048
+      memory: 4096
+      desired_count: 1
+      min_capacity: 1
+      max_capacity: 3
+    
+    kilo_code:
+      cpu: 8192
+      memory: 16384
+      desired_count: 2
+      min_capacity: 1
+      max_capacity: 4
+
+# 开发环境配置
+development:
+  aws:
+    region: "us-east-1"
+    account_id: "123456789012"
+  
+  vpc:
+    cidr_block: "10.2.0.0/16"
+    subnets:
+      public_cidrs: ["10.2.1.0/24"]
+      private_cidrs: ["10.2.11.0/24"]
+      database_cidrs: ["10.2.21.0/24"]
+  
+  rds:
+    engine_version: "15.4"
+    instance_class: "db.t3.medium"
+    allocated_storage: 100
+    backup_retention: 1
+    multi_az: false
+    deletion_protection: false
+  
+  elasticache:
+    node_type: "cache.t3.micro"
+    num_nodes: 1
+    engine_version: "7.0"
+  
+  ecs:
+    enterprise:
+      cpu: 1024
+      memory: 2048
+      desired_count: 1
+      min_capacity: 1
+      max_capacity: 2
+    
+    personal_pro:
+      cpu: 512
+      memory: 1024
+      desired_count: 1
+      min_capacity: 1
+      max_capacity: 2
+    
+    kilo_code:
+      cpu: 2048
+      memory: 4096
+      desired_count: 1
+      min_capacity: 1
+      max_capacity: 2
+
