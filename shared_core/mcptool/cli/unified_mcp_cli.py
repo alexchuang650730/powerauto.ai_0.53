@@ -925,3 +925,45 @@ if __name__ == "__main__":
         else:
             print("❌ 未知系統命令")
 
+
+
+    def do_intelligent_intervention(self, args):
+        """智能介入適配器專用命令
+        用法: intelligent_intervention analyze <repo_path>
+        用法: intelligent_intervention scan <file_path>
+        """
+        if not args.strip():
+            print("❌ 用法: intelligent_intervention <analyze|scan> [args]")
+            return
+        
+        parts = args.strip().split(maxsplit=1)
+        action = parts[0]
+        
+        if action == "analyze":
+            if len(parts) < 2:
+                print("❌ 用法: intelligent_intervention analyze <repo_path>")
+                return
+            
+            repo_path = parts[1]
+            data = {
+                "action": "analyze_repo",
+                "repo_path": repo_path
+            }
+            self.do_exec(f"developerintelligentinterventionmcp {json.dumps(data)}")
+            
+        elif action == "scan":
+            if len(parts) < 2:
+                print("❌ 用法: intelligent_intervention scan <file_path>")
+                return
+            
+            file_path = parts[1]
+            data = {
+                "action": "scan_file",
+                "file_path": file_path
+            }
+            self.do_exec(f"codecompliancescannermcp {json.dumps(data)}")
+            
+        else:
+            print(f"❌ 未知智能介入命令: {action}")
+
+
