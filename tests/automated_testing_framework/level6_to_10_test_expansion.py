@@ -105,9 +105,9 @@ class Level6to10TestExpansion:
         """創建Level 6企業安全測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 6 企業安全測試 - {component_name}
+PowerAutomation Level 6 企業安全測試 - level6_to_10_expansion
 
-測試目標: 驗證{component_name}的企業級安全性和合規性
+測試目標: 驗證level6_to_10_expansion的企業級安全性和合規性
 安全等級: 企業級
 測試類型: 深度安全場景測試
 """
@@ -125,12 +125,12 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}Security(unittest.TestCase):
     """
-    {component_name} 企業安全測試類
+    level6_to_10_expansion 企業安全測試類
     
     測試覆蓋範圍:
     - 安全漏洞掃描
@@ -399,7 +399,7 @@ class Test{component_name.replace('_', '').title()}Security(unittest.TestCase):
 
 class Test{component_name.replace('_', '').title()}SecurityAsync(unittest.IsolatedAsyncioTestCase):
     """
-    {component_name} 異步安全測試類
+    level6_to_10_expansion 異步安全測試類
     """
     
     async def asyncSetUp(self):
@@ -480,9 +480,9 @@ def run_security_tests():
 if __name__ == '__main__':
     success = run_security_tests()
     if success:
-        print(f"✅ {{component_name}} 企業安全測試全部通過!")
+        print(f"✅ {level6_to_10_expansion} 企業安全測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 企業安全測試存在失敗")
+        print(f"❌ {level6_to_10_expansion} 企業安全測試存在失敗")
         sys.exit(1)
 '''
     
@@ -490,9 +490,9 @@ if __name__ == '__main__':
         """創建Level 7兼容性測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 7 兼容性測試 - {component_name}
+PowerAutomation Level 7 兼容性測試 - level6_to_10_expansion
 
-測試目標: 驗證{component_name}的跨平台兼容性和向後兼容性
+測試目標: 驗證level6_to_10_expansion的跨平台兼容性和向後兼容性
 兼容性等級: 企業級
 測試類型: 深度兼容性場景測試
 """
@@ -510,12 +510,12 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}Compatibility(unittest.TestCase):
     """
-    {component_name} 兼容性測試類
+    level6_to_10_expansion 兼容性測試類
     
     測試覆蓋範圍:
     - 跨平台兼容性
@@ -802,9 +802,9 @@ def run_compatibility_tests():
 if __name__ == '__main__':
     success = run_compatibility_tests()
     if success:
-        print(f"✅ {{component_name}} 兼容性測試全部通過!")
+        print(f"✅ {level6_to_10_expansion} 兼容性測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 兼容性測試存在失敗")
+        print(f"❌ {level6_to_10_expansion} 兼容性測試存在失敗")
         sys.exit(1)
 '''
     
@@ -812,9 +812,9 @@ if __name__ == '__main__':
         """創建Level 8壓力測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 8 壓力測試 - {component_name}
+PowerAutomation Level 8 壓力測試 - level6_to_10_expansion
 
-測試目標: 驗證{component_name}在極限條件下的性能和穩定性
+測試目標: 驗證level6_to_10_expansion在極限條件下的性能和穩定性
 壓力等級: 極限負載
 測試類型: 深度壓力場景測試
 """
@@ -835,12 +835,12 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}Stress(unittest.TestCase):
     """
-    {component_name} 壓力測試類
+    level6_to_10_expansion 壓力測試類
     
     測試覆蓋範圍:
     - 極限負載測試
@@ -1175,7 +1175,7 @@ class Test{component_name.replace('_', '').title()}Stress(unittest.TestCase):
 
 class Test{component_name.replace('_', '').title()}StressAsync(unittest.IsolatedAsyncioTestCase):
     """
-    {component_name} 異步壓力測試類
+    level6_to_10_expansion 異步壓力測試類
     """
     
     async def asyncSetUp(self):
@@ -1242,9 +1242,9 @@ def run_stress_tests():
 if __name__ == '__main__':
     success = run_stress_tests()
     if success:
-        print(f"✅ {{component_name}} 壓力測試全部通過!")
+        print(f"✅ {level6_to_10_expansion} 壓力測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 壓力測試存在失敗")
+        print(f"❌ {level6_to_10_expansion} 壓力測試存在失敗")
         sys.exit(1)
 '''
     
@@ -1252,9 +1252,9 @@ if __name__ == '__main__':
         """創建Level 9 GAIA基準測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 9 GAIA基準測試 - {component_name}
+PowerAutomation Level 9 GAIA基準測試 - level6_to_10_expansion
 
-測試目標: 驗證{component_name}在GAIA基準測試中的表現
+測試目標: 驗證level6_to_10_expansion在GAIA基準測試中的表現
 基準等級: 國際標準
 測試類型: 深度GAIA場景測試
 """
@@ -1272,12 +1272,12 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}GAIA(unittest.TestCase):
     """
-    {component_name} GAIA基準測試類
+    level6_to_10_expansion GAIA基準測試類
     
     測試覆蓋範圍:
     - GAIA Level 1-3 測試
@@ -1676,9 +1676,9 @@ def run_gaia_tests():
 if __name__ == '__main__':
     success = run_gaia_tests()
     if success:
-        print(f"✅ {{component_name}} GAIA基準測試全部通過!")
+        print(f"✅ {level6_to_10_expansion} GAIA基準測試全部通過!")
     else:
-        print(f"❌ {{component_name}} GAIA基準測試存在失敗")
+        print(f"❌ {level6_to_10_expansion} GAIA基準測試存在失敗")
         sys.exit(1)
 '''
     
@@ -1686,9 +1686,9 @@ if __name__ == '__main__':
         """創建Level 10 AI能力評估測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 10 AI能力評估測試 - {component_name}
+PowerAutomation Level 10 AI能力評估測試 - level6_to_10_expansion
 
-測試目標: 評估{component_name}的AI能力水平和智能表現
+測試目標: 評估level6_to_10_expansion的AI能力水平和智能表現
 能力等級: 高級AI
 測試類型: 深度AI能力場景測試
 """
@@ -1708,7 +1708,7 @@ from typing import Dict, List, Any, Optional, Tuple
 from enum import Enum
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class AICapabilityLevel(Enum):
@@ -1722,7 +1722,7 @@ class AICapabilityLevel(Enum):
 
 class Test{component_name.replace('_', '').title()}AICapability(unittest.TestCase):
     """
-    {component_name} AI能力評估測試類
+    level6_to_10_expansion AI能力評估測試類
     
     測試覆蓋範圍:
     - 推理能力評估
@@ -2191,9 +2191,9 @@ def run_ai_capability_tests():
 if __name__ == '__main__':
     success = run_ai_capability_tests()
     if success:
-        print(f"✅ {{component_name}} AI能力評估測試全部通過!")
+        print(f"✅ {level6_to_10_expansion} AI能力評估測試全部通過!")
     else:
-        print(f"❌ {{component_name}} AI能力評估測試存在失敗")
+        print(f"❌ {level6_to_10_expansion} AI能力評估測試存在失敗")
         sys.exit(1)
 '''
     

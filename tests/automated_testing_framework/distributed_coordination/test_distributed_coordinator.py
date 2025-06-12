@@ -15,7 +15,7 @@ import os
 from pathlib import Path
 
 # 添加项目路径
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 # 导入分布式协调器组件

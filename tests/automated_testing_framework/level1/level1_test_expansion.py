@@ -109,10 +109,10 @@ class Level1TestExpansion:
         """創建測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 1 單元測試 - {component_name}
+PowerAutomation Level 1 單元測試 - level1_expansion
 
 測試類別: {category}
-測試目標: 驗證{component_name}的核心功能和邊界條件
+測試目標: 驗證level1_expansion的核心功能和邊界條件
 """
 
 import unittest
@@ -123,12 +123,12 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}(unittest.TestCase):
     """
-    {component_name} 單元測試類
+    level1_expansion 單元測試類
     
     測試覆蓋範圍:
     - 基本功能測試
@@ -202,7 +202,7 @@ class Test{component_name.replace('_', '').title()}(unittest.TestCase):
 
 class Test{component_name.replace('_', '').title()}Async(unittest.IsolatedAsyncioTestCase):
     """
-    {component_name} 異步單元測試類
+    level1_expansion 異步單元測試類
     
     專門測試異步功能和並發場景
     """
@@ -257,9 +257,9 @@ def run_tests():
 if __name__ == '__main__':
     success = run_tests()
     if success:
-        print(f"✅ {{component_name}} 單元測試全部通過!")
+        print(f"✅ {level1_expansion} 單元測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 單元測試存在失敗")
+        print(f"❌ {level1_expansion} 單元測試存在失敗")
         sys.exit(1)
 '''
     
@@ -304,7 +304,7 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Level1TestRunner:

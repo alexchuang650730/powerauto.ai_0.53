@@ -14,7 +14,7 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class TestIntelligentmcpselector(unittest.TestCase):
@@ -148,7 +148,7 @@ def run_tests():
 if __name__ == '__main__':
     success = run_tests()
     if success:
-        print(f"✅ {component_name} 單元測試全部通過!")
+        print(f"✅ intelligent_mcp_selector_unit 單元測試全部通過!")
     else:
-        print(f"❌ {component_name} 單元測試存在失敗")
+        print(f"❌ intelligent_mcp_selector_unit 單元測試存在失敗")
         sys.exit(1)

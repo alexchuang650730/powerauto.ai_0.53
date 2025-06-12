@@ -132,10 +132,10 @@ class Level2to4TestExpansion:
         """創建Level 2集成測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 2 集成測試 - {component_name}
+PowerAutomation Level 2 集成測試 - level2_to_4_expansion
 
 測試類別: {category}
-測試目標: 驗證{component_name}的集成功能和組件間協作
+測試目標: 驗證level2_to_4_expansion的集成功能和組件間協作
 """
 
 import unittest
@@ -147,12 +147,12 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}Integration(unittest.TestCase):
     """
-    {component_name} 集成測試類
+    level2_to_4_expansion 集成測試類
     
     測試覆蓋範圍:
     - 組件間通信測試
@@ -217,7 +217,7 @@ class Test{component_name.replace('_', '').title()}Integration(unittest.TestCase
 
 class Test{component_name.replace('_', '').title()}IntegrationAsync(unittest.IsolatedAsyncioTestCase):
     """
-    {component_name} 異步集成測試類
+    level2_to_4_expansion 異步集成測試類
     """
     
     async def asyncSetUp(self):
@@ -254,9 +254,9 @@ def run_integration_tests():
 if __name__ == '__main__':
     success = run_integration_tests()
     if success:
-        print(f"✅ {{component_name}} 集成測試全部通過!")
+        print(f"✅ {level2_to_4_expansion} 集成測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 集成測試存在失敗")
+        print(f"❌ {level2_to_4_expansion} 集成測試存在失敗")
         sys.exit(1)
 '''
     
@@ -264,10 +264,10 @@ if __name__ == '__main__':
         """創建Level 3合規測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 3 MCP合規測試 - {component_name}
+PowerAutomation Level 3 MCP合規測試 - level2_to_4_expansion
 
 測試類別: {category}
-測試目標: 驗證{component_name}的MCP協議合規性和標準符合性
+測試目標: 驗證level2_to_4_expansion的MCP協議合規性和標準符合性
 """
 
 import unittest
@@ -279,12 +279,12 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}Compliance(unittest.TestCase):
     """
-    {component_name} MCP合規測試類
+    level2_to_4_expansion MCP合規測試類
     
     測試覆蓋範圍:
     - MCP協議合規性
@@ -370,9 +370,9 @@ def run_compliance_tests():
 if __name__ == '__main__':
     success = run_compliance_tests()
     if success:
-        print(f"✅ {{component_name}} 合規測試全部通過!")
+        print(f"✅ {level2_to_4_expansion} 合規測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 合規測試存在失敗")
+        print(f"❌ {level2_to_4_expansion} 合規測試存在失敗")
         sys.exit(1)
 '''
     
@@ -380,10 +380,10 @@ if __name__ == '__main__':
         """創建Level 4端到端測試模板"""
         return f'''#!/usr/bin/env python3
 """
-PowerAutomation Level 4 端到端測試 - {component_name}
+PowerAutomation Level 4 端到端測試 - level2_to_4_expansion
 
 測試類別: {category}
-測試目標: 驗證{component_name}的完整用戶場景和業務流程
+測試目標: 驗證level2_to_4_expansion的完整用戶場景和業務流程
 """
 
 import unittest
@@ -395,12 +395,12 @@ from unittest.mock import Mock, patch, MagicMock
 from pathlib import Path
 
 # 添加項目路徑
-project_root = Path(__file__).parent.parent.parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 class Test{component_name.replace('_', '').title()}E2E(unittest.TestCase):
     """
-    {component_name} 端到端測試類
+    level2_to_4_expansion 端到端測試類
     
     測試覆蓋範圍:
     - 完整用戶旅程
@@ -477,7 +477,7 @@ class Test{component_name.replace('_', '').title()}E2E(unittest.TestCase):
 
 class Test{component_name.replace('_', '').title()}E2EAsync(unittest.IsolatedAsyncioTestCase):
     """
-    {component_name} 異步端到端測試類
+    level2_to_4_expansion 異步端到端測試類
     """
     
     async def asyncSetUp(self):
@@ -514,9 +514,9 @@ def run_e2e_tests():
 if __name__ == '__main__':
     success = run_e2e_tests()
     if success:
-        print(f"✅ {{component_name}} 端到端測試全部通過!")
+        print(f"✅ {level2_to_4_expansion} 端到端測試全部通過!")
     else:
-        print(f"❌ {{component_name}} 端到端測試存在失敗")
+        print(f"❌ {level2_to_4_expansion} 端到端測試存在失敗")
         sys.exit(1)
 '''
     
