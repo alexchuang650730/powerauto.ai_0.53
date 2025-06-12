@@ -929,17 +929,55 @@ if __name__ == "__main__":
 
     def do_intelligent_intervention(self, args):
         """智能介入適配器專用命令
-        用法: intelligent_intervention analyze <repo_path>
-        用法: intelligent_intervention scan <file_path>
+        用法: intelligent_intervention start           # 启动智能介入监控
+        用法: intelligent_intervention stop            # 停止智能介入监控
+        用法: intelligent_intervention status          # 查看智能介入状态
+        用法: intelligent_intervention events [limit]  # 查看智能介入事件
+        用法: intelligent_intervention analyze <repo_path>  # 分析Git仓库
+        用法: intelligent_intervention scan <file_path>     # 扫描代码文件
+        用法: intelligent_intervention config <key> <value> # 更新配置
         """
         if not args.strip():
-            print("❌ 用法: intelligent_intervention <analyze|scan> [args]")
+            print("❌ 用法: intelligent_intervention <start|stop|status|events|analyze|scan|config> [args]")
             return
         
         parts = args.strip().split(maxsplit=1)
         action = parts[0]
         
-        if action == "analyze":
+        if action == "start":
+            data = {
+                "action": "start_monitoring"
+            }
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
+            
+        elif action == "stop":
+            data = {
+                "action": "stop_monitoring"
+            }
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
+            
+        elif action == "status":
+            data = {
+                "action": "get_status"
+            }
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
+            
+        elif action == "events":
+            limit = 10
+            if len(parts) > 1:
+                try:
+                    limit = int(parts[1])
+                except ValueError:
+                    print("❌ 事件数量必须是整数")
+                    return
+            
+            data = {
+                "action": "get_events",
+                "parameters": {"limit": limit}
+            }
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
+            
+        elif action == "analyze":
             if len(parts) < 2:
                 print("❌ 用法: intelligent_intervention analyze <repo_path>")
                 return
@@ -947,9 +985,9 @@ if __name__ == "__main__":
             repo_path = parts[1]
             data = {
                 "action": "analyze_repo",
-                "repo_path": repo_path
+                "parameters": {"repo_path": repo_path}
             }
-            self.do_exec(f"developerintelligentinterventionmcp {json.dumps(data)}")
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
             
         elif action == "scan":
             if len(parts) < 2:
@@ -959,9 +997,42 @@ if __name__ == "__main__":
             file_path = parts[1]
             data = {
                 "action": "scan_file",
-                "file_path": file_path
+                "parameters": {"file_path": file_path}
             }
             self.do_exec(f"codecompliancescannermcp {json.dumps(data)}")
+            
+        elif action == "config":
+            if len(parts) < 2:
+                print("❌ 用法: intelligent_intervention config <key> <value>")
+                return
+                
+            config_parts = parts[1].split(maxsplit=1)
+            if len(config_parts) < 2:
+                print("❌ 用法: intelligent_intervention config <key> <value>")
+                return
+                
+            key = config_parts[0]
+            value = config_parts[1]
+            
+            # 处理布尔值和数字
+            if value.lower() == "true":
+                value = True
+            elif value.lower() == "false":
+                value = False
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    try:
+                        value = float(value)
+                    except ValueError:
+                        pass  # 保持为字符串
+            
+            data = {
+                "action": "update_config",
+                "parameters": {"config": {key: value}}
+            }
+            self.do_exec(f"developer.intelligent_intervention {json.dumps(data)}")
             
         else:
             print(f"❌ 未知智能介入命令: {action}")

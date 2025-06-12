@@ -135,24 +135,19 @@ class GitHelper:
         """获取最后一次提交时间"""
         try:
             result = subprocess.run(
-                ["git", "log", "-1", "--format=%cd", "--date=iso"],
+                ["git", "log", "-1", "--format=%aI"], # Use %aI for ISO 8601 format with timezone
                 capture_output=True,
                 text=True,
                 check=True
             )
             commit_time_str = result.stdout.strip()
+            logger.info(f"Raw commit_time_str: {commit_time_str}")
             if commit_time_str:
                 # 解析ISO格式日期
                 dt_obj = datetime.fromisoformat(commit_time_str)
-                if dt_obj.tzinfo is None:
-                    # Assume local timezone if no tzinfo, then convert to UTC
-                    dt_obj = dt_obj.astimezone(datetime.now().astimezone().tzinfo).astimezone(timezone.utc)
-                else:
-                    # Convert to UTC if already timezone-aware
-                    dt_obj = dt_obj.astimezone(timezone.utc)
-                logger.info(f"Parsed datetime: {dt_obj}, tzinfo: {dt_obj.tzinfo}")
+                dt_obj = dt_obj.astimezone(timezone.utc)
+                logger.info(f"Parsed and converted datetime: {dt_obj}, tzinfo: {dt_obj.tzinfo}")
                 return dt_obj
-            return None
         except (subprocess.CalledProcessError, ValueError) as e:
             logger.warning(f"获取最后提交时间失败: {e}")
             return None
@@ -605,33 +600,34 @@ class DeveloperIntelligentIntervention:
             self.monitor_thread.join(timeout=5)
         logger.info("开发端智能介入监控已停止")
     
-    def _monitoring_loop(self):
-        """监控循环"""
-        last_git_check = datetime.now()
-        last_code_scan = datetime.now()
-        
+    def _intervention_loop(self):
+        last_git_check = datetime.now(timezone.utc)
+        last_code_scan = datetime.now(timezone.utc)
+
         while self.is_running:
             try:
-                # 检查Git未提交变更
+                now = datetime.now(timezone.utc)
+
+                # Git未check-in监测
                 if (now - last_git_check).total_seconds() >= self.config.git_checkin_reminder_interval * 60:
                     self._check_git_status()
                     last_git_check = now
-                
+
                 # 扫描代码规范
                 if (now - last_code_scan).total_seconds() >= self.config.code_scan_interval * 60:
-                    self._scan_code_structure()
+                    self._check_code_compliance()
                     last_code_scan = now
-                
+
                 # 检查合并冲突
                 self._check_merge_conflicts()
-                
+
                 # 处理事件队列
                 while not self.event_queue.empty():
                     event = self.event_queue.get_nowait()
                     self._process_event(event)
                 
                 # 休眠一段时间
-                time.sleep(10)
+                time.sleep(5)  # 每5秒检查一次
                 
             except Exception as e:
                 logger.error(f"监控循环异常: {e}")
@@ -644,7 +640,11 @@ class DeveloperIntelligentIntervention:
             return
         
         # 检查最后提交时间
-        last_commit_time = self.git_helper.get_last_commit_time()
+        last_commit_time = GitHelper.get_last_commit_time()
+        if last_commit_time and last_commit_time.tzinfo is None:
+            last_commit_time = last_commit_time.replace(tzinfo=timezone.utc)
+        elif last_commit_time:
+            last_commit_time = last_commit_time.astimezone(timezone.utc)
         if not last_commit_time:
             return
         
@@ -654,7 +654,7 @@ class DeveloperIntelligentIntervention:
             return
         
         # 检查是否超过提醒间隔
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
         time_since_last_commit = now - last_commit_time
         
         if time_since_last_commit.total_seconds() >= self.config.git_checkin_reminder_interval * 60:
@@ -696,7 +696,7 @@ class DeveloperIntelligentIntervention:
             return
         
         # 创建冲突解决事件
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
         event_id = f"merge_conflict_{now.strftime('%Y%m%d%H%M%S')}"
         event = InterventionEvent(
             event_id=event_id,
@@ -728,7 +728,7 @@ class DeveloperIntelligentIntervention:
             return
         
         # 创建代码规范扫描事件
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
         event_id = f"code_scan_{now.strftime('%Y%m%d%H%M%S')}"
         event = InterventionEvent(
             event_id=event_id,
@@ -753,6 +753,7 @@ class DeveloperIntelligentIntervention:
         manus_issues = [issue for issue in issues if issue["type"] == "manus_reference"]
         if manus_issues and self.config.manus_removal_enabled:
             # 创建manus引用清理事件
+            now = datetime.now(timezone.utc)
             event_id = f"manus_removal_{now.strftime('%Y%m%d%H%M%S')}"
             event = InterventionEvent(
                 event_id=event_id,
@@ -778,7 +779,7 @@ class DeveloperIntelligentIntervention:
         logger.info(f"处理事件: {event.event_id} ({event.intervention_type.value})")
         
         event.status = InterventionStatus.IN_PROGRESS
-        event.updated_at = datetime.now()
+        event.updated_at = datetime.now(timezone.utc)
         
         try:
             # 根据事件类型处理
@@ -821,7 +822,7 @@ class DeveloperIntelligentIntervention:
             
             # 设置自动提交超时
             event.details["auto_checkin_deadline"] = (
-                datetime.now() + timedelta(minutes=self.config.git_auto_checkin_timeout)
+                datetime.now(timezone.utc) + timedelta(minutes=self.config.git_auto_checkin_timeout)
             ).isoformat()
             
             event.status = InterventionStatus.PENDING
@@ -844,7 +845,7 @@ class DeveloperIntelligentIntervention:
                         event.resolution_details = {
                             "action": "auto_commit",
                             "files_committed": len(uncommitted_files),
-                            "commit_time": datetime.now().isoformat()
+                            "commit_time": datetime.now(timezone.utc).isoformat()
                         }
                         
                         self._notify_user(

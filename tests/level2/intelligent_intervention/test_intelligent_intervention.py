@@ -8,7 +8,8 @@ import json
 from dataclasses import asdict
 
 from shared_core.engines.developer_intelligent_intervention import (
-    InterventionConfig, GitHelper, CodeScanner, DeveloperIntelligentIntervention
+    InterventionConfig, GitHelper, CodeScanner, DeveloperIntelligentIntervention,
+    InterventionType, InterventionStatus, InterventionEvent
 )
 
 class TestGitHelper(unittest.TestCase):
@@ -138,14 +139,35 @@ class TestDeveloperIntelligentIntervention(unittest.TestCase):
 
     @patch("shared_core.engines.developer_intelligent_intervention.GitHelper")
     def test_git_checkin_reminder(self, mock_GitHelper):
+        # 设置类方法mock
         mock_GitHelper.get_repo_root.return_value = "/mock/repo"
         mock_GitHelper.get_last_commit_time.return_value = datetime.now(timezone.utc) - timedelta(minutes=self.intervention_engine.config.git_checkin_reminder_interval + 1)
         mock_GitHelper.get_uncommitted_changes.return_value = ["file1.txt"]
         mock_GitHelper.auto_commit.return_value = True
 
-        # Simulate a check
+        # 清除现有事件
+        self.intervention_engine.events = []
+        
+        # 第一次调用：创建提醒事件
         self.intervention_engine._check_git_status()
-        mock_GitHelper.auto_commit.assert_called_once_with("Auto-commit by PowerAutomation intelligent intervention engine.")
+        
+        # 确保事件已创建
+        self.assertTrue(len(self.intervention_engine.events) > 0)
+        event = self.intervention_engine.events[-1]
+        self.assertEqual(event.intervention_type, InterventionType.GIT_CHECKIN_REMINDER)
+        self.assertEqual(event.status, InterventionStatus.PENDING)
+        
+        # 模拟截止时间已过
+        event.details["auto_checkin_deadline"] = (datetime.now(timezone.utc) - timedelta(minutes=1)).isoformat()
+        
+        # 第二次调用：触发自动提交
+        self.intervention_engine._check_git_status()
+        
+        # 验证事件状态已更新为已完成
+        self.assertEqual(event.status, InterventionStatus.COMPLETED)
+        self.assertTrue(event.auto_resolved)
+        self.assertIn("action", event.resolution_details)
+        self.assertEqual(event.resolution_details["action"], "auto_commit")
 
     # Add more tests for other intervention types
 
