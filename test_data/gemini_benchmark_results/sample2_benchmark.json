@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "ocr_text": "➖➖➖➖➖➖➖➖➖➖➖OCR[Gemini]➖➖➖\n➖➖➖➖➖OCR➖➖➖➖➖\n1. ➖➖➖➖➖\"➖➖➖\"\n2. ➖➖➖➖➖\"➖➖➖\"\n3. ➖➖➖➖➖\"➖➖➖\"\n4. ➖➖➖➖➖\"➖➖➖\"\n➖➖➖\n⬜⬜ ⬜⬜ ⬜\n⬜⬜A 2 50.00\n⬜⬜B 1 100.00",
+  "ground_truth": "这是第二个测试文档，用于评估OCR和Gemini修正的准确率。\n    \n本文档包含一些常见的OCR错误和格式问题：\n\n1. 日出东方（应为\"日出东方\"）\n2. 国家安全（应为\"国家安全\"）\n3. 川流不息（应为\"川流不息\"）\n4. 刀法严明（应为\"刀法严明\"）\n\n表格示例：\n项目    数量    单价\n商品A   2       50.00\n商品B   1       100.00",
+  "processing_time": 2.7855260372161865,
+  "metrics": {
+    "character_accuracy": 0.005154639175257732,
+    "word_accuracy": 0.4,
+    "line_accuracy": 0.0
+  },
+  "image_file": "sample2.png",
+  "ground_truth_file": "sample2.txt"
+}

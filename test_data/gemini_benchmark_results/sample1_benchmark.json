@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "ocr_text": "--- OCR Start ---\nOCR Gemini\nOCR\n1. \"\"☐\n2. \"\"☐\n3. \"\"☐\n4. \"\"☐\nGemini\n--- OCR End ---",
+  "ground_truth": "这是一个测试文档的标准答案，用于评估OCR和Gemini修正的准确率。\n文档包含一些常见的OCR错误，如：\n1. 行走（原文可能错误识别为\"彳亍\"）\n2. 明月（原文可能错误识别为\"未月\"）\n3. 人们（原文可能错误识别为\"人口\"）\n4. 相（原文可能错误识别为\"木目\"）\n\n这些错误将用于测试Gemini的修正能力。",
+  "processing_time": 2.168309450149536,
+  "metrics": {
+    "character_accuracy": 0.07547169811320754,
+    "word_accuracy": 0.0,
+    "line_accuracy": 0.0
+  },
+  "image_file": "sample1.png",
+  "ground_truth_file": "sample1.txt"
+}
