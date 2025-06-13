@@ -1,0 +1,12 @@
+{
+  "file_path": "user_documents/張家銓.pdf",
+  "error": "Expecting value: line 1 column 1 (char 0)",
+  "text_blocks": [],
+  "low_confidence_blocks": [],
+  "metadata": {
+    "total_blocks": 0,
+    "low_confidence_blocks": 0,
+    "average_confidence": 0
+  },
+  "processing_time": 29.30510973930359
+}

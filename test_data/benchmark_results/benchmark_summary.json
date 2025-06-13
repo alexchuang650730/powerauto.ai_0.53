@@ -1,0 +1,59 @@
+{
+  "timestamp": "2025-06-12T16:02:18.672555",
+  "test_dir": "test_data/documents",
+  "ground_truth_dir": "test_data/ground_truth",
+  "output_dir": "test_data/benchmark_results",
+  "summary": {
+    "total_files": 2,
+    "processed_files": 2,
+    "success_files": 2,
+    "failed_files": 0,
+    "total_cer": 0.6229585427135678,
+    "total_wer": 0.42372234935164,
+    "total_structure_score": 1.0,
+    "avg_cer": 0.3114792713567839,
+    "avg_wer": 0.21186117467582,
+    "avg_structure_score": 0.5,
+    "gemini_improvement": {
+      "cer": 0.02880025125628141,
+      "wer": 0.07856598016781081
+    }
+  },
+  "results": [
+    {
+      "file_name": "sample1.png",
+      "ocr": {
+        "cer": 0.31875,
+        "wer": 0.2826086956521739,
+        "structure_score": 0.39999999999999997
+      },
+      "gemini": {
+        "cer": 0.28125,
+        "wer": 0.1956521739130435,
+        "structure_score": 0.39999999999999997
+      },
+      "improvement": {
+        "cer": 0.03749999999999998,
+        "wer": 0.0869565217391304
+      }
+    },
+    {
+      "file_name": "sample2.png",
+      "ocr": {
+        "cer": 0.36180904522613067,
+        "wer": 0.2982456140350877,
+        "structure_score": 0.6
+      },
+      "gemini": {
+        "cer": 0.3417085427135678,
+        "wer": 0.22807017543859648,
+        "structure_score": 0.6
+      },
+      "improvement": {
+        "cer": 0.020100502512562846,
+        "wer": 0.07017543859649122
+      }
+    }
+  ],
+  "processing_time": 0.03316545486450195
+}

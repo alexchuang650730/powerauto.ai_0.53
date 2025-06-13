@@ -1,0 +1,32 @@
+{
+  "file_path": "user_documents/張家銓.pdf",
+  "ocr_result": {
+    "file_path": "user_documents/張家銓.pdf",
+    "error": "Expecting value: line 1 column 1 (char 0)",
+    "text_blocks": [],
+    "low_confidence_blocks": [],
+    "metadata": {
+      "total_blocks": 0,
+      "low_confidence_blocks": 0,
+      "average_confidence": 0
+    },
+    "processing_time": 29.30510973930359
+  },
+  "gemini_result": {
+    "file_path": "user_documents/張家銓.pdf",
+    "corrections": [],
+    "metadata": {
+      "total_corrections": 0,
+      "average_confidence_improvement": 0
+    },
+    "processing_time": 2.8848648071289062e-05
+  },
+  "claude_result": {
+    "file_path": "user_documents/張家銓.pdf",
+    "error": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}",
+    "analysis": {},
+    "processing_time": 0.07013273239135742
+  },
+  "processing_time": 29.378066301345825,
+  "timestamp": "2025-06-13T15:53:28.357027"
+}

@@ -1,0 +1,6 @@
+{
+  "file_path": "user_documents/張家銓.pdf",
+  "error": "Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}",
+  "analysis": {},
+  "processing_time": 0.07013273239135742
+}
