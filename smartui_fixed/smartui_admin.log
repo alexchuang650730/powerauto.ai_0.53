@@ -1,0 +1,78 @@
+nohup: ignoring input
+INFO:smart_ui.database_config:SQLite連接初始化成功
+WARNING:smart_ui.database_config:PostgreSQL連接失敗，將使用本地模式: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+WARNING:smart_ui.database_config:Redis連接失敗，將不使用緩存: Error 111 connecting to localhost:6379. Connection refused.
+INFO:smart_ui.database_config:SQLite表 users 創建成功
+INFO:smart_ui.database_config:SQLite表 projects 創建成功
+INFO:smart_ui.database_config:SQLite表 workflows 創建成功
+INFO:smart_ui.database_config:SQLite表 sync_log 創建成功
+INFO:smart_ui.sync_engine:智慧同步引擎已啟動
+🧠 PowerAutomation 智慧UI系統啟動中...
+📊 數據庫連接: ✅
+🔄 同步引擎: ✅
+👥 用戶管理: ✅
+⚡ 工作流管理: ✅
+🚀 智慧UI系統就緒！
+🧠 PowerAutomation 智慧UI API服務器啟動中...
+📊 數據庫連接: ✅
+🔄 同步引擎: ✅
+🌐 API服務: ✅
+🚀 服務器就緒！
+📱 訪問地址: http://localhost:5001
+ * Serving Flask app 'api_server'
+ * Debug mode: on
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://169.254.0.21:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+INFO:smart_ui.database_config:SQLite連接初始化成功
+WARNING:smart_ui.database_config:PostgreSQL連接失敗，將使用本地模式: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+WARNING:smart_ui.database_config:Redis連接失敗，將不使用緩存: Error 111 connecting to localhost:6379. Connection refused.
+INFO:smart_ui.database_config:SQLite表 users 創建成功
+INFO:smart_ui.database_config:SQLite表 projects 創建成功
+INFO:smart_ui.database_config:SQLite表 workflows 創建成功
+INFO:smart_ui.database_config:SQLite表 sync_log 創建成功
+INFO:smart_ui.sync_engine:智慧同步引擎已啟動
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 103-312-880
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/services HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/logs HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/system-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/kilocode-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "[33mGET /api/deployment-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:29:04] "GET /api/workflows HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 10:29:39] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:00] "HEAD / HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:00] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/services HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/system-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "GET /api/workflows HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/deployment-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/kilocode-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:30:26] "[33mGET /api/logs HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/kilocode-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/services HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/logs HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/system-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/deployment-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "GET /api/workflows HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:31:58] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/logs HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/kilocode-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/system-status HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/services HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "GET /api/workflows HTTP/1.1" 200 -
+INFO:werkzeug:10.142.35.1 - - [15/Jun/2025 10:32:03] "[33mGET /api/deployment-status HTTP/1.1[0m" 404 -
