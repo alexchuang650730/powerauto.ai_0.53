@@ -123,4 +123,3 @@ python3 enhanced_smartui_server.py
 - **项目维护者**: Alex Chuang
 - **GitHub**: https://github.com/alexchuang650730/aicore0615.git
 - **邮箱**: alexchuang650730@gmail.com
-
