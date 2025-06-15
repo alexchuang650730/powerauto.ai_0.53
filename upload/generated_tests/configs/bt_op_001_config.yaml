@@ -1,0 +1,35 @@
+environment:
+  hardware:
+    android_version: '>=10.0'
+    bluetooth_support: true
+    device_type: Android手机
+    memory: '>=4GB'
+  network:
+    network_latency: <100ms
+    wifi_connection: stable
+  permissions:
+    adb_debugging: true
+    screenshot_permission: true
+    system_app_access: true
+  software:
+    adb_version: '>=1.0.41'
+    screenshot_tool: uiautomator2
+    test_framework: pytest>=6.0
+expected_results:
+- 蓝牙图标呈现半透明或带有特殊半关标识
+- 蓝牙设置页面正常显示，开关为半关状态
+- 开关显示为关闭状态，蓝牙相关选项全部变灰
+failure_criteria:
+- 任何状态切换不符合预期
+- 界面显示异常或卡顿
+- 重复测试结果不一致
+preconditions:
+- 设备已开机并解锁进入主界面
+- 蓝牙功能正常可用且初始状态为全开
+- 控制中心可正常下拉访问
+- 蓝牙设置页面可正常进入
+test_info:
+  business_module: BSP_Bluetooth
+  test_id: BT_OP_001
+  test_name: 蓝牙页面半关切换功能测试
+  test_type: 操作型测试
