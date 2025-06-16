@@ -1,6 +1,7 @@
 """
 统一的本地模型MCP适配器
 支持Qwen 8B和Mistral 12B多模型配置，集成OCR功能
+添加OCR工作流接口支持
 """
 
 import os
@@ -21,6 +22,7 @@ from .models.model_manager import ModelManager
 from .ocr.ocr_engine import OCREngine
 from .utils.device_utils import DeviceUtils
 from .utils.memory_utils import MemoryUtils
+from .ocr_workflow_interface import OCRWorkflowInterface, OCRWorkflowRequest, OCRWorkflowResult
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +45,17 @@ class LocalModelMCP:
         self.device_utils = DeviceUtils()
         self.memory_utils = MemoryUtils()
         
+        # 初始化Mistral OCR引擎（如果配置了）
+        self.mistral_ocr_engine = None
+        if self.config.get("mistral_ocr", {}).get("enabled", False):
+            api_key = self.config.get("mistral_ocr", {}).get("api_key")
+            if api_key:
+                from .mistral_ocr_engine import MistralOCREngine
+                self.mistral_ocr_engine = MistralOCREngine(api_key)
+                logger.info("Mistral OCR引擎配置完成")
+            else:
+                logger.warning("Mistral OCR已启用但未配置API密钥")
+        
         # 状态管理
         self.initialized = False
         self.current_model = None
@@ -54,8 +67,12 @@ class LocalModelMCP:
             "total_tokens_generated": 0,
             "average_response_time": 0,
             "model_switches": 0,
-            "ocr_requests": 0
+            "ocr_requests": 0,
+            "workflow_requests": 0
         }
+        
+        # 初始化OCR工作流接口
+        self.ocr_workflow = None  # 延迟初始化
         
         logger.info(f"LocalModelMCP初始化完成 - 版本: {self.config['mcp_info']['version']}")
     
@@ -102,6 +119,11 @@ class LocalModelMCP:
             "ocr": {
                 "enabled": False
             },
+            "mistral_ocr": {
+                "enabled": False,
+                "api_key": "",
+                "model_name": "mistralai/pixtral-12b"
+            },
             "performance": {
                 "max_concurrent_requests": 3,
                 "memory_limit_gb": 8
@@ -144,6 +166,10 @@ class LocalModelMCP:
             else:
                 self.current_model = default_model
                 logger.info(f"默认模型 {default_model} 加载成功")
+            
+            # 5. 初始化OCR工作流接口
+            self.ocr_workflow = OCRWorkflowInterface(self)
+            logger.info("OCR工作流接口初始化完成")
             
             self.initialized = True
             logger.info("LocalModelMCP初始化完成")
@@ -342,6 +368,52 @@ class LocalModelMCP:
         # 更新token统计（如果有）
         if isinstance(result, dict) and "tokens" in result:
             self.stats["total_tokens_generated"] += result.get("tokens", 0)
+    
+    async def process_ocr_workflow(self, request: Union[Dict[str, Any], OCRWorkflowRequest]) -> OCRWorkflowResult:
+        """
+        处理OCR工作流请求 - 新的workflow兼容接口
+        
+        Args:
+            request: OCR工作流请求
+            
+        Returns:
+            OCRWorkflowResult: 处理结果
+        """
+        try:
+            if not self.initialized:
+                await self.initialize()
+            
+            if not self.ocr_workflow:
+                return OCRWorkflowResult(
+                    success=False,
+                    text="",
+                    confidence=0.0,
+                    processing_time=0.0,
+                    adapter_used="none",
+                    quality_score=0.0,
+                    error="OCR工作流接口未初始化"
+                )
+            
+            # 更新统计
+            self.stats["workflow_requests"] += 1
+            
+            # 调用OCR工作流接口
+            result = await self.ocr_workflow.process_ocr_workflow(request)
+            
+            logger.info(f"OCR工作流处理完成: 成功={result.success}, 质量={result.quality_score:.2f}")
+            return result
+            
+        except Exception as e:
+            logger.error(f"OCR工作流处理失败: {e}")
+            return OCRWorkflowResult(
+                success=False,
+                text="",
+                confidence=0.0,
+                processing_time=0.0,
+                adapter_used="none",
+                quality_score=0.0,
+                error=str(e)
+            )
     
     async def get_status(self) -> Dict[str, Any]:
         """
