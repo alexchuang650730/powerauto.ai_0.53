@@ -1,0 +1,20 @@
+nohup: ignoring input
+🚀 启动GitHub MCP服务器...
+📁 仓库根目录: /home/ubuntu/kilocode_integrated_repo
+🔧 MCP ID: github_mcp
+📡 端口: 8091
+✅ Git仓库连接成功: aicore0615
+🌿 当前分支: main
+ * Serving Flask app 'github_mcp'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8091
+ * Running on http://169.254.0.21:8091
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:19:10] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:19:13] "GET /api/repo-info HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:25] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:30] "GET /api/repo-info HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:29:00] "POST /mcp/request HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:36:20] "GET /health HTTP/1.1" 200 -

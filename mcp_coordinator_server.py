@@ -240,3 +240,156 @@ if __name__ == '__main__':
     
     app.run(host='0.0.0.0', port=8089, debug=False)
 
+
+
+# ============================================================================
+# Web API 端点 - 为前端界面提供直接访问
+# ============================================================================
+
+@app.route('/api/operations-status', methods=['GET'])
+def get_operations_status():
+    """获取Operations Workflow MCP状态"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_status", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/file-placement-status', methods=['GET'])
+def get_file_placement_status():
+    """获取文件放置状态"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_file_placement_status", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/workflow-status', methods=['GET'])
+def get_workflow_status():
+    """获取六大工作流状态"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_workflow_status", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/github-sync', methods=['GET'])
+def get_github_sync():
+    """获取GitHub同步信息"""
+    try:
+        # 通过GitHub MCP获取信息
+        result = coordinator.forward_request(
+            "github_mcp", 
+            "get_repo_info", 
+            {}
+        )
+        
+        if result.get("success"):
+            # 转换为前端需要的格式
+            repo_data = result.get("data", {})
+            return jsonify({
+                "success": True,
+                "data": {
+                    "repo_name": repo_data.get("repo_name", "unknown"),
+                    "current_branch": repo_data.get("current_branch", "unknown"),
+                    "last_sync": repo_data.get("last_sync", "unknown"),
+                    "sync_status": repo_data.get("sync_status", "unknown"),
+                    "webhook_status": repo_data.get("webhook_status", "正常监听"),
+                    "auto_deploy": repo_data.get("auto_deploy", "启用"),
+                    "code_quality": repo_data.get("code_quality", "通过")
+                }
+            })
+        else:
+            return jsonify(result)
+            
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/mcp-registry', methods=['GET'])
+def get_mcp_registry():
+    """获取MCP注册表信息"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_mcp_registry_status", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/intervention-stats', methods=['GET'])
+def get_intervention_stats():
+    """获取智能介入统计"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_intervention_stats", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/directory-structure', methods=['GET'])
+def get_directory_structure():
+    """获取目录结构状态"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_directory_structure_status", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+@app.route('/api/recent-operations', methods=['GET'])
+def get_recent_operations():
+    """获取最近操作记录"""
+    try:
+        result = coordinator.forward_request(
+            "operations_workflow_mcp", 
+            "get_recent_operations", 
+            {}
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# ============================================================================
+# GitHub MCP 注册
+# ============================================================================
+
+def register_github_mcp():
+    """注册GitHub MCP到协调器"""
+    github_mcp_config = {
+        "url": "http://localhost:8091",
+        "status": "unknown",
+        "capabilities": [
+            "git_repo_info",
+            "branch_management", 
+            "commit_history",
+            "sync_status_monitoring"
+        ],
+        "last_health_check": None
+    }
+    
+    coordinator.register_mcp("github_mcp", github_mcp_config)
+    logger.info("✅ GitHub MCP 已注册到协调器")
+
+# 启动时注册GitHub MCP
+register_github_mcp()
+

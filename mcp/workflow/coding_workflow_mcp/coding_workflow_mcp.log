@@ -1,0 +1,22 @@
+nohup: ignoring input
+🚀 启动编码工作流MCP服务器...
+🔧 MCP ID: coding_workflow_mcp
+📡 端口: 8093
+🎯 功能: 编码流程管理、质量控制、工作流编排
+ * Serving Flask app 'coding_workflow_mcp'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8093
+ * Running on http://169.254.0.21:8093
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [16/Jun/2025 00:28:21] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:34:58] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:04] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:22] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:27] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:38] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:44] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:35:54] "POST /mcp/request HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:36:20] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 00:36:25] "POST /mcp/request HTTP/1.1" 200 -

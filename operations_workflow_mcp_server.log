@@ -31,3 +31,13 @@ INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:26] "GET /health HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:25] "POST /mcp/request HTTP/1.1" 200 -
 INFO:mcp.workflow.operations_workflow_mcp.src.file_placement_manager:📊 分析完成: 2 个文件, 1 个目录
 INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:33] "POST /mcp/request HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:05] "GET /mcp/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "GET /mcp/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/file-placement/analyze HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/interventions/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/registry/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "GET /mcp/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/file-placement/analyze HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/interventions/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:53:57] "[33mGET /mcp/registry/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:36:20] "GET /health HTTP/1.1" 200 -

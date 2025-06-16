@@ -1,0 +1,4 @@
+nohup: ignoring input
+  File "/home/ubuntu/kilocode_integrated_repo/mcp/adapter/development_intervention_mcp/development_intervention_mcp_new.py", line 715
+    }
+IndentationError: unexpected indent

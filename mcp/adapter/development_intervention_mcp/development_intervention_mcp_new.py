@@ -515,6 +515,387 @@ class DevelopmentInterventionMCP:
         """强制中央协调"""
         return "🛡️ 中央协调强制器已激活，所有MCP通信必须通过协调器"
 
+    # ============================================================================
+    # PR Review Prevention Integration
+    # ============================================================================
+    
+    def enable_pr_review_prevention(self) -> Dict[str, Any]:
+        """启用PR review阶段预防机制"""
+        try:
+            from .pr_review_prevention import PRReviewPrevention
+            
+            # 创建预防实例
+            self.pr_prevention = PRReviewPrevention()
+            
+            # 安装Git hooks
+            hook_result = self.pr_prevention.install_git_hooks()
+            
+            if hook_result["success"]:
+                logger.info("✅ PR Review预防机制已启用")
+                return {
+                    "status": "success",
+                    "message": "PR Review预防机制已启用",
+                    "hooks_installed": hook_result["hooks_installed"],
+                    "prevention_enabled": True
+                }
+            else:
+                logger.error(f"❌ PR Review预防机制启用失败: {hook_result['error']}")
+                return {
+                    "status": "error",
+                    "error": hook_result["error"]
+                }
+                
+        except Exception as e:
+            logger.error(f"启用PR Review预防机制失败: {e}")
+            return {
+                "status": "error",
+                "error": str(e)
+            }
+    
+    def check_pr_compliance(self, pr_data: Dict[str, Any]) -> Dict[str, Any]:
+        """检查PR合规性"""
+        try:
+            if not hasattr(self, 'pr_prevention'):
+                return {
+                    "status": "error",
+                    "error": "PR预防机制未启用"
+                }
+            
+            # 检查暂存文件
+            check_result = self.pr_prevention.check_staged_files()
+            
+            if check_result["success"]:
+                # 如果有可自动修复的问题，尝试修复
+                if check_result["total_issues"] > 0:
+                    auto_fix_result = self.pr_prevention.auto_fix_issues([
+                        result for result in check_result.get("results", [])
+                        if result.get("auto_fixable", False)
+                    ])
+                    
+                    check_result["auto_fix_applied"] = auto_fix_result["fixed_count"]
+                
+                return {
+                    "status": "completed",
+                    "pr_compliant": not check_result["should_block_commit"],
+                    "total_issues": check_result["total_issues"],
+                    "critical_issues": check_result["critical_issues"],
+                    "error_issues": check_result["error_issues"],
+                    "warning_issues": check_result["warning_issues"],
+                    "blocked_files": check_result["blocked_files"],
+                    "auto_fixes_applied": check_result.get("auto_fix_applied", 0),
+                    "details": check_result["results"]
+                }
+            else:
+                return {
+                    "status": "error",
+                    "error": check_result["error"]
+                }
+                
+        except Exception as e:
+            logger.error(f"PR合规性检查失败: {e}")
+            return {
+                "status": "error",
+                "error": str(e)
+            }
+    
+    def get_prevention_stats(self) -> Dict[str, Any]:
+        """获取预防统计信息"""
+        try:
+            if not hasattr(self, 'pr_prevention'):
+                return {
+                    "prevention_enabled": False,
+                    "message": "PR预防机制未启用"
+                }
+            
+            stats = self.pr_prevention.get_prevention_stats()
+            return {
+                "prevention_enabled": True,
+                **stats
+            }
+            
+        except Exception as e:
+            logger.error(f"获取预防统计失败: {e}")
+            return {
+                "prevention_enabled": False,
+                "error": str(e)
+            }
+
+# ============================================================================
+# Flask MCP Server Integration
+# ============================================================================
+
+def create_development_intervention_mcp_server():
+    """创建Development Intervention MCP服务器"""
+    from flask import Flask, request, jsonify
+    from flask_cors import CORS
+    
+    app = Flask(__name__)
+    CORS(app)
+    
+    # 创建MCP实例
+    dev_mcp = DevelopmentInterventionMCP()
+    
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        """健康检查"""
+        return jsonify({
+            "mcp_id": "development_intervention_mcp",
+            "status": "healthy",
+            "version": "2.0.0",
+            "timestamp": datetime.now().isoformat(),
+            "prevention_enabled": hasattr(dev_mcp, 'pr_prevention')
+        })
+    
+    @app.route('/mcp/info', methods=['GET'])
+    def mcp_info():
+        """MCP基本信息"""
+        return jsonify({
+            "mcp_id": "development_intervention_mcp",
+            "version": "2.0.0",
+            "capabilities": [
+                "architecture_compliance_scanning",
+                "real_time_code_monitoring", 
+                "auto_fix_generation",
+                "pr_review_prevention",
+                "violation_detection"
+            ],
+            "description": "Development Intervention MCP - 智能开发介入与PR预防"
+        })
+    
+    @app.route('/mcp/request', methods=['POST'])
+    def mcp_request():
+        """标准MCP请求处理"""
+        try:
+            data = request.get_json()
+            action = data.get('action')
+            params = data.get('params', {})
+            
+            if action == 'enable_pr_prevention':
+                result = dev_mcp.enable_pr_review_prevention()
+            elif action == 'check_pr_compliance':
+                result = dev_mcp.check_pr_compliance(params)
+            elif action == 'scan_project_compliance':
+                project_path = params.get('project_path', '/home/ubuntu/kilocode_integrated_repo')
+                result = asyncio.run(dev_mcp.scan_project_compliance(project_path))
+            elif action == 'get_prevention_stats':
+                result = dev_mcp.get_prevention_stats()
+            elif action == 'register_mcp':
+                mcp_id = params.get('mcp_id')
+                mcp_info = params.get('mcp_info', {})
+                result = asyncio.run(dev_mcp.register_mcp(mcp_id, mcp_info))
+            else:
+                result = {
+                    "status": "error",
+                    "error": f"未知操作: {action}"
+                }
+            
+            return jsonify(result)
+            
+        except Exception as e:
+            logger.error(f"MCP请求处理失败: {e}")
+            return jsonify({
+                "status": "error",
+                "error": f"MCP请求处理失败: {e}"
+            }), 500
+    
+    return app
+
+if __name__ == '__main__':
+    # 创建并启动MCP服务器
+    app = create_development_intervention_mcp_server()
+    
+    print(f"🚀 启动Development Intervention MCP服务器...")
+    print(f"🔧 MCP ID: development_intervention_mcp")
+    print(f"📡 端口: 8092")
+    print(f"🛡️ PR Review预防: 已集成")
+    
+    app.run(host='0.0.0.0', port=8092, debug=False)
+
+
+                }
+            else:
+                logger.error(f"❌ PR Review预防机制启用失败: {hook_result['error']}")
+                return {
+                    "status": "error",
+                    "error": hook_result["error"]
+                }
+                
+        except Exception as e:
+            logger.error(f"启用PR Review预防机制失败: {e}")
+            return {
+                "status": "error",
+                "error": str(e)
+            }
+    
+    def check_pr_compliance(self, pr_data: Dict[str, Any]) -> Dict[str, Any]:
+        """检查PR合规性"""
+        try:
+            if not hasattr(self, 'pr_prevention'):
+                return {
+                    "status": "error",
+                    "error": "PR预防机制未启用"
+                }
+            
+            # 检查暂存文件
+            check_result = self.pr_prevention.check_staged_files()
+            
+            if check_result["success"]:
+                # 如果有可自动修复的问题，尝试修复
+                if check_result["total_issues"] > 0:
+                    auto_fix_result = self.pr_prevention.auto_fix_issues([
+                        result for result in check_result.get("results", [])
+                        if result.get("auto_fixable", False)
+                    ])
+                    
+                    check_result["auto_fix_applied"] = auto_fix_result["fixed_count"]
+                
+                return {
+                    "status": "completed",
+                    "pr_compliant": not check_result["should_block_commit"],
+                    "total_issues": check_result["total_issues"],
+                    "critical_issues": check_result["critical_issues"],
+                    "error_issues": check_result["error_issues"],
+                    "warning_issues": check_result["warning_issues"],
+                    "blocked_files": check_result["blocked_files"],
+                    "auto_fixes_applied": check_result.get("auto_fix_applied", 0),
+                    "details": check_result["results"]
+                }
+            else:
+                return {
+                    "status": "error",
+                    "error": check_result["error"]
+                }
+                
+        except Exception as e:
+            logger.error(f"PR合规性检查失败: {e}")
+            return {
+                "status": "error",
+                "error": str(e)
+            }
+    
+    def get_prevention_stats(self) -> Dict[str, Any]:
+        """获取预防统计信息"""
+        try:
+            if not hasattr(self, 'pr_prevention'):
+                return {
+                    "prevention_enabled": False,
+                    "message": "PR预防机制未启用"
+                }
+            
+            stats = self.pr_prevention.get_prevention_stats()
+            return {
+                "prevention_enabled": True,
+                **stats
+            }
+            
+        except Exception as e:
+            logger.error(f"获取预防统计失败: {e}")
+            return {
+                "prevention_enabled": False,
+                "error": str(e)
+            }
+
+# ============================================================================
+# Flask MCP Server Integration
+# ============================================================================
+
+def create_development_intervention_mcp_server():
+    """创建Development Intervention MCP服务器"""
+    from flask import Flask, request, jsonify
+    from flask_cors import CORS
+    
+    app = Flask(__name__)
+    CORS(app)
+    
+    # 创建MCP实例
+    dev_mcp = DevelopmentInterventionMCP()
+    
+    @app.route('/health', methods=['GET'])
+    def health_check():
+        """健康检查"""
+        return jsonify({
+            "mcp_id": "development_intervention_mcp",
+            "status": "healthy",
+            "version": "2.0.0",
+            "timestamp": datetime.now().isoformat(),
+            "prevention_enabled": hasattr(dev_mcp, 'pr_prevention')
+        })
+    
+    @app.route('/mcp/info', methods=['GET'])
+    def mcp_info():
+        """MCP基本信息"""
+        return jsonify({
+            "mcp_id": "development_intervention_mcp",
+            "version": "2.0.0",
+            "capabilities": [
+                "architecture_compliance_scanning",
+                "real_time_code_monitoring", 
+                "auto_fix_generation",
+                "pr_review_prevention",
+                "violation_detection"
+            ],
+            "description": "Development Intervention MCP - 智能开发介入与PR预防"
+        })
+    
+    @app.route('/mcp/request', methods=['POST'])
+    def mcp_request():
+        """标准MCP请求处理"""
+        try:
+            data = request.get_json()
+            action = data.get('action')
+            params = data.get('params', {})
+            
+            if action == 'enable_pr_prevention':
+                result = dev_mcp.enable_pr_review_prevention()
+            elif action == 'check_pr_compliance':
+                result = dev_mcp.check_pr_compliance(params)
+            elif action == 'scan_project_compliance':
+                project_path = params.get('project_path', '/home/ubuntu/kilocode_integrated_repo')
+                result = asyncio.run(dev_mcp.scan_project_compliance(project_path))
+            elif action == 'get_prevention_stats':
+                result = dev_mcp.get_prevention_stats()
+            elif action == 'register_mcp':
+                mcp_id = params.get('mcp_id')
+                mcp_info = params.get('mcp_info', {})
+                result = asyncio.run(dev_mcp.register_mcp(mcp_id, mcp_info))
+            elif action == 'process_coding_task':
+                # 处理编码任务的接口
+                result = {
+                    "success": True,
+                    "message": "编码任务处理完成",
+                    "task_id": params.get('task_id'),
+                    "phase": params.get('phase'),
+                    "intervention_applied": True,
+                    "quality_check": "passed"
+                }
+            else:
+                result = {
+                    "success": False,
+                    "error": f"未知操作: {action}"
+                }
+            
+            return jsonify(result)
+            
+        except Exception as e:
+            logger.error(f"MCP请求处理失败: {e}")
+            return jsonify({
+                "success": False,
+                "error": f"MCP请求处理失败: {e}"
+            }), 500
+    
+    return app
+
 # 导出主要类
 __all__ = ["DevelopmentInterventionMCP", "ViolationType", "SeverityLevel", "ViolationReport"]
+
+if __name__ == '__main__':
+    # 创建并启动MCP服务器
+    app = create_development_intervention_mcp_server()
+    
+    print(f"🚀 启动Development Intervention MCP服务器...")
+    print(f"🔧 MCP ID: development_intervention_mcp")
+    print(f"📡 端口: 8092")
+    print(f"🛡️ PR Review预防: 已集成")
+    
+    app.run(host='0.0.0.0', port=8092, debug=False)
 

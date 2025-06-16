@@ -23,10 +23,25 @@ INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a
  * Running on http://127.0.0.1:8089
  * Running on http://169.254.0.21:8089
 INFO:werkzeug:[33mPress CTRL+C to quit[0m
-INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:21] "GET /health HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:26] "GET /coordinator/health-check HTTP/1.1" 200 -
-INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:19] "GET /health HTTP/1.1" 200 -
-INFO:__main__:✅ 转发请求成功: operations_workflow_mcp.get_status
-INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:25] "POST /coordinator/request/operations_workflow_mcp HTTP/1.1" 200 -
-INFO:__main__:✅ 转发请求成功: operations_workflow_mcp.file_placement_analyze
-INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:33] "POST /coordinator/request/operations_workflow_mcp HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:25:53] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:25:57] "[33mGET /api/github-sync HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:26:06] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:__main__:✅ 注册MCP: github_mcp
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:37] "POST /coordinator/register HTTP/1.1" 200 -
+INFO:__main__:✅ 注册MCP: coding_workflow_mcp
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:46] "POST /coordinator/register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:51] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:28:56] "[33mGET /api/github-sync HTTP/1.1[0m" 404 -
+INFO:__main__:✅ 转发请求成功: github_mcp.get_repo_info
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:29:00] "POST /coordinator/request/github_mcp HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:35:27] "POST /coordinator/request/development_intervention_mcp HTTP/1.1" 200 -
+INFO:__main__:✅ 注册MCP: development_intervention_mcp
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:35:33] "POST /coordinator/register HTTP/1.1" 200 -
+INFO:__main__:✅ 转发请求成功: development_intervention_mcp.process_coding_task
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:35:54] "POST /coordinator/request/development_intervention_mcp HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:36:15] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:36:20] "GET /coordinator/health-check HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:40:18] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:40:18] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:40] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:59:49] "GET /coordinator/mcps HTTP/1.1" 200 -
