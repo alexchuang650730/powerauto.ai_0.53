@@ -1,0 +1,14 @@
+[mcp_info]
+name = "kilocode_mcp"
+version = "2.0.0"
+description = "兜底创建引擎"
+type = "fallback_creator"
+
+[ai_assistance]
+enable_ai_assistance = true
+primary_ai = "gemini_mcp"
+fallback_ai = "claude_mcp"
+ai_timeout = 30
+
+[logging]
+log_level = "INFO"
