@@ -1,0 +1,126 @@
+[quality]
+# 质量阈值设置
+min_confidence = 0.8
+min_accuracy = 0.9
+max_processing_time = 300
+target_quality_score = 0.95
+
+# 质量评估权重
+confidence_weight = 0.4
+accuracy_weight = 0.3
+completeness_weight = 0.2
+readability_weight = 0.1
+
+[performance]
+# 性能设置
+enable_caching = true
+cache_ttl = 3600
+enable_compression = true
+max_memory_usage = "2GB"
+gpu_acceleration = true
+parallel_processing = true
+max_workers = 4
+
+# 性能监控
+track_processing_time = true
+track_memory_usage = true
+track_gpu_usage = true
+performance_log_interval = 60
+
+[cost_optimization]
+# 成本优化设置
+prefer_local = true
+cost_threshold = 0.01  # 美元
+quality_cost_balance = 0.7  # 0-1之间，越高越偏向质量
+max_cloud_requests_per_hour = 100
+
+# 成本计算
+local_processing_cost = 0.001  # 每次处理成本
+cloud_processing_cost = 0.01   # 云端处理成本
+storage_cost_per_mb = 0.0001   # 存储成本
+
+[fallback]
+# 降级策略
+enable_fallback = true
+fallback_quality_threshold = 0.6
+max_fallback_attempts = 2
+fallback_timeout = 60
+
+# 降级顺序
+fallback_sequence = [
+    "retry_with_preprocessing",
+    "switch_to_alternative_adapter", 
+    "use_multiple_engines",
+    "return_partial_result"
+]
+
+[output_format]
+# 输出格式设置
+default_format = "structured_json"
+include_confidence_scores = true
+include_bounding_boxes = true
+include_metadata = true
+preserve_formatting = true
+
+# 支持的输出格式
+supported_formats = [
+    "plain_text",
+    "structured_json", 
+    "markdown",
+    "html",
+    "xml",
+    "csv"  # 用于表格数据
+]
+
+[preprocessing]
+# 预处理设置
+auto_rotate = true
+auto_crop = true
+enhance_contrast = true
+denoise = true
+binarization_method = "adaptive"
+resize_for_ocr = true
+max_image_size = "10MB"
+
+# 预处理参数
+contrast_enhancement_factor = 1.2
+noise_reduction_strength = 0.5
+binarization_threshold = 127
+
+[postprocessing]
+# 后处理设置
+spell_check = true
+grammar_check = false
+format_correction = true
+remove_artifacts = true
+structure_analysis = true
+
+# 文本清理
+remove_extra_whitespace = true
+normalize_line_breaks = true
+fix_encoding_issues = true
+remove_ocr_artifacts = true
+
+[language_support]
+# 语言支持设置
+default_languages = ["zh-CN", "zh-TW", "en"]
+auto_language_detection = true
+mixed_language_support = true
+
+# 语言特定优化
+chinese_text_optimization = true
+english_text_optimization = true
+number_recognition_optimization = true
+
+[security]
+# 安全设置
+data_encryption = true
+secure_deletion = true
+audit_logging = true
+privacy_mode = false
+
+# 数据保护
+max_data_retention_days = 30
+anonymize_sensitive_data = false
+redact_personal_info = false
+

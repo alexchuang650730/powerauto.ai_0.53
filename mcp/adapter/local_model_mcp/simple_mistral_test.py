@@ -11,7 +11,7 @@ import base64
 async def test_mistral_api():
     """简化的Mistral API测试"""
     
-    api_key = "Po6zoCs8d8CpmtvGZhih7uxpCwebA6K6"
+    api_key = "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"
     base_url = "https://openrouter.ai/api/v1"
     
     # 首先测试文本API

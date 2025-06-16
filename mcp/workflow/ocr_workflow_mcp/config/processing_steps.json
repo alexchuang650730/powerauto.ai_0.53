@@ -1,0 +1,170 @@
+{
+  "steps": [
+    {
+      "id": "input_validation",
+      "name": "输入验证",
+      "processor": "InputValidator",
+      "required": true,
+      "timeout": 10,
+      "retry_count": 1,
+      "description": "验证输入图像格式、大小和可读性"
+    },
+    {
+      "id": "image_analysis",
+      "name": "图像分析",
+      "processor": "ImageAnalyzer",
+      "required": true,
+      "timeout": 15,
+      "retry_count": 1,
+      "description": "分析图像质量、类型和复杂度"
+    },
+    {
+      "id": "preprocessing",
+      "name": "图像预处理",
+      "processor": "ImagePreprocessor",
+      "required": false,
+      "timeout": 30,
+      "retry_count": 2,
+      "description": "图像增强、去噪、二值化等预处理",
+      "conditions": {
+        "image_quality": "< 0.8",
+        "enable_preprocessing": true
+      },
+      "parameters": {
+        "enhance_contrast": true,
+        "denoise": true,
+        "binarization": "adaptive"
+      }
+    },
+    {
+      "id": "adapter_selection",
+      "name": "适配器选择",
+      "processor": "AdapterSelector",
+      "required": true,
+      "timeout": 5,
+      "retry_count": 1,
+      "description": "根据路由规则选择最适合的MCP适配器"
+    },
+    {
+      "id": "ocr_processing",
+      "name": "OCR处理",
+      "processor": "OCRProcessor",
+      "required": true,
+      "timeout": 120,
+      "retry_count": 3,
+      "description": "执行OCR识别处理",
+      "parameters": {
+        "confidence_threshold": 0.8,
+        "language_detection": true,
+        "preserve_layout": true
+      }
+    },
+    {
+      "id": "result_validation",
+      "name": "结果验证",
+      "processor": "ResultValidator",
+      "required": true,
+      "timeout": 10,
+      "retry_count": 1,
+      "description": "验证OCR结果的质量和完整性"
+    },
+    {
+      "id": "postprocessing",
+      "name": "结果后处理",
+      "processor": "ResultPostprocessor",
+      "required": true,
+      "timeout": 30,
+      "retry_count": 2,
+      "description": "文本清理、格式化、结构化处理",
+      "parameters": {
+        "spell_check": true,
+        "format_correction": true,
+        "structure_analysis": true
+      }
+    },
+    {
+      "id": "quality_assessment",
+      "name": "质量评估",
+      "processor": "QualityAssessor",
+      "required": false,
+      "timeout": 15,
+      "retry_count": 1,
+      "description": "评估最终结果的质量分数",
+      "conditions": {
+        "quality_check_enabled": true
+      }
+    },
+    {
+      "id": "result_formatting",
+      "name": "结果格式化",
+      "processor": "ResultFormatter",
+      "required": true,
+      "timeout": 10,
+      "retry_count": 1,
+      "description": "将结果格式化为标准输出格式"
+    }
+  ],
+  
+  "conditional_steps": {
+    "low_confidence_retry": {
+      "condition": "ocr_confidence < 0.7",
+      "steps": [
+        {
+          "id": "enhanced_preprocessing",
+          "name": "增强预处理",
+          "processor": "EnhancedPreprocessor",
+          "timeout": 45
+        },
+        {
+          "id": "alternative_ocr",
+          "name": "备用OCR处理",
+          "processor": "AlternativeOCRProcessor",
+          "timeout": 120
+        }
+      ]
+    },
+    "table_detection": {
+      "condition": "document_type == 'table'",
+      "steps": [
+        {
+          "id": "table_structure_analysis",
+          "name": "表格结构分析",
+          "processor": "TableStructureAnalyzer",
+          "timeout": 60
+        },
+        {
+          "id": "table_extraction",
+          "name": "表格数据提取",
+          "processor": "TableExtractor",
+          "timeout": 90
+        }
+      ]
+    }
+  },
+  
+  "error_handling": {
+    "on_step_failure": "retry_or_skip",
+    "on_critical_failure": "abort_workflow",
+    "fallback_adapter": "local_model_mcp",
+    "max_total_retries": 5,
+    "retry_delay": 2,
+    "critical_steps": ["input_validation", "adapter_selection", "ocr_processing"]
+  },
+  
+  "parallel_processing": {
+    "enabled": true,
+    "parallel_steps": [
+      ["image_analysis", "preprocessing"],
+      ["result_validation", "quality_assessment"]
+    ],
+    "max_parallel_workers": 3
+  },
+  
+  "caching": {
+    "enabled": true,
+    "cache_steps": ["preprocessing", "ocr_processing"],
+    "cache_key_fields": ["image_hash", "adapter_type", "parameters"],
+    "ttl": 3600
+  }
+}
+

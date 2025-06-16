@@ -60,7 +60,7 @@ model_name = "mistralai/Mistral-Nemo-Instruct-2407"
 provider = "transformers"
 # 云端API配置 (OpenRouter)
 cloud_base_url = "https://openrouter.ai/api/v1"
-cloud_api_key = "Po6zoCs8d8CpmtvGZhih7uxpCwebA6K6"
+cloud_api_key = "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"
 cloud_model_name = "mistralai/mistral-nemo"
 # 本地配置
 device = "auto"

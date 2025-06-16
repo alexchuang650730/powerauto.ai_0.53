@@ -1,0 +1,32 @@
+[workflow]
+name = "OCR处理工作流"
+version = "1.0.0"
+description = "智能OCR处理和文档分析工作流"
+author = "PowerAutomation Team"
+
+[dependencies]
+adapters = ["local_model_mcp", "cloud_search_mcp"]
+required_models = ["qwen", "mistral", "gemini", "claude", "pixtral"]
+
+[execution]
+timeout = 300  # 秒
+max_retries = 3
+parallel_processing = true
+batch_size = 10
+enable_preprocessing = true
+enable_postprocessing = true
+
+[monitoring]
+enable_logging = true
+log_level = "INFO"
+metrics_collection = true
+performance_tracking = true
+save_intermediate_results = false
+
+[optimization]
+enable_caching = true
+cache_ttl = 3600  # 秒
+enable_compression = true
+max_memory_usage = "2GB"
+gpu_acceleration = true
+

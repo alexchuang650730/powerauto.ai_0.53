@@ -1,0 +1,81 @@
+routing_rules:
+  # 基于任务类型的路由
+  task_type:
+    document_ocr: "local_model_mcp"      # 普通文档OCR
+    handwriting_ocr: "cloud_search_mcp"  # 手写识别
+    table_extraction: "cloud_search_mcp" # 表格提取
+    form_processing: "cloud_search_mcp"  # 表单处理
+    multi_language: "cloud_search_mcp"   # 多语言文档
+    simple_text: "local_model_mcp"       # 简单文本识别
+  
+  # 基于质量要求的路由
+  quality_level:
+    high: "cloud_search_mcp"     # 高质量要求
+    medium: "local_model_mcp"    # 中等质量要求
+    fast: "local_model_mcp"      # 快速处理
+    best: "cloud_search_mcp"     # 最佳质量
+  
+  # 基于隐私要求的路由
+  privacy_level:
+    sensitive: "local_model_mcp"    # 敏感数据
+    confidential: "local_model_mcp" # 机密数据
+    internal: "local_model_mcp"     # 内部数据
+    public: "cloud_search_mcp"      # 公开数据
+    normal: "cloud_search_mcp"      # 普通数据
+  
+  # 基于文件大小的路由
+  file_size:
+    small: "local_model_mcp"      # < 5MB
+    medium: "cloud_search_mcp"    # 5-20MB
+    large: "cloud_search_mcp"     # > 20MB
+  
+  # 基于图像质量的路由
+  image_quality:
+    poor: "cloud_search_mcp"      # 图像质量差，需要云端处理
+    fair: "local_model_mcp"       # 图像质量一般
+    good: "local_model_mcp"       # 图像质量好
+    excellent: "local_model_mcp"  # 图像质量优秀
+  
+  # 基于语言类型的路由
+  language:
+    chinese_simplified: "local_model_mcp"
+    chinese_traditional: "local_model_mcp"
+    english: "local_model_mcp"
+    mixed_languages: "cloud_search_mcp"
+    rare_languages: "cloud_search_mcp"
+  
+  # 基于处理复杂度的路由
+  complexity:
+    simple: "local_model_mcp"     # 简单文档
+    moderate: "local_model_mcp"   # 中等复杂度
+    complex: "cloud_search_mcp"   # 复杂文档
+    very_complex: "cloud_search_mcp" # 非常复杂
+
+# 路由决策权重
+decision_weights:
+  privacy_level: 0.4      # 隐私要求权重最高
+  quality_level: 0.3      # 质量要求次之
+  task_type: 0.2          # 任务类型
+  file_size: 0.1          # 文件大小权重最低
+
+# 特殊规则
+special_rules:
+  # 强制本地处理的条件
+  force_local:
+    - privacy_level: "sensitive"
+    - privacy_level: "confidential"
+    - file_size: "small" AND quality_level: "fast"
+  
+  # 强制云端处理的条件  
+  force_cloud:
+    - task_type: "handwriting_ocr"
+    - task_type: "table_extraction"
+    - complexity: "very_complex"
+    - language: "mixed_languages"
+
+# 降级策略
+fallback_strategy:
+  primary_failure: "switch_adapter"    # 主适配器失败时切换
+  secondary_failure: "retry_with_preprocessing" # 二次失败时重试预处理
+  final_failure: "return_partial_result" # 最终失败时返回部分结果
+
