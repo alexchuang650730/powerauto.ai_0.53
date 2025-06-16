@@ -4,7 +4,7 @@
 [mcp_info]
 name = "local_model_mcp"
 version = "1.0.0"
-description = "统一的本地模型MCP适配器，支持Qwen 8B和Mistral 12B，集成OCR功能"
+description = "统一的本地模型MCP适配器，支持Qwen 8B和Mistral 12B，集成OCR功能和Mistral OCR"
 type = "local_model_provider"
 category = "ai_models"
 
@@ -14,12 +14,14 @@ supported_features = [
     "text_generation",
     "chat_completion", 
     "ocr_processing",
+    "mistral_ocr",
     "model_switching",
-    "batch_processing"
+    "batch_processing",
+    "workflow_processing"
 ]
 
 # 支持的模型类型
-supported_models = ["qwen", "mistral"]
+supported_models = ["qwen", "mistral", "mistral_ocr"]
 
 # 支持的任务类型
 supported_tasks = [
@@ -27,7 +29,10 @@ supported_tasks = [
     "text_generation",
     "code_generation", 
     "document_analysis",
-    "ocr_extraction"
+    "ocr_extraction",
+    "handwriting_recognition",
+    "table_extraction",
+    "form_processing"
 ]
 
 [models]
@@ -200,4 +205,53 @@ metrics = ["response_time", "memory_usage", "model_load_time", "error_rate"]
 monitoring_interval = 30
 # 告警阈值
 alert_thresholds = { memory_usage = 80, error_rate = 5, response_time = 10 }
+
+
+
+# Mistral OCR 配置
+[mistral_ocr]
+# 是否启用Mistral OCR
+enabled = true
+# OpenRouter API密钥
+api_key = "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"
+# 基础URL
+base_url = "https://openrouter.ai/api/v1"
+# 模型名称
+model_name = "mistralai/pixtral-12b"
+# 最大重试次数
+max_retries = 3
+# 请求超时
+timeout = 60
+# 温度设置
+temperature = 0.1
+# 最大token数
+max_tokens = 4000
+
+[mistral_ocr.task_types]
+# 支持的任务类型配置
+comprehensive = "全面OCR识别"
+table_focus = "表格重点识别"
+handwriting_focus = "手写重点识别"
+form_focus = "表单重点识别"
+
+[mistral_ocr.quality]
+# 质量设置
+min_confidence = 0.8
+enable_preprocessing = true
+enable_postprocessing = true
+preserve_layout = true
+
+[workflow]
+# OCR工作流配置
+enable_workflow_interface = true
+default_task_type = "comprehensive"
+default_quality_level = "medium"
+default_privacy_level = "normal"
+enable_smart_routing = true
+
+[workflow.routing_rules]
+# 路由规则配置
+high_quality_tasks = ["handwriting", "table_extraction", "form_processing"]
+privacy_sensitive_tasks = ["document_ocr"]
+fast_processing_tasks = ["simple_text"]
 

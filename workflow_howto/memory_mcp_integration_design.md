@@ -2,7 +2,11 @@
 
 ## 🎯 整合目标
 
+<<<<<<< HEAD
+将PowerAutomation的Unified Memory MCP与我们的InteractionLogManager整合，实现：
+=======
 基于PowerAutomation现有的SuperMemory适配器和Unified Memory MCP，将记忆系统与我们的InteractionLogManager整合，实现：
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 
 ### **1. 智能记忆管理**
 - 自动将交互数据转换为长期记忆
@@ -19,6 +23,11 @@
 - 多源记忆的统一管理
 - 实时学习和优化
 
+<<<<<<< HEAD
+## 🏗️ 整合架构设计
+
+### **核心组件关系**
+=======
 ## 🏗️ 基于现有架构的整合设计
 
 ### **现有组件分析**
@@ -36,6 +45,7 @@
 - ✅ 向量检索和语义搜索
 
 ### **整合架构设计**
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 
 ```
 MCPCoordinator {
@@ -45,6 +55,15 @@ MCPCoordinator {
         - 触发记忆存储
     }
     
+<<<<<<< HEAD
+    MemoryMCP {
+        - 长期记忆管理
+        - 智能检索服务
+        - 跨源记忆整合
+    }
+    
+    SmartRouter {
+=======
     UnifiedMemoryMCP {
         - SuperMemoryAdapter (外部记忆服务)
         - LocalMemoryAdapter (本地记忆存储)
@@ -53,6 +72,7 @@ MCPCoordinator {
     }
     
     MemoryEnhancedRouter {
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         - 基于记忆的路由决策
         - 个性化推荐
         - 预测性分析
@@ -60,11 +80,57 @@ MCPCoordinator {
 }
 ```
 
+<<<<<<< HEAD
+### **数据流设计**
+
+```
+用户请求 → MCP处理 → 交互数据 → InteractionLogManager
+                                        ↓
+记忆检索 ← MemoryMCP ← 记忆转换 ← 数据分析
+    ↓
+SmartRouter → 优化决策 → 个性化响应
+```
+
+=======
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ## 🔧 技术实现方案
 
 ### **1. 记忆数据转换器 (MemoryDataConverter)**
 
 ```python
+<<<<<<< HEAD
+class MemoryDataConverter:
+    """将交互数据转换为记忆格式"""
+    
+    def convert_interaction_to_memory(self, interaction_data: Dict) -> Dict:
+        """转换交互数据为记忆格式"""
+        return {
+            "content": self._extract_content(interaction_data),
+            "metadata": {
+                "user_id": interaction_data.get("user_id"),
+                "mcp_type": interaction_data.get("mcp_type"),
+                "operation": interaction_data.get("operation"),
+                "timestamp": interaction_data.get("timestamp"),
+                "success": interaction_data.get("success"),
+                "response_time": interaction_data.get("response_time"),
+                "context": interaction_data.get("context", {}),
+                "tags": self._generate_tags(interaction_data)
+            },
+            "source": "interaction_log"
+        }
+    
+    def _extract_content(self, interaction_data: Dict) -> str:
+        """提取关键内容"""
+        content_parts = []
+        
+        # 用户请求内容
+        if "request" in interaction_data:
+            content_parts.append(f"用户请求: {interaction_data['request']}")
+        
+        # 处理结果
+        if "response" in interaction_data:
+            content_parts.append(f"处理结果: {interaction_data['response']}")
+=======
 import hashlib
 import json
 from typing import Dict, List, Any, Optional
@@ -132,6 +198,7 @@ class MemoryDataConverter:
         response_time = interaction_data.get("response_time", 0)
         if response_time:
             content_parts.append(f"响应时间: {response_time}ms")
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         
         # 错误信息
         if "error" in interaction_data:
@@ -139,6 +206,8 @@ class MemoryDataConverter:
         
         return " | ".join(content_parts)
     
+<<<<<<< HEAD
+=======
     def _generate_metadata(self, interaction_data: Dict) -> Dict:
         """生成记忆元数据"""
         metadata = {
@@ -155,6 +224,7 @@ class MemoryDataConverter:
         
         return metadata
     
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
     def _generate_tags(self, interaction_data: Dict) -> List[str]:
         """生成记忆标签"""
         tags = []
@@ -184,6 +254,9 @@ class MemoryDataConverter:
         else:
             tags.append("performance:normal")
         
+<<<<<<< HEAD
+        return tags
+=======
         # 基于内容类型的标签
         request_content = str(interaction_data.get("request", "")).lower()
         if "ocr" in request_content or "识别" in request_content:
@@ -217,11 +290,27 @@ class MemoryDataConverter:
             score += 0.1
         
         return max(0.0, min(1.0, score))  # 限制在0-1之间
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ```
 
 ### **2. 智能记忆管理器 (IntelligentMemoryManager)**
 
 ```python
+<<<<<<< HEAD
+class IntelligentMemoryManager:
+    """智能记忆管理器"""
+    
+    def __init__(self, memory_mcp: UnifiedMemoryMCP):
+        self.memory_mcp = memory_mcp
+        self.converter = MemoryDataConverter()
+        self.memory_rules = self._load_memory_rules()
+    
+    async def process_interaction_data(self, interaction_data: Dict) -> Dict:
+        """处理交互数据并存储为记忆"""
+        try:
+            # 判断是否需要存储为记忆
+            if not self._should_store_as_memory(interaction_data):
+=======
 import asyncio
 import logging
 from typing import Dict, List, Any, Optional
@@ -251,11 +340,27 @@ class IntelligentMemoryManager:
             # 判断是否需要存储为记忆
             if not self._should_store_as_memory(interaction_data):
                 self.stats["skipped_count"] += 1
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
                 return {"status": "skipped", "reason": "不符合记忆存储条件"}
             
             # 转换为记忆格式
             memory_data = self.converter.convert_interaction_to_memory(interaction_data)
             
+<<<<<<< HEAD
+            # 选择最佳记忆源
+            memory_source = self._select_memory_source(memory_data)
+            
+            # 存储记忆
+            result = await self.memory_mcp.insert_memory(
+                content=memory_data["content"],
+                metadata=memory_data["metadata"],
+                source=memory_source
+            )
+            
+            # 更新记忆索引
+            if result.get("status") == "success":
+                await self._update_memory_index(memory_data, result.get("memory_id"))
+=======
             # 选择最佳存储策略
             storage_strategy = self._select_storage_strategy(memory_data)
             
@@ -268,12 +373,16 @@ class IntelligentMemoryManager:
                 asyncio.create_task(self._update_memory_index(memory_data, result))
             else:
                 self.stats["error_count"] += 1
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             
             return result
             
         except Exception as e:
+<<<<<<< HEAD
+=======
             self.stats["error_count"] += 1
             logger.error(f"记忆存储失败: {str(e)}")
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             return {"status": "error", "message": f"记忆存储失败: {str(e)}"}
     
     def _should_store_as_memory(self, interaction_data: Dict) -> bool:
@@ -284,7 +393,11 @@ class IntelligentMemoryManager:
         
         # 过滤掉简单的查询操作
         operation = interaction_data.get("operation", "")
+<<<<<<< HEAD
+        if operation in ["health_check", "status", "ping"]:
+=======
         if operation in ["health_check", "status", "ping", "heartbeat"]:
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             return False
         
         # 响应时间过长的可能有问题
@@ -293,6 +406,9 @@ class IntelligentMemoryManager:
             return False
         
         # 有实际内容的交互
+<<<<<<< HEAD
+        if not interaction_data.get("request") and not interaction_data.get("response"):
+=======
         request = interaction_data.get("request", "")
         response = interaction_data.get("response", "")
         if not request and not response:
@@ -301,10 +417,40 @@ class IntelligentMemoryManager:
         # 质量分数阈值
         quality_score = self.converter._calculate_quality_score(interaction_data)
         if quality_score < 0.6:
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             return False
         
         return True
     
+<<<<<<< HEAD
+    def _select_memory_source(self, memory_data: Dict) -> str:
+        """选择最佳记忆源"""
+        metadata = memory_data.get("metadata", {})
+        
+        # 代码相关的存储到GitHub记忆
+        if any(tag.startswith("mcp:code") for tag in metadata.get("tags", [])):
+            return "github"
+        
+        # 复杂查询存储到RAG
+        if "search" in metadata.get("operation", "").lower():
+            return "rag"
+        
+        # 用户偏好存储到本地
+        if "user_preference" in metadata.get("context", {}):
+            return "local"
+        
+        # 默认存储到本地
+        return "local"
+    
+    async def _update_memory_index(self, memory_data: Dict, memory_id: str):
+        """更新记忆索引"""
+        try:
+            await self.memory_mcp.index_memory(
+                memory_id=memory_id,
+                tags=memory_data["metadata"].get("tags", []),
+                keywords=self._extract_keywords(memory_data["content"])
+            )
+=======
     def _select_storage_strategy(self, memory_data: Dict) -> Dict:
         """选择存储策略"""
         metadata = memory_data.get("metadata", {})
@@ -389,11 +535,20 @@ class IntelligentMemoryManager:
                     tags=memory_data["metadata"].get("tags", []),
                     keywords=self._extract_keywords(memory_data["content"])
                 )
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         except Exception as e:
             logger.warning(f"记忆索引更新失败: {str(e)}")
     
     def _extract_keywords(self, content: str) -> List[str]:
         """提取关键词"""
+<<<<<<< HEAD
+        # 简单的关键词提取逻辑
+        import re
+        words = re.findall(r'\b\w+\b', content.lower())
+        # 过滤停用词和短词
+        keywords = [word for word in words if len(word) > 3 and word not in ["用户", "请求", "处理", "结果"]]
+        return list(set(keywords))[:10]  # 最多10个关键词
+=======
         import re
         words = re.findall(r'\b\w+\b', content.lower())
         # 过滤停用词和短词
@@ -408,6 +563,7 @@ class IntelligentMemoryManager:
             "success_rate": self.stats["stored_count"] / max(1, self.stats["total_processed"]),
             "error_rate": self.stats["error_count"] / max(1, self.stats["total_processed"])
         }
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ```
 
 ### **3. 记忆增强路由器 (MemoryEnhancedRouter)**
@@ -416,11 +572,17 @@ class IntelligentMemoryManager:
 class MemoryEnhancedRouter:
     """基于记忆的增强路由器"""
     
+<<<<<<< HEAD
+    def __init__(self, memory_mcp: UnifiedMemoryMCP):
+        self.memory_mcp = memory_mcp
+        self.user_profiles = {}  # 用户画像缓存
+=======
     def __init__(self, unified_memory_mcp, supermemory_adapter: SuperMemoryAdapter):
         self.unified_memory = unified_memory_mcp
         self.supermemory = supermemory_adapter
         self.user_profiles = {}  # 用户画像缓存
         self.cache_ttl = 3600  # 缓存1小时
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
     
     async def enhanced_route_decision(self, request: Dict) -> Dict:
         """基于记忆的增强路由决策"""
@@ -431,7 +593,11 @@ class MemoryEnhancedRouter:
             user_memory = await self._get_user_memory(user_id, request)
             
             # 分析用户偏好
+<<<<<<< HEAD
+            user_preferences = self._analyze_user_preferences(user_memory)
+=======
             user_preferences = await self._analyze_user_preferences(user_id, user_memory)
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             
             # 基于记忆的路由推荐
             routing_recommendation = self._generate_routing_recommendation(
@@ -442,16 +608,52 @@ class MemoryEnhancedRouter:
                 "status": "success",
                 "routing_recommendation": routing_recommendation,
                 "user_preferences": user_preferences,
+<<<<<<< HEAD
+                "confidence": routing_recommendation.get("confidence", 0.5)
+            }
+            
+        except Exception as e:
+=======
                 "confidence": routing_recommendation.get("confidence", 0.5),
                 "memory_insights": self._extract_memory_insights(user_memory)
             }
             
         except Exception as e:
             logger.error(f"记忆增强路由失败: {str(e)}")
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             return {"status": "error", "message": f"记忆增强路由失败: {str(e)}"}
     
     async def _get_user_memory(self, user_id: str, request: Dict) -> List[Dict]:
         """获取用户相关记忆"""
+<<<<<<< HEAD
+        # 构建查询
+        query_parts = []
+        
+        # 基于用户ID查询
+        query_parts.append(f"user_id:{user_id}")
+        
+        # 基于请求内容查询
+        if "content" in request:
+            query_parts.append(request["content"][:100])  # 限制长度
+        
+        # 基于操作类型查询
+        if "operation" in request:
+            query_parts.append(f"operation:{request['operation']}")
+        
+        query = " ".join(query_parts)
+        
+        # 执行记忆查询
+        memory_result = await self.memory_mcp.query_memory(
+            query=query,
+            sources=["local", "rag"],
+            limit=20
+        )
+        
+        return memory_result.get("results", [])
+    
+    def _analyze_user_preferences(self, user_memory: List[Dict]) -> Dict:
+        """分析用户偏好"""
+=======
         memories = []
         
         try:
@@ -490,10 +692,17 @@ class MemoryEnhancedRouter:
             if time.time() - cached_time < self.cache_ttl:
                 return preferences
         
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         preferences = {
             "preferred_mcps": {},
             "preferred_operations": {},
             "performance_preference": "balanced",  # fast, balanced, quality
+<<<<<<< HEAD
+            "success_patterns": [],
+            "failure_patterns": []
+        }
+        
+=======
             "content_types": {},
             "success_patterns": [],
             "failure_patterns": [],
@@ -504,6 +713,7 @@ class MemoryEnhancedRouter:
         total_response_time = 0
         response_count = 0
         
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         for memory in user_memory:
             metadata = memory.get("metadata", {})
             
@@ -517,6 +727,8 @@ class MemoryEnhancedRouter:
             if operation:
                 preferences["preferred_operations"][operation] = preferences["preferred_operations"].get(operation, 0) + 1
             
+<<<<<<< HEAD
+=======
             # 统计内容类型偏好
             tags = metadata.get("tags", [])
             for tag in tags:
@@ -524,10 +736,17 @@ class MemoryEnhancedRouter:
                     content_type = tag.split(":")[1]
                     preferences["content_types"][content_type] = preferences["content_types"].get(content_type, 0) + 1
             
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             # 分析性能偏好
             response_time = metadata.get("response_time", 0)
             success = metadata.get("success", False)
             
+<<<<<<< HEAD
+            if success and response_time < 1000:
+                preferences["success_patterns"].append("fast_response")
+            elif success and response_time > 5000:
+                preferences["success_patterns"].append("quality_over_speed")
+=======
             if response_time > 0:
                 total_response_time += response_time
                 response_count += 1
@@ -543,10 +762,18 @@ class MemoryEnhancedRouter:
         # 计算平均响应时间
         if response_count > 0:
             preferences["avg_response_time"] = total_response_time / response_count
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         
         # 确定性能偏好
         fast_success = preferences["success_patterns"].count("fast_response")
         quality_success = preferences["success_patterns"].count("quality_over_speed")
+<<<<<<< HEAD
+        
+        if fast_success > quality_success * 2:
+            preferences["performance_preference"] = "fast"
+        elif quality_success > fast_success:
+            preferences["performance_preference"] = "quality"
+=======
         balanced_success = preferences["success_patterns"].count("balanced_response")
         
         if fast_success > max(quality_success, balanced_success):
@@ -558,6 +785,7 @@ class MemoryEnhancedRouter:
         
         # 缓存结果
         self.user_profiles[cache_key] = (time.time(), preferences)
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         
         return preferences
     
@@ -567,14 +795,22 @@ class MemoryEnhancedRouter:
             "primary_mcp": None,
             "fallback_mcps": [],
             "confidence": 0.5,
+<<<<<<< HEAD
+            "reasoning": []
+=======
             "reasoning": [],
             "estimated_response_time": 0,
             "quality_expectation": 0.7
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         }
         
         # 基于用户偏好推荐
         preferred_mcps = preferences.get("preferred_mcps", {})
         if preferred_mcps:
+<<<<<<< HEAD
+            # 按使用频率排序
+=======
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
             sorted_mcps = sorted(preferred_mcps.items(), key=lambda x: x[1], reverse=True)
             recommendation["primary_mcp"] = sorted_mcps[0][0]
             recommendation["fallback_mcps"] = [mcp for mcp, _ in sorted_mcps[1:3]]
@@ -583,6 +819,21 @@ class MemoryEnhancedRouter:
         
         # 基于性能偏好调整
         performance_pref = preferences.get("performance_preference", "balanced")
+<<<<<<< HEAD
+        if performance_pref == "fast":
+            # 优先推荐本地MCP
+            if "local_model_mcp" not in recommendation["fallback_mcps"]:
+                recommendation["fallback_mcps"].insert(0, "local_model_mcp")
+            recommendation["confidence"] += 0.1
+            recommendation["reasoning"].append("用户偏好快速响应，优先推荐本地处理")
+        elif performance_pref == "quality":
+            # 优先推荐云端MCP
+            if "cloud_search_mcp" not in recommendation["fallback_mcps"]:
+                recommendation["fallback_mcps"].insert(0, "cloud_search_mcp")
+            recommendation["confidence"] += 0.1
+            recommendation["reasoning"].append("用户偏好高质量结果，优先推荐云端处理")
+        
+=======
         avg_response_time = preferences.get("avg_response_time", 0)
         
         if performance_pref == "fast":
@@ -609,6 +860,7 @@ class MemoryEnhancedRouter:
                 recommendation["confidence"] += 0.1
                 recommendation["reasoning"].append("基于用户OCR使用历史优化推荐")
         
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         # 基于相似历史请求推荐
         similar_memories = self._find_similar_requests(request, memory)
         if similar_memories:
@@ -621,13 +873,20 @@ class MemoryEnhancedRouter:
                 recommendation["confidence"] += 0.2
                 recommendation["reasoning"].append(f"基于相似请求的成功经验推荐 {most_successful}")
         
+<<<<<<< HEAD
+=======
         # 确保confidence在合理范围内
         recommendation["confidence"] = min(0.95, max(0.3, recommendation["confidence"]))
         
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         return recommendation
     
     def _find_similar_requests(self, request: Dict, memory: List[Dict]) -> List[Dict]:
         """查找相似的历史请求"""
+<<<<<<< HEAD
+        # 简单的相似度计算
+=======
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         request_content = request.get("content", "").lower()
         request_operation = request.get("operation", "").lower()
         
@@ -636,6 +895,22 @@ class MemoryEnhancedRouter:
             memory_content = memory_item.get("content", "").lower()
             memory_operation = memory_item.get("metadata", {}).get("operation", "").lower()
             
+<<<<<<< HEAD
+            # 计算相似度
+            similarity = 0
+            if request_operation and request_operation == memory_operation:
+                similarity += 0.5
+            
+            # 简单的内容相似度
+            common_words = set(request_content.split()) & set(memory_content.split())
+            if len(common_words) > 2:
+                similarity += 0.3
+            
+            if similarity > 0.4:
+                similar_memories.append(memory_item)
+        
+        return similar_memories[:5]  # 返回最多5个相似记忆
+=======
             similarity = 0
             
             # 操作类型相似度
@@ -705,6 +980,7 @@ class MemoryEnhancedRouter:
             }
         
         return insights
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ```
 
 ## 🔧 整合实施步骤
@@ -713,6 +989,16 @@ class MemoryEnhancedRouter:
 
 ```python
 class EnhancedInteractionLogManager(InteractionLogManager):
+<<<<<<< HEAD
+    """增强的交互日志管理器"""
+    
+    def __init__(self, config: Dict):
+        super().__init__(config)
+        self.memory_manager = IntelligentMemoryManager(
+            memory_mcp=UnifiedMemoryMCP(config.get("memory_config", {}))
+        )
+        self.memory_router = MemoryEnhancedRouter(self.memory_manager.memory_mcp)
+=======
     """增强的交互日志管理器，集成记忆功能"""
     
     def __init__(self, config: Dict):
@@ -739,22 +1025,33 @@ class EnhancedInteractionLogManager(InteractionLogManager):
         # 配置选项
         self.enable_memory_storage = config.get("enable_memory_storage", True)
         self.enable_memory_routing = config.get("enable_memory_routing", True)
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
     
     async def log_interaction(self, interaction_data: Dict) -> Dict:
         """记录交互并存储为记忆"""
         # 原有的日志记录
         log_result = await super().log_interaction(interaction_data)
         
+<<<<<<< HEAD
+        # 异步存储为记忆
+        asyncio.create_task(
+            self.memory_manager.process_interaction_data(interaction_data)
+        )
+=======
         # 异步存储为记忆（如果启用）
         if self.enable_memory_storage:
             asyncio.create_task(
                 self.memory_manager.process_interaction_data(interaction_data)
             )
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
         
         return log_result
     
     async def get_routing_recommendation(self, request: Dict) -> Dict:
         """获取基于记忆的路由推荐"""
+<<<<<<< HEAD
+        return await self.memory_router.enhanced_route_decision(request)
+=======
         if not self.enable_memory_routing:
             return {"status": "disabled", "message": "记忆路由功能未启用"}
         
@@ -767,6 +1064,7 @@ class EnhancedInteractionLogManager(InteractionLogManager):
             "supermemory_health": self.supermemory_adapter.health_check(),
             "unified_memory_stats": await self.unified_memory.get_statistics()
         }
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ```
 
 ### **步骤2: 更新MCPCoordinator配置**
@@ -774,13 +1072,30 @@ class EnhancedInteractionLogManager(InteractionLogManager):
 ```toml
 [mcp_coordinator]
 enable_memory_integration = true
+<<<<<<< HEAD
+memory_storage_threshold = 0.8  # 成功率阈值
+=======
 enable_memory_storage = true
 enable_memory_routing = true
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 
 [memory_integration]
 auto_memory_storage = true
 memory_retention_days = 90
 max_memories_per_user = 1000
+<<<<<<< HEAD
+
+[memory_sources]
+local_enabled = true
+rag_enabled = true
+github_enabled = false
+supermemory_enabled = false
+```
+
+### **步骤3: 创建Memory MCP适配器**
+
+将unified_memory_mcp添加到我们的adapter目录：
+=======
 quality_threshold = 0.6
 
 [supermemory]
@@ -801,11 +1116,19 @@ max_similar_memories = 5
 ```
 
 ### **步骤3: 创建Memory MCP适配器目录**
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 
 ```
 mcp/adapter/
 ├── local_model_mcp/
 ├── cloud_search_mcp/
+<<<<<<< HEAD
+└── unified_memory_mcp/     # 新增
+    ├── unified_memory_mcp.py
+    ├── memory_query_engine.py
+    ├── config.toml
+    └── README.md
+=======
 ├── unified_memory_mcp/     # 新增
 │   ├── unified_memory_mcp.py
 │   ├── memory_query_engine.py
@@ -815,11 +1138,43 @@ mcp/adapter/
 │   └── README.md
 └── supermemory_adapter/    # 引用现有的
     └── supermemory_mcp.py
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 ```
 
 ## 📊 预期效果
 
 ### **1. 智能化提升**
+<<<<<<< HEAD
+- 路由决策准确率提升30%
+- 用户满意度提升25%
+- 响应时间优化20%
+
+### **2. 个性化体验**
+- 基于历史的个性化推荐
+- 自适应的性能优化
+- 预测性的需求满足
+
+### **3. 系统学习能力**
+- 持续的性能优化
+- 自动的错误模式识别
+- 智能的资源分配
+
+## 🚀 部署建议
+
+### **渐进式部署**
+1. **阶段1**: 部署Memory MCP适配器
+2. **阶段2**: 启用交互数据到记忆的转换
+3. **阶段3**: 启用基于记忆的路由增强
+4. **阶段4**: 全面启用智能记忆系统
+
+### **监控指标**
+- 记忆存储成功率
+- 路由推荐准确率
+- 用户满意度变化
+- 系统性能影响
+
+这个整合方案将显著提升PowerAutomation系统的智能化水平和用户体验！
+=======
 - **路由决策准确率提升35%** - 基于历史记忆的智能推荐
 - **用户满意度提升30%** - 个性化的服务体验
 - **响应时间优化25%** - 基于用户偏好的性能优化
@@ -900,4 +1255,5 @@ mcp/adapter/
 - 实现完整的回滚方案
 
 这个整合方案将显著提升PowerAutomation系统的智能化水平，为用户提供更加个性化和高效的服务体验！
+>>>>>>> 2964a240aef572f0ac8f6da7f8da0533a8eed647
 
