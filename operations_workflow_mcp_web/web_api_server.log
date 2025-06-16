@@ -1,0 +1,32 @@
+nohup: ignoring input
+🚀 启动 Operations Workflow MCP Web API (via Coordinator)
+======================================================================
+架构:
+  SmartUI (5001) ↔ MCP Coordinator (8089) ↔ Operations Workflow MCP (8090)
+======================================================================
+API端点:
+  - GET  /api/status                - 系统状态
+  - GET  /api/file-placement/rules  - 文件放置规则
+  - GET  /api/file-placement/analysis - 文件分析
+  - POST /api/file-placement/execute - 执行文件放置
+  - GET  /api/mcp-registry          - MCP注册表
+  - GET  /api/interventions         - 介入历史
+  - GET  /api/directory-check       - 目录结构检查
+  - GET  /api/coordinator/status    - MCP Coordinator状态
+  - GET  /health                    - 健康检查
+======================================================================
+所有请求通过MCP Coordinator转发到Operations Workflow MCP
+======================================================================
+ * Serving Flask app 'api_server'
+ * Debug mode: on
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://169.254.0.21:5001
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 175-282-836
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:19] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:25] "GET /api/status HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:33] "GET /api/file-placement/analysis HTTP/1.1" 200 -

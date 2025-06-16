@@ -1,0 +1,33 @@
+nohup: ignoring input
+INFO:mcp.workflow.operations_workflow_mcp.src.file_placement_manager:📁 File Placement Manager 初始化完成
+INFO:mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager:📋 加载了 5 个MCP注册信息
+INFO:mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager:🗂️ MCP Registry Manager 初始化完成
+INFO:mcp.workflow.operations_workflow_mcp.src.smart_intervention_coordinator:📋 加载了 6 个历史介入记录
+INFO:mcp.workflow.operations_workflow_mcp.src.smart_intervention_coordinator:🎯 Smart Intervention Coordinator 初始化完成
+INFO:__main__:✅ operations_workflow_mcp 初始化完成
+🚀 启动 Operations Workflow MCP Server
+============================================================
+MCP ID: operations_workflow_mcp
+版本: 1.0.0
+状态: ready
+============================================================
+标准MCP端点:
+  - GET  /mcp/info     - MCP基本信息
+  - POST /mcp/request  - MCP请求处理
+  - GET  /mcp/status   - MCP状态
+  - GET  /health       - 健康检查
+============================================================
+运行在端口: 8090
+============================================================
+ * Serving Flask app 'operations_workflow_mcp_server'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://169.254.0.21:8090
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:35:55] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:26] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:25] "POST /mcp/request HTTP/1.1" 200 -
+INFO:mcp.workflow.operations_workflow_mcp.src.file_placement_manager:📊 分析完成: 2 个文件, 1 个目录
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:33] "POST /mcp/request HTTP/1.1" 200 -

@@ -1,0 +1,32 @@
+nohup: ignoring input
+INFO:__main__:✅ MCP Coordinator 初始化完成
+🚀 启动 MCP Coordinator
+============================================================
+协调器ID: mcp_coordinator
+版本: 1.0.0
+已注册MCP: 1
+============================================================
+协调器端点:
+  - GET  /coordinator/info           - 协调器信息
+  - GET  /coordinator/mcps           - 已注册MCP列表
+  - POST /coordinator/register       - 注册新MCP
+  - POST /coordinator/request/<mcp_id> - 转发MCP请求
+  - GET  /coordinator/health-check   - 检查所有MCP健康状态
+  - GET  /health                     - 协调器健康检查
+============================================================
+运行在端口: 8089
+============================================================
+ * Serving Flask app 'mcp_coordinator_server'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8089
+ * Running on http://169.254.0.21:8089
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:21] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:39:26] "GET /coordinator/health-check HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:19] "GET /health HTTP/1.1" 200 -
+INFO:__main__:✅ 转发请求成功: operations_workflow_mcp.get_status
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:25] "POST /coordinator/request/operations_workflow_mcp HTTP/1.1" 200 -
+INFO:__main__:✅ 转发请求成功: operations_workflow_mcp.file_placement_analyze
+INFO:werkzeug:127.0.0.1 - - [15/Jun/2025 23:41:33] "POST /coordinator/request/operations_workflow_mcp HTTP/1.1" 200 -

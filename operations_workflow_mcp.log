@@ -1,0 +1,56 @@
+nohup: ignoring input
+2025-06-15 23:24:06,858 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 📋 加载了 5 个MCP注册信息
+2025-06-15 23:24:06,858 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 🗂️ MCP Registry Manager 初始化完成
+2025-06-15 23:24:06,859 - mcp.workflow.operations_workflow_mcp.src.smart_intervention_coordinator - INFO - 📋 加载了 6 个历史介入记录
+2025-06-15 23:24:06,859 - mcp.workflow.operations_workflow_mcp.src.smart_intervention_coordinator - INFO - 🎯 Smart Intervention Coordinator 初始化完成
+2025-06-15 23:24:06,859 - mcp.workflow.operations_workflow_mcp.src.file_placement_manager - INFO - 📁 File Placement Manager 初始化完成
+2025-06-15 23:24:06,859 - __main__ - INFO - 🚀 Operations Workflow MCP Service 初始化完成
+2025-06-15 23:24:06,859 - __main__ - INFO - 🔄 启动 Operations Workflow MCP Service...
+2025-06-15 23:24:06,859 - __main__ - INFO - 📋 自动发现和注册MCP...
+2025-06-15 23:24:06,861 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 🔍 自动发现 6 个MCP
+2025-06-15 23:24:06,861 - __main__ - INFO - 发现 6 个MCP
+2025-06-15 23:24:06,862 - development_intervention_mcp_module - INFO - 🔧 Development Intervention MCP 初始化完成
+2025-06-15 23:24:06,862 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,862 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - ✅ 成功加载MCP: development_intervention_mcp
+2025-06-15 23:24:06,865 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - ERROR - ❌ 加载MCP local_model_mcp 失败: attempted relative import with no known parent package
+2025-06-15 23:24:06,866 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,948 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,948 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - ✅ 成功加载MCP: cloud_search_mcp
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - KiloCode MCP 2.0.0 初始化完成
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - KiloCode MCP 2.0.0 初始化完成
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - 支持工作流: 0个
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - 支持工作流: 0个
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - 支持创建类型: 0个
+2025-06-15 23:24:06,950 - kilocode_mcp - INFO - 支持创建类型: 0个
+2025-06-15 23:24:06,950 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,950 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - ✅ 成功加载MCP: kilocode_mcp
+2025-06-15 23:24:06,951 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - ERROR - ❌ 加载MCP directory_structure_mcp 失败: module 'directory_structure_mcp_module' has no attribute 'Directorystructuremcp'
+2025-06-15 23:24:06,951 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,952 - mcp.workflow.operations_workflow_mcp.src.mcp_registry_manager - INFO - 💾 保存了 5 个MCP注册信息
+2025-06-15 23:24:06,952 - __main__ - INFO - 健康检查: 1/5 健康
+2025-06-15 23:24:06,952 - __main__ - INFO - 🎯 启动智能介入协调器...
+2025-06-15 23:24:06,952 - __main__ - INFO - ✅ 智能介入协调器启动成功
+2025-06-15 23:24:06,952 - __main__ - INFO - 🗂️ 启动目录结构监控...
+2025-06-15 23:24:06,952 - __main__ - INFO - ✅ 目录结构监控启动成功
+2025-06-15 23:24:06,952 - __main__ - INFO - 📁 启动文件放置监控...
+2025-06-15 23:24:06,952 - __main__ - INFO - ✅ 文件放置监控启动成功
+2025-06-15 23:24:06,952 - __main__ - INFO - ✅ Operations Workflow MCP Service 启动成功
+2025-06-15 23:24:06,952 - __main__ - INFO - 🔄 进入主循环...
+2025-06-15 23:24:06,953 - __main__ - INFO - 📊 服务状态报告:
+2025-06-15 23:24:06,953 - __main__ - INFO -   - 运行时间: 0秒
+2025-06-15 23:24:06,953 - __main__ - INFO -   - 注册MCP: 5
+2025-06-15 23:24:06,953 - __main__ - INFO -   - 活跃实例: 3
+2025-06-15 23:24:06,953 - __main__ - INFO -   - 介入队列: 0
+2025-06-15 23:24:06,953 - __main__ - INFO -   - 已完成介入: 6
+2025-06-15 23:24:06,953 - __main__ - ERROR - ❌ 目录结构监控错误: 'DirectoryStructureManager' object has no attribute 'check_directory_compliance'
+2025-06-15 23:24:06,954 - mcp.workflow.operations_workflow_mcp.src.file_placement_manager - INFO - 📊 分析完成: 2 个文件, 1 个目录
+2025-06-15 23:24:06,954 - __main__ - INFO - 发现 2 个文件需要放置
+2025-06-15 23:24:06,954 - mcp.workflow.operations_workflow_mcp.src.file_placement_manager - INFO - ✅ copied_file: alexchuang.pem → upload/.recovery/
+2025-06-15 23:24:06,954 - mcp.workflow.operations_workflow_mcp.src.file_placement_manager - ERROR - ❌ 放置失败: .recovery/alexchuang.pem → upload/.recovery/: PosixPath('/home/ubuntu/kilocode_integrated_repo/upload/.recovery/alexchuang.pem') and '/home/ubuntu/kilocode_integrated_repo/upload/.recovery/alexchuang.pem' are the same file
+2025-06-15 23:24:06,954 - __main__ - INFO - 成功放置 1 个文件
+2025-06-15 23:27:05,071 - __main__ - INFO - 📡 收到信号 15
+2025-06-15 23:27:07,128 - __main__ - INFO - 🛑 停止 Operations Workflow MCP Service...
+2025-06-15 23:27:07,129 - __main__ - INFO - 📴 intervention_task 已停止
+2025-06-15 23:27:07,129 - __main__ - INFO - 📴 directory_task 已停止
+2025-06-15 23:27:07,129 - __main__ - INFO - 📴 file_placement_task 已停止
+2025-06-15 23:27:07,129 - __main__ - INFO - ✅ Operations Workflow MCP Service 已停止
