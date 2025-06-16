@@ -21,3 +21,7 @@ INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:53] "POST /mcp/request HTTP/1.1" 
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:53] "POST /mcp/request HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:53] "POST /mcp/request HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:53] "POST /mcp/request HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:07:42] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:07:55] "[33mGET /api/dashboard/status HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:07:59] "[33mGET /api/stats HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:22:59] "GET /health HTTP/1.1" 200 -

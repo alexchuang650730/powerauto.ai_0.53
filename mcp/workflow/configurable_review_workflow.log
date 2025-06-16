@@ -14,3 +14,5 @@ nohup: ignoring input
 127.0.0.1 - - [16/Jun/2025 00:51:43] "GET /api/review/config HTTP/1.1" 200 -
 127.0.0.1 - - [16/Jun/2025 00:55:40] "GET /health HTTP/1.1" 200 -
 127.0.0.1 - - [16/Jun/2025 00:55:53] "POST /api/review/process HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 01:23:35] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [16/Jun/2025 01:30:39] "GET /health HTTP/1.1" 200 -

@@ -45,3 +45,15 @@ INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:40:18] "GET /coordinator/mcps HTTP/1
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:40:18] "GET /coordinator/mcps HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:55:40] "GET /health HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 00:59:49] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 01:11:31] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 01:11:31] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 01:19:25] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:18] "GET /health HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:23] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:27] "[33mGET /api/mcps HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:31] "[33mGET /mcp/list HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:36] "[33mGET /mcp/list HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:49] "GET /coordinator/mcps HTTP/1.1" 200 -
+INFO:__main__:✅ 注册MCP: developer_flow_mcp
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:33:58] "POST /coordinator/register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:34:03] "GET /coordinator/mcps HTTP/1.1" 200 -

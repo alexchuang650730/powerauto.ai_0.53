@@ -468,6 +468,10 @@ def create_coding_workflow_mcp_server():
                 result = asyncio.run(coding_mcp.get_workflow_overview())
             elif action == 'health_check_all_mcps':
                 result = asyncio.run(coding_mcp.health_check_all_mcps())
+            elif action == 'get_three_node_workflow_dashboard':
+                result = coding_mcp.get_three_node_workflow_dashboard()
+            elif action == 'get_workflow_metrics':
+                result = coding_mcp.get_workflow_metrics()
             else:
                 result = {
                     "success": False,
@@ -495,4 +499,247 @@ if __name__ == '__main__':
     print(f"🎯 功能: 编码流程管理、质量控制、工作流编排")
     
     app.run(host='0.0.0.0', port=8093, debug=False)
+
+
+    
+    def get_three_node_workflow_dashboard(self) -> Dict[str, Any]:
+        """获取三节点工作流Dashboard数据"""
+        try:
+            # 获取Git状态和开发者活动数据
+            git_data = self._get_git_dashboard_data()
+            intervention_data = self._get_intervention_dashboard_data()
+            
+            # 计算三节点状态
+            coding_node = self._calculate_coding_node_status(git_data, intervention_data)
+            editing_node = self._calculate_editing_node_status(git_data, intervention_data)
+            deployment_node = self._calculate_deployment_node_status()
+            
+            # 编码工作流状态卡片数据
+            workflow_card = {
+                "title": "编码工作流",
+                "status": "运行中",
+                "status_color": "success",
+                "metrics": {
+                    "code_quality": {
+                        "value": coding_node["quality_score"],
+                        "label": "代码质量",
+                        "unit": "%"
+                    },
+                    "architecture_compliance": {
+                        "value": intervention_data.get("compliance_score", 92),
+                        "label": "架构合规",
+                        "unit": "%"
+                    },
+                    "daily_commits": {
+                        "value": git_data.get("daily_commits", 0),
+                        "label": "今日提交",
+                        "unit": ""
+                    },
+                    "violations_detected": {
+                        "value": intervention_data.get("violations_today", 0),
+                        "label": "违规检测",
+                        "unit": ""
+                    }
+                }
+            }
+            
+            dashboard_data = {
+                "three_node_workflow": {
+                    "nodes": [
+                        {
+                            "id": "coding",
+                            "name": "编码",
+                            "icon": "code",
+                            "color": "#007AFF",
+                            "status": coding_node["status"],
+                            "progress": coding_node["progress"],
+                            "details": coding_node["details"]
+                        },
+                        {
+                            "id": "editing", 
+                            "name": "编辑",
+                            "icon": "edit",
+                            "color": "#FF8C00",
+                            "status": editing_node["status"],
+                            "progress": editing_node["progress"],
+                            "details": editing_node["details"]
+                        },
+                        {
+                            "id": "deployment",
+                            "name": "部署",
+                            "icon": "rocket",
+                            "color": "#00C851",
+                            "status": deployment_node["status"],
+                            "progress": deployment_node["progress"],
+                            "details": deployment_node["details"]
+                        }
+                    ]
+                },
+                "workflow_card": workflow_card,
+                "real_time_data": {
+                    "git_status": git_data,
+                    "intervention_stats": intervention_data,
+                    "last_updated": datetime.now().isoformat()
+                }
+            }
+            
+            return {
+                "success": True,
+                "dashboard_data": dashboard_data
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ 获取三节点工作流Dashboard失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def _get_git_dashboard_data(self) -> Dict[str, Any]:
+        """获取Git相关的Dashboard数据"""
+        try:
+            # 通过Developer Intervention MCP获取Git数据
+            response = requests.get(
+                "http://localhost:8092/mcp/request",
+                json={"action": "get_dashboard_data", "params": {}},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("success"):
+                    dashboard_data = result.get("dashboard_data", {})
+                    git_status = dashboard_data.get("git_status", {})
+                    activity_summary = dashboard_data.get("activity_summary", {})
+                    
+                    return {
+                        "current_branch": git_status.get("current_branch", "main"),
+                        "uncommitted_changes": len(git_status.get("uncommitted_changes", [])),
+                        "is_clean": git_status.get("is_clean", True),
+                        "daily_commits": activity_summary.get("commits", 0),
+                        "files_modified": activity_summary.get("unique_files", 0),
+                        "last_commit_time": git_status.get("last_commit_time"),
+                        "last_commit_message": git_status.get("last_commit_message", "")
+                    }
+            
+            return {"daily_commits": 0, "files_modified": 0, "is_clean": True}
+            
+        except Exception as e:
+            logger.error(f"获取Git数据失败: {e}")
+            return {"daily_commits": 0, "files_modified": 0, "is_clean": True}
+    
+    def _get_intervention_dashboard_data(self) -> Dict[str, Any]:
+        """获取开发介入相关的Dashboard数据"""
+        try:
+            # 通过Developer Intervention MCP获取介入数据
+            response = requests.post(
+                "http://localhost:8092/mcp/request",
+                json={"action": "get_prevention_stats", "params": {}},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                if result.get("prevention_enabled"):
+                    stats = result.get("prevention_stats", {})
+                    return {
+                        "violations_today": stats.get("violations_prevented_today", 0),
+                        "compliance_score": max(0, 100 - stats.get("violations_prevented_today", 0) * 5),
+                        "auto_fixes_applied": stats.get("auto_fixes_applied", 0),
+                        "total_scans": stats.get("total_scans", 0)
+                    }
+            
+            return {"violations_today": 0, "compliance_score": 95, "auto_fixes_applied": 0}
+            
+        except Exception as e:
+            logger.error(f"获取介入数据失败: {e}")
+            return {"violations_today": 0, "compliance_score": 95, "auto_fixes_applied": 0}
+    
+    def _calculate_coding_node_status(self, git_data: Dict, intervention_data: Dict) -> Dict[str, Any]:
+        """计算编码节点状态"""
+        # 基于Git活动和代码质量计算编码节点状态
+        has_activity = git_data.get("daily_commits", 0) > 0 or git_data.get("files_modified", 0) > 0
+        quality_score = max(85, 100 - intervention_data.get("violations_today", 0) * 3)
+        
+        if has_activity:
+            status = "active"
+            progress = min(100, git_data.get("daily_commits", 0) * 10 + git_data.get("files_modified", 0) * 5)
+        else:
+            status = "idle"
+            progress = 0
+        
+        return {
+            "status": status,
+            "progress": progress,
+            "quality_score": quality_score,
+            "details": {
+                "commits_today": git_data.get("daily_commits", 0),
+                "files_modified": git_data.get("files_modified", 0),
+                "current_branch": git_data.get("current_branch", "main"),
+                "last_commit": git_data.get("last_commit_message", "")[:50] + "..." if git_data.get("last_commit_message", "") else ""
+            }
+        }
+    
+    def _calculate_editing_node_status(self, git_data: Dict, intervention_data: Dict) -> Dict[str, Any]:
+        """计算编辑节点状态"""
+        # 基于未提交更改和自动修复计算编辑节点状态
+        has_uncommitted = git_data.get("uncommitted_changes", 0) > 0
+        auto_fixes = intervention_data.get("auto_fixes_applied", 0)
+        
+        if has_uncommitted or auto_fixes > 0:
+            status = "active"
+            progress = min(100, git_data.get("uncommitted_changes", 0) * 20 + auto_fixes * 10)
+        else:
+            status = "idle"
+            progress = 0
+        
+        return {
+            "status": status,
+            "progress": progress,
+            "details": {
+                "uncommitted_files": git_data.get("uncommitted_changes", 0),
+                "auto_fixes_applied": auto_fixes,
+                "is_clean": git_data.get("is_clean", True),
+                "compliance_score": intervention_data.get("compliance_score", 95)
+            }
+        }
+    
+    def _calculate_deployment_node_status(self) -> Dict[str, Any]:
+        """计算部署节点状态"""
+        # 基于Release Manager状态计算部署节点状态
+        try:
+            response = requests.get("http://localhost:8096/health", timeout=5)
+            if response.status_code == 200:
+                status = "ready"
+                progress = 85
+            else:
+                status = "error"
+                progress = 0
+        except:
+            status = "idle"
+            progress = 0
+        
+        return {
+            "status": status,
+            "progress": progress,
+            "details": {
+                "release_manager_status": status,
+                "deployment_ready": status == "ready",
+                "last_deployment": "2025-06-16 01:00:00"  # 示例数据
+            }
+        }
+    
+    def get_workflow_metrics(self) -> Dict[str, Any]:
+        """获取工作流指标"""
+        try:
+            dashboard_data = self.get_three_node_workflow_dashboard()
+            if dashboard_data["success"]:
+                workflow_card = dashboard_data["dashboard_data"]["workflow_card"]
+                return {
+                    "success": True,
+                    "metrics": workflow_card["metrics"]
+                }
+            else:
+                return dashboard_data
+                
+        except Exception as e:
+            logger.error(f"❌ 获取工作流指标失败: {e}")
+            return {"success": False, "error": str(e)}
 

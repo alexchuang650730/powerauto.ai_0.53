@@ -65,6 +65,9 @@ class DevelopmentInterventionMCP:
             "prevented_commits": 0
         }
         
+        # 初始化Git监控
+        self.git_extension = None
+        
         logger.info(f"🛡️ {self.mcp_id} 初始化完成")
     
     def _initialize_violation_rules(self) -> Dict[str, Dict]:
@@ -293,6 +296,126 @@ class DevelopmentInterventionMCP:
                 "error": str(e)
             }
 
+    # Git监控功能集成
+    def initialize_git_monitoring(self) -> Dict[str, Any]:
+        """初始化Git监控功能"""
+        try:
+            from git_monitor import GitMonitor, DeveloperInterventionMCPExtension
+            
+            # 创建Git监控扩展
+            self.git_extension = DeveloperInterventionMCPExtension(self)
+            
+            logger.info("🔍 Git监控功能已集成")
+            return {
+                "success": True,
+                "message": "Git监控功能初始化成功",
+                "monitoring_status": self.git_extension.get_git_monitoring_status()
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Git监控初始化失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def start_git_monitoring(self) -> Dict[str, Any]:
+        """启动Git监控"""
+        try:
+            if not hasattr(self, 'git_extension') or self.git_extension is None:
+                init_result = self.initialize_git_monitoring()
+                if not init_result["success"]:
+                    return init_result
+            
+            return self.git_extension.git_monitor.start_monitoring()
+            
+        except Exception as e:
+            logger.error(f"❌ 启动Git监控失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def stop_git_monitoring(self) -> Dict[str, Any]:
+        """停止Git监控"""
+        try:
+            if hasattr(self, 'git_extension') and self.git_extension:
+                return self.git_extension.git_monitor.stop_monitoring()
+            else:
+                return {"success": False, "error": "Git监控未初始化"}
+                
+        except Exception as e:
+            logger.error(f"❌ 停止Git监控失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_git_status(self) -> Dict[str, Any]:
+        """获取当前Git状态"""
+        try:
+            if not hasattr(self, 'git_extension') or self.git_extension is None:
+                init_result = self.initialize_git_monitoring()
+                if not init_result["success"]:
+                    return init_result
+            
+            return self.git_extension.git_monitor.get_current_status()
+            
+        except Exception as e:
+            logger.error(f"❌ 获取Git状态失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_checkin_events(self, limit: int = 20) -> Dict[str, Any]:
+        """获取最近的checkin事件"""
+        try:
+            if not hasattr(self, 'git_extension') or self.git_extension is None:
+                return {"success": False, "error": "Git监控未初始化"}
+            
+            return self.git_extension.git_monitor.get_recent_events(limit)
+            
+        except Exception as e:
+            logger.error(f"❌ 获取checkin事件失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_developer_activity_summary(self, hours: int = 24) -> Dict[str, Any]:
+        """获取开发者活动摘要"""
+        try:
+            if not hasattr(self, 'git_extension') or self.git_extension is None:
+                return {"success": False, "error": "Git监控未初始化"}
+            
+            return self.git_extension.git_monitor.get_developer_activity_summary(hours)
+            
+        except Exception as e:
+            logger.error(f"❌ 获取活动摘要失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_dashboard_data(self) -> Dict[str, Any]:
+        """获取dashboard数据"""
+        try:
+            # 获取基础统计信息
+            dashboard_data = {
+                "mcp_info": {
+                    "mcp_id": self.mcp_id,
+                    "version": self.version,
+                    "status": "running"
+                },
+                "intervention_stats": self.intervention_stats,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # 添加Git监控数据
+            if hasattr(self, 'git_extension') and self.git_extension:
+                git_status = self.get_git_status()
+                checkin_events = self.get_checkin_events(10)
+                activity_summary = self.get_developer_activity_summary(24)
+                
+                dashboard_data.update({
+                    "git_status": git_status.get("git_status"),
+                    "recent_checkin_events": checkin_events.get("events", []),
+                    "activity_summary": activity_summary.get("activity_summary"),
+                    "git_monitoring_active": self.git_extension.git_monitor.monitoring
+                })
+            
+            return {
+                "success": True,
+                "dashboard_data": dashboard_data
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ 获取dashboard数据失败: {e}")
+            return {"success": False, "error": str(e)}
+
 # ============================================================================
 # Flask MCP Server
 # ============================================================================
@@ -362,6 +485,20 @@ def create_development_intervention_mcp_server():
                     "intervention_applied": True,
                     "quality_check": "passed"
                 }
+            elif action == 'start_git_monitoring':
+                result = dev_mcp.start_git_monitoring()
+            elif action == 'stop_git_monitoring':
+                result = dev_mcp.stop_git_monitoring()
+            elif action == 'get_git_status':
+                result = dev_mcp.get_git_status()
+            elif action == 'get_checkin_events':
+                limit = params.get('limit', 20)
+                result = dev_mcp.get_checkin_events(limit)
+            elif action == 'get_developer_activity_summary':
+                hours = params.get('hours', 24)
+                result = dev_mcp.get_developer_activity_summary(hours)
+            elif action == 'get_dashboard_data':
+                result = dev_mcp.get_dashboard_data()
             else:
                 result = {
                     "success": False,
@@ -451,5 +588,125 @@ if __name__ == '__main__':
             else:
                 return {"success": False, "error": "配置更新失败"}
         except Exception as e:
+            return {"success": False, "error": str(e)}
+
+    # Git监控功能集成
+    def initialize_git_monitoring(self) -> Dict[str, Any]:
+        """初始化Git监控功能"""
+        try:
+            from git_monitor import GitMonitor, DeveloperInterventionMCPExtension
+            
+            # 创建Git监控扩展
+            self.git_extension = DeveloperInterventionMCPExtension(self)
+            
+            logger.info("🔍 Git监控功能已集成")
+            return {
+                "success": True,
+                "message": "Git监控功能初始化成功",
+                "monitoring_status": self.git_extension.get_git_monitoring_status()
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ Git监控初始化失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def start_git_monitoring(self) -> Dict[str, Any]:
+        """启动Git监控"""
+        try:
+            if not hasattr(self, 'git_extension'):
+                init_result = self.initialize_git_monitoring()
+                if not init_result["success"]:
+                    return init_result
+            
+            return self.git_extension.git_monitor.start_monitoring()
+            
+        except Exception as e:
+            logger.error(f"❌ 启动Git监控失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def stop_git_monitoring(self) -> Dict[str, Any]:
+        """停止Git监控"""
+        try:
+            if hasattr(self, 'git_extension'):
+                return self.git_extension.git_monitor.stop_monitoring()
+            else:
+                return {"success": False, "error": "Git监控未初始化"}
+                
+        except Exception as e:
+            logger.error(f"❌ 停止Git监控失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_git_status(self) -> Dict[str, Any]:
+        """获取当前Git状态"""
+        try:
+            if not hasattr(self, 'git_extension'):
+                init_result = self.initialize_git_monitoring()
+                if not init_result["success"]:
+                    return init_result
+            
+            return self.git_extension.git_monitor.get_current_status()
+            
+        except Exception as e:
+            logger.error(f"❌ 获取Git状态失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_checkin_events(self, limit: int = 20) -> Dict[str, Any]:
+        """获取最近的checkin事件"""
+        try:
+            if not hasattr(self, 'git_extension'):
+                return {"success": False, "error": "Git监控未初始化"}
+            
+            return self.git_extension.git_monitor.get_recent_events(limit)
+            
+        except Exception as e:
+            logger.error(f"❌ 获取checkin事件失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_developer_activity_summary(self, hours: int = 24) -> Dict[str, Any]:
+        """获取开发者活动摘要"""
+        try:
+            if not hasattr(self, 'git_extension'):
+                return {"success": False, "error": "Git监控未初始化"}
+            
+            return self.git_extension.git_monitor.get_developer_activity_summary(hours)
+            
+        except Exception as e:
+            logger.error(f"❌ 获取活动摘要失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    def get_dashboard_data(self) -> Dict[str, Any]:
+        """获取dashboard数据"""
+        try:
+            # 获取基础统计信息
+            dashboard_data = {
+                "mcp_info": {
+                    "mcp_id": self.mcp_id,
+                    "version": self.version,
+                    "status": "running"
+                },
+                "intervention_stats": self.intervention_stats,
+                "timestamp": datetime.now().isoformat()
+            }
+            
+            # 添加Git监控数据
+            if hasattr(self, 'git_extension'):
+                git_status = self.get_git_status()
+                checkin_events = self.get_checkin_events(10)
+                activity_summary = self.get_developer_activity_summary(24)
+                
+                dashboard_data.update({
+                    "git_status": git_status.get("git_status"),
+                    "recent_checkin_events": checkin_events.get("events", []),
+                    "activity_summary": activity_summary.get("activity_summary"),
+                    "git_monitoring_active": self.git_extension.git_monitor.monitoring
+                })
+            
+            return {
+                "success": True,
+                "dashboard_data": dashboard_data
+            }
+            
+        except Exception as e:
+            logger.error(f"❌ 获取dashboard数据失败: {e}")
             return {"success": False, "error": str(e)}
 

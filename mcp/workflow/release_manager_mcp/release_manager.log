@@ -1,0 +1,45 @@
+nohup: ignoring input
+INFO:__main__:✅ Release Manager MCP 初始化完成
+INFO:__main__:🎯 目标部署IP: 98.81.255.168
+INFO:__main__:🚀 启动 Release Manager MCP...
+INFO:__main__:📍 服务地址: http://0.0.0.0:8096
+INFO:__main__:🎯 目标部署IP: 98.81.255.168
+INFO:__main__:🔍 执行启动时部署验证...
+WARNING:__main__:⚠️ IP地址不匹配: 当前 44.213.133.54, 目标 98.81.255.168
+INFO:__main__:🔍 检查服务: mcp_coordinator (端口 8089)
+INFO:__main__:🔍 检查服务: operations_workflow_mcp (端口 8090)
+INFO:__main__:🔍 检查服务: github_mcp (端口 8091)
+INFO:__main__:🔍 检查服务: development_intervention_mcp (端口 8092)
+INFO:__main__:🔍 检查服务: coding_workflow_mcp (端口 8093)
+INFO:__main__:🔍 检查服务: requirements_analysis_mcp (端口 8094)
+INFO:__main__:🔍 检查服务: architecture_design_mcp (端口 8095)
+INFO:__main__:🔍 检查服务: release_manager_mcp (端口 8096)
+INFO:__main__:📊 验证结果: critical
+ * Serving Flask app 'release_manager_mcp'
+ * Debug mode: off
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8096
+ * Running on http://169.254.0.21:8096
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 01:59:22] "GET /health HTTP/1.1" 200 -
+WARNING:__main__:⚠️ IP地址不匹配: 当前 44.213.133.54, 目标 98.81.255.168
+INFO:__main__:🔍 检查服务: mcp_coordinator (端口 8089)
+INFO:__main__:🔍 检查服务: operations_workflow_mcp (端口 8090)
+INFO:__main__:🔍 检查服务: github_mcp (端口 8091)
+INFO:__main__:🔍 检查服务: development_intervention_mcp (端口 8092)
+INFO:__main__:🔍 检查服务: coding_workflow_mcp (端口 8093)
+INFO:__main__:🔍 检查服务: requirements_analysis_mcp (端口 8094)
+INFO:__main__:🔍 检查服务: architecture_design_mcp (端口 8095)
+INFO:__main__:🔍 检查服务: release_manager_mcp (端口 8096)
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:00:16] "POST /api/deployment/verify HTTP/1.1" 200 -
+INFO:__main__:🔍 检查服务: mcp_coordinator (端口 8089)
+INFO:__main__:🔍 检查服务: operations_workflow_mcp (端口 8090)
+INFO:__main__:🔍 检查服务: github_mcp (端口 8091)
+INFO:__main__:🔍 检查服务: development_intervention_mcp (端口 8092)
+INFO:__main__:🔍 检查服务: coding_workflow_mcp (端口 8093)
+INFO:__main__:🔍 检查服务: requirements_analysis_mcp (端口 8094)
+INFO:__main__:🔍 检查服务: architecture_design_mcp (端口 8095)
+INFO:__main__:🔍 检查服务: release_manager_mcp (端口 8096)
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:01:01] "GET /api/services/discover HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [16/Jun/2025 02:38:41] "GET /health HTTP/1.1" 200 -
