@@ -1,0 +1,46 @@
+nohup: ignoring input
+/opt/powerautomation/real_api_server.py:269: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+INFO:     Will watch for changes in these directories: ['/opt/powerautomation']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [33727] using StatReload
+🚀 啟動PowerAutomation Real API Server...
+INFO:     Started server process [33729]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ PowerAutomation Real API Server 已啟動
+📊 測試數據已初始化
+🔗 API文檔: http://localhost:8000/docs
+INFO:     10.142.35.1:45154 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     10.142.35.1:45160 - "GET / HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'smart_ui/api_server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [33729]
+INFO:     Started server process [37069]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+✅ PowerAutomation Real API Server 已啟動
+📊 測試數據已初始化
+🔗 API文檔: http://localhost:8000/docs
+INFO:     10.142.35.1:57434 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     10.142.35.1:57450 - "GET / HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'smart_ui/api_server.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [37069]
+INFO:     Started server process [38861]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [38861]
+INFO:     Stopping reloader process [33727]
