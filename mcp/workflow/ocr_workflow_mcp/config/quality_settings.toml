@@ -1,126 +1,293 @@
 [quality]
-# 质量阈值设置
-min_confidence = 0.8
-min_accuracy = 0.9
-max_processing_time = 300
-target_quality_score = 0.95
+# 质量控制基础设置
+min_confidence = 0.6              # 最低置信度阈值
+target_confidence = 0.8           # 目标置信度
+quality_threshold = 0.7           # 质量通过阈值
+enable_quality_gates = true       # 启用质量门禁
+
+# 质量等级定义
+[quality.levels]
+excellent = { min_score = 0.9, description = "优秀质量" }
+good = { min_score = 0.8, description = "良好质量" }
+acceptable = { min_score = 0.6, description = "可接受质量" }
+poor = { min_score = 0.4, description = "较差质量" }
+unacceptable = { min_score = 0.0, description = "不可接受质量" }
 
 # 质量评估权重
-confidence_weight = 0.4
-accuracy_weight = 0.3
-completeness_weight = 0.2
-readability_weight = 0.1
+[quality.weights]
+confidence_score = 0.4            # 置信度权重
+content_completeness = 0.3        # 内容完整性权重
+structural_integrity = 0.2        # 结构完整性权重
+format_preservation = 0.1         # 格式保持权重
 
-[performance]
-# 性能设置
-enable_caching = true
-cache_ttl = 3600
-enable_compression = true
-max_memory_usage = "2GB"
-gpu_acceleration = true
-parallel_processing = true
-max_workers = 4
+[limits]
+# 文件大小限制
+max_image_size_mb = 50            # 最大图像文件大小(MB)
+min_image_size_kb = 1             # 最小图像文件大小(KB)
+max_image_width = 10000           # 最大图像宽度(像素)
+max_image_height = 10000          # 最大图像高度(像素)
+min_image_width = 50              # 最小图像宽度(像素)
+min_image_height = 50             # 最小图像高度(像素)
 
-# 性能监控
-track_processing_time = true
-track_memory_usage = true
-track_gpu_usage = true
-performance_log_interval = 60
+# 处理时间限制
+max_processing_time = 300         # 最大处理时间(秒)
+max_step_time = 120               # 单步最大时间(秒)
+timeout_warning_threshold = 60    # 超时警告阈值(秒)
 
-[cost_optimization]
-# 成本优化设置
-prefer_local = true
-cost_threshold = 0.01  # 美元
-quality_cost_balance = 0.7  # 0-1之间，越高越偏向质量
-max_cloud_requests_per_hour = 100
+# 重试限制
+max_retry_count = 3               # 最大重试次数
+max_total_retries = 5             # 总最大重试次数
+retry_delay_base = 1.0            # 重试基础延迟(秒)
+retry_delay_multiplier = 2.0      # 重试延迟倍数
 
-# 成本计算
-local_processing_cost = 0.001  # 每次处理成本
-cloud_processing_cost = 0.01   # 云端处理成本
-storage_cost_per_mb = 0.0001   # 存储成本
-
-[fallback]
-# 降级策略
-enable_fallback = true
-fallback_quality_threshold = 0.6
-max_fallback_attempts = 2
-fallback_timeout = 60
-
-# 降级顺序
-fallback_sequence = [
-    "retry_with_preprocessing",
-    "switch_to_alternative_adapter", 
-    "use_multiple_engines",
-    "return_partial_result"
-]
-
-[output_format]
-# 输出格式设置
-default_format = "structured_json"
-include_confidence_scores = true
-include_bounding_boxes = true
-include_metadata = true
-preserve_formatting = true
-
-# 支持的输出格式
-supported_formats = [
-    "plain_text",
-    "structured_json", 
-    "markdown",
-    "html",
-    "xml",
-    "csv"  # 用于表格数据
-]
+# 内容限制
+max_text_length = 100000          # 最大文本长度
+min_text_length = 1               # 最小文本长度
+max_line_count = 10000            # 最大行数
+max_word_count = 50000            # 最大单词数
 
 [preprocessing]
-# 预处理设置
-auto_rotate = true
-auto_crop = true
-enhance_contrast = true
-denoise = true
-binarization_method = "adaptive"
-resize_for_ocr = true
-max_image_size = "10MB"
+# 预处理基础设置
+auto_enhance = true               # 自动增强
+enable_by_default = true          # 默认启用预处理
+skip_high_quality = true          # 跳过高质量图像的预处理
+quality_skip_threshold = 0.9      # 跳过预处理的质量阈值
+
+# 图像质量阈值
+[preprocessing.quality_thresholds]
+denoise_threshold = 0.3           # 去噪阈值
+contrast_threshold = 0.4          # 对比度增强阈值
+sharpness_threshold = 0.5         # 锐化阈值
+brightness_threshold = 0.3        # 亮度调整阈值
 
 # 预处理参数
-contrast_enhancement_factor = 1.2
-noise_reduction_strength = 0.5
-binarization_threshold = 127
+[preprocessing.parameters]
+# 对比度增强
+contrast_enhancement = true
+clahe_clip_limit = 2.0
+clahe_tile_grid_size = [8, 8]
+gamma_correction_range = [0.5, 2.0]
+
+# 去噪设置
+noise_reduction = true
+gaussian_kernel_sizes = [3, 5, 7]
+median_kernel_sizes = [3, 5]
+bilateral_d = 9
+bilateral_sigma_color = 75
+bilateral_sigma_space = 75
+
+# 锐化设置
+sharpening = true
+unsharp_mask_radius = 1.0
+unsharp_mask_amount = 1.5
+unsharp_mask_threshold = 0
+
+# 几何校正
+geometric_correction = true
+deskew_angle_range = [-45, 45]
+rotation_step = 0.1
+perspective_threshold = 0.1
 
 [postprocessing]
-# 后处理设置
-spell_check = true
-grammar_check = false
-format_correction = true
-remove_artifacts = true
-structure_analysis = true
+# 后处理基础设置
+enable_by_default = true          # 默认启用后处理
+aggressive_cleaning = false       # 激进清理模式
 
-# 文本清理
-remove_extra_whitespace = true
-normalize_line_breaks = true
-fix_encoding_issues = true
-remove_ocr_artifacts = true
+# 文本清理设置
+[postprocessing.text_cleaning]
+remove_extra_whitespace = true    # 移除多余空白
+normalize_line_breaks = true      # 标准化换行符
+remove_special_chars = false      # 移除特殊字符
+fix_encoding_issues = true        # 修复编码问题
+remove_noise_chars = true         # 移除噪声字符
+
+# 格式标准化
+[postprocessing.format_standardization]
+normalize_punctuation = true      # 标准化标点符号
+standardize_quotes = true         # 标准化引号
+fix_spacing = true                # 修复间距
+normalize_case = false            # 标准化大小写
+
+# 结构增强
+[postprocessing.structure_enhancement]
+detect_paragraphs = true          # 检测段落
+detect_lists = true               # 检测列表
+detect_tables = true              # 检测表格
+preserve_formatting = true        # 保持格式
+
+# 语言特定设置
+[postprocessing.language_specific]
+[postprocessing.language_specific.chinese]
+traditional_to_simplified = false # 繁体转简体
+punctuation_normalization = true  # 标点符号标准化
+number_format_standardization = true # 数字格式标准化
+
+[postprocessing.language_specific.english]
+capitalization_correction = false # 大小写校正
+contraction_expansion = false     # 缩写展开
+abbreviation_expansion = false    # 缩略语展开
+
+[performance]
+# 性能监控设置
+enable_monitoring = true          # 启用性能监控
+collect_detailed_metrics = true   # 收集详细指标
+enable_profiling = false          # 启用性能分析
+
+# 缓存设置
+[performance.caching]
+enable_result_cache = true        # 启用结果缓存
+cache_ttl = 3600                  # 缓存生存时间(秒)
+max_cache_size = 1000             # 最大缓存条目数
+cache_compression = true          # 缓存压缩
+
+# 并发设置
+[performance.concurrency]
+max_concurrent_requests = 10      # 最大并发请求数
+max_concurrent_steps = 3          # 最大并发步骤数
+thread_pool_size = 4              # 线程池大小
+enable_async_processing = true    # 启用异步处理
+
+# 资源限制
+[performance.resources]
+max_memory_usage_mb = 2048        # 最大内存使用(MB)
+max_cpu_usage_percent = 80        # 最大CPU使用率(%)
+max_gpu_memory_mb = 4096          # 最大GPU内存(MB)
+enable_resource_monitoring = true # 启用资源监控
 
 [language_support]
 # 语言支持设置
-default_languages = ["zh-CN", "zh-TW", "en"]
-auto_language_detection = true
-mixed_language_support = true
+default_language = "auto"         # 默认语言
+enable_auto_detection = true      # 启用自动检测
+fallback_language = "eng"         # 备用语言
 
-# 语言特定优化
-chinese_text_optimization = true
-english_text_optimization = true
-number_recognition_optimization = true
+# 支持的语言列表
+[language_support.supported_languages]
+chinese_simplified = { code = "chi_sim", name = "简体中文", enabled = true }
+chinese_traditional = { code = "chi_tra", name = "繁体中文", enabled = true }
+english = { code = "eng", name = "英语", enabled = true }
+japanese = { code = "jpn", name = "日语", enabled = false }
+korean = { code = "kor", name = "韩语", enabled = false }
+french = { code = "fra", name = "法语", enabled = false }
+german = { code = "deu", name = "德语", enabled = false }
+spanish = { code = "spa", name = "西班牙语", enabled = false }
+
+# 语言检测设置
+[language_support.detection]
+confidence_threshold = 0.8        # 语言检测置信度阈值
+enable_mixed_language = true      # 启用混合语言检测
+max_languages_per_document = 3    # 每个文档最大语言数
+
+[output]
+# 输出格式设置
+default_format = "structured_json" # 默认输出格式
+include_metadata = true           # 包含元数据
+include_confidence = true         # 包含置信度信息
+include_bounding_boxes = false    # 包含边界框信息
+include_timing_info = true        # 包含时间信息
+
+# 输出格式配置
+[output.formats]
+[output.formats.plain_text]
+encoding = "utf-8"
+preserve_line_breaks = true
+include_confidence = false
+
+[output.formats.structured_json]
+pretty_print = true
+include_all_metadata = true
+confidence_precision = 3
+coordinate_precision = 2
+
+[output.formats.xml]
+schema_version = "1.0"
+include_attributes = true
+preserve_hierarchy = true
+encoding = "utf-8"
+
+[output.formats.markdown]
+preserve_formatting = true
+convert_tables = true
+convert_lists = true
+include_metadata_section = true
 
 [security]
 # 安全设置
-data_encryption = true
-secure_deletion = true
-audit_logging = true
-privacy_mode = false
+enable_input_validation = true    # 启用输入验证
+enable_output_sanitization = true # 启用输出清理
+enable_file_type_check = true     # 启用文件类型检查
+enable_virus_scan = false         # 启用病毒扫描
 
-# 数据保护
-max_data_retention_days = 30
-anonymize_sensitive_data = false
-redact_personal_info = false
+# 允许的文件类型
+[security.allowed_file_types]
+extensions = [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"]
+mime_types = [
+    "image/jpeg",
+    "image/png", 
+    "image/bmp",
+    "image/tiff",
+    "application/pdf"
+]
+
+# 安全限制
+[security.limits]
+max_file_uploads_per_hour = 1000  # 每小时最大文件上传数
+max_processing_time_per_user = 3600 # 每用户最大处理时间(秒)
+enable_rate_limiting = true       # 启用速率限制
+rate_limit_requests_per_minute = 60 # 每分钟请求限制
+
+[logging]
+# 日志设置
+level = "INFO"                    # 日志级别
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+enable_file_logging = true        # 启用文件日志
+log_file = "logs/ocr_workflow.log" # 日志文件路径
+
+# 日志轮转设置
+[logging.rotation]
+max_log_size_mb = 10              # 最大日志文件大小(MB)
+backup_count = 5                  # 保留日志文件数量
+rotation_when = "midnight"        # 轮转时间
+rotation_interval = 1             # 轮转间隔
+
+# 日志内容设置
+[logging.content]
+log_requests = true               # 记录请求
+log_responses = false             # 记录响应(可能包含敏感信息)
+log_errors = true                 # 记录错误
+log_performance = true            # 记录性能指标
+log_security_events = true        # 记录安全事件
+
+[monitoring]
+# 监控设置
+enable_health_checks = true       # 启用健康检查
+health_check_interval = 60        # 健康检查间隔(秒)
+enable_metrics_collection = true  # 启用指标收集
+metrics_collection_interval = 30  # 指标收集间隔(秒)
+
+# 告警设置
+[monitoring.alerts]
+enable_alerts = true              # 启用告警
+alert_channels = ["log", "email"] # 告警渠道
+
+# 告警阈值
+[monitoring.alerts.thresholds]
+error_rate = 0.1                  # 错误率阈值
+response_time = 30.0              # 响应时间阈值(秒)
+memory_usage = 0.8                # 内存使用率阈值
+cpu_usage = 0.8                   # CPU使用率阈值
+disk_usage = 0.9                  # 磁盘使用率阈值
+
+[debugging]
+# 调试设置
+enable_debug_mode = false         # 启用调试模式
+save_intermediate_results = false # 保存中间结果
+enable_step_timing = true         # 启用步骤计时
+enable_memory_profiling = false   # 启用内存分析
+
+# 调试输出
+[debugging.output]
+save_preprocessed_images = false  # 保存预处理图像
+save_analysis_results = false     # 保存分析结果
+save_raw_ocr_results = false      # 保存原始OCR结果
+debug_output_dir = "debug/"       # 调试输出目录
 

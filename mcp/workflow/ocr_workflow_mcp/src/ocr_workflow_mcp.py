@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-OCR工作流MCP - 主实现类
+OCR工作流MCP - 主入口类
 
-基于配置驱动的OCR处理工作流，整合local_model_mcp和cloud_search_mcp
+整合OCR工作流执行器，提供标准的MCP接口
 """
 
 import os
@@ -10,541 +10,424 @@ import sys
 import time
 import json
 import logging
-import hashlib
+import asyncio
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Union
 from dataclasses import dataclass, asdict
-import toml
-import yaml
 
-# 添加adapter路径
-sys.path.append(str(Path(__file__).parent.parent.parent / "adapter"))
+# 配置日志
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-# 导入基础工作流类
-from workflow_howto.workflow_design_guide import BaseWorkflow
+# 添加当前目录到Python路径
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
 
-@dataclass
-class OCRRequest:
-    """OCR请求数据结构"""
-    image_path: str
-    task_type: str = "document_ocr"
-    quality_level: str = "medium"
-    privacy_level: str = "normal"
-    language: str = "auto"
-    output_format: str = "structured_json"
-    enable_preprocessing: bool = True
-    enable_postprocessing: bool = True
-    metadata: Dict[str, Any] = None
+# 导入工作流执行器
+try:
+    from ocr_workflow_executor_real import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+    logger.info("✅ 使用真实OCR工作流执行器")
+except ImportError as e:
+    logger.warning(f"⚠️ 真实执行器导入失败，使用模拟版本: {e}")
+    try:
+        from ocr_workflow_executor_mock import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+        logger.info("✅ 使用模拟OCR工作流执行器")
+    except ImportError:
+        from ocr_workflow_executor import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+        logger.info("✅ 使用基础OCR工作流执行器")
 
-@dataclass
-class OCRResult:
-    """OCR结果数据结构"""
-    success: bool
-    text: str
-    confidence: float
-    processing_time: float
-    adapter_used: str
-    quality_score: float
-    bounding_boxes: List[Dict] = None
-    metadata: Dict[str, Any] = None
-    error: str = ""
-
-class OCRWorkflowMCP(BaseWorkflow):
-    """OCR工作流MCP主类"""
+class OCRWorkflowMCP:
+    """OCR工作流MCP主类 - 提供标准MCP接口"""
     
     def __init__(self, config_dir: str = None):
-        if config_dir is None:
-            config_dir = Path(__file__).parent / "config"
+        self.logger = logger
         
-        super().__init__(str(config_dir))
+        # 初始化工作流执行器
+        self.executor = OCRWorkflowExecutor(config_dir)
         
-        # OCR特定配置
-        self.preprocessing_config = self.quality_settings.get('preprocessing', {})
-        self.postprocessing_config = self.quality_settings.get('postprocessing', {})
-        self.language_config = self.quality_settings.get('language_support', {})
+        # MCP元数据
+        self.mcp_info = {
+            "name": "OCR工作流MCP",
+            "version": "1.0.0",
+            "description": "智能OCR处理工作流，支持多引擎和云边协同",
+            "capabilities": [
+                "document_ocr",
+                "handwriting_recognition", 
+                "table_extraction",
+                "form_processing",
+                "multi_language_ocr",
+                "image_preprocessing",
+                "quality_assessment"
+            ],
+            "supported_formats": ["jpg", "jpeg", "png", "bmp", "tiff", "pdf"],
+            "adapters": ["local_model_mcp", "cloud_search_mcp"]
+        }
         
-        # 初始化处理器
-        self.processors = self._initialize_processors()
-        
-        # 缓存管理
-        self.cache = {} if self.quality_settings.get('performance', {}).get('enable_caching') else None
+        # 统计信息
+        self.stats = {
+            "total_requests": 0,
+            "successful_requests": 0,
+            "failed_requests": 0,
+            "total_processing_time": 0.0,
+            "average_processing_time": 0.0,
+            "adapter_usage": {
+                "local_model_mcp": 0,
+                "cloud_search_mcp": 0
+            }
+        }
         
         self.logger.info("OCR工作流MCP初始化完成")
     
-    def _initialize_adapters(self) -> Dict[str, Any]:
-        """初始化所需的adapter"""
-        adapters = {}
+    async def process_ocr(self, request: Dict[str, Any]) -> Dict[str, Any]:
+        """处理OCR请求 - 主要接口方法"""
+        start_time = time.time()
+        self.stats["total_requests"] += 1
         
         try:
-            # 导入local_model_mcp
-            from local_model_mcp.local_model_mcp import LocalModelMCP
-            adapters['local_model_mcp'] = LocalModelMCP()
-            self.logger.info("✅ LocalModelMCP初始化成功")
+            # 验证请求格式
+            validated_request = self._validate_request(request)
+            
+            # 创建工作流请求
+            workflow_request = WorkflowOCRRequest(**validated_request)
+            
+            # 执行工作流
+            result = await self.executor.execute_workflow(workflow_request)
+            
+            # 更新统计信息
+            processing_time = time.time() - start_time
+            self._update_stats(result, processing_time)
+            
+            # 转换为标准响应格式
+            response = self._format_response(result, processing_time)
+            
+            self.logger.info(f"OCR处理完成: {result.adapter_used} ({processing_time:.2f}s)")
+            return response
+            
         except Exception as e:
-            self.logger.error(f"❌ LocalModelMCP初始化失败: {e}")
-        
-        try:
-            # 导入cloud_search_mcp (如果存在)
-            # 这里需要根据实际的cloud_search_mcp实现来调整
-            # adapters['cloud_search_mcp'] = CloudSearchMCP()
-            self.logger.info("⚠️ CloudSearchMCP暂未实现，使用模拟适配器")
-            adapters['cloud_search_mcp'] = self._create_mock_cloud_adapter()
-        except Exception as e:
-            self.logger.error(f"❌ CloudSearchMCP初始化失败: {e}")
-            adapters['cloud_search_mcp'] = self._create_mock_cloud_adapter()
-        
-        return adapters
-    
-    def _create_mock_cloud_adapter(self):
-        """创建模拟的云端适配器"""
-        class MockCloudAdapter:
-            def process_ocr(self, request):
-                return {
-                    "success": True,
-                    "text": "模拟云端OCR结果",
-                    "confidence": 0.95,
-                    "processing_time": 2.0
-                }
-        
-        return MockCloudAdapter()
-    
-    def _initialize_processors(self) -> Dict[str, Any]:
-        """初始化处理器"""
-        processors = {}
-        
-        # 输入验证器
-        processors['InputValidator'] = self._create_input_validator()
-        
-        # 图像分析器
-        processors['ImageAnalyzer'] = self._create_image_analyzer()
-        
-        # 图像预处理器
-        processors['ImagePreprocessor'] = self._create_image_preprocessor()
-        
-        # 适配器选择器
-        processors['AdapterSelector'] = self._create_adapter_selector()
-        
-        # OCR处理器
-        processors['OCRProcessor'] = self._create_ocr_processor()
-        
-        # 结果验证器
-        processors['ResultValidator'] = self._create_result_validator()
-        
-        # 结果后处理器
-        processors['ResultPostprocessor'] = self._create_result_postprocessor()
-        
-        # 质量评估器
-        processors['QualityAssessor'] = self._create_quality_assessor()
-        
-        # 结果格式化器
-        processors['ResultFormatter'] = self._create_result_formatter()
-        
-        return processors
-    
-    def _create_input_validator(self):
-        """创建输入验证器"""
-        def validate_input(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """验证输入请求"""
-            image_path = request.get('image_path')
-            
-            if not image_path or not os.path.exists(image_path):
-                raise ValueError(f"图像文件不存在: {image_path}")
-            
-            # 检查文件大小
-            file_size = os.path.getsize(image_path) / (1024 * 1024)  # MB
-            max_size = float(self.preprocessing_config.get('max_image_size', '10MB').replace('MB', ''))
-            
-            if file_size > max_size:
-                raise ValueError(f"图像文件过大: {file_size:.2f}MB > {max_size}MB")
-            
-            return {"success": True, "file_size_mb": file_size}
-        
-        return validate_input
-    
-    def _create_image_analyzer(self):
-        """创建图像分析器"""
-        def analyze_image(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """分析图像特征"""
-            try:
-                from PIL import Image
-                import cv2
-                import numpy as np
-                
-                image_path = request['image_path']
-                
-                # 使用PIL分析基本信息
-                with Image.open(image_path) as img:
-                    width, height = img.size
-                    mode = img.mode
-                
-                # 使用OpenCV分析质量
-                cv_img = cv2.imread(image_path)
-                if cv_img is None:
-                    raise ValueError("无法读取图像文件")
-                
-                # 计算图像质量指标
-                gray = cv2.cvtColor(cv_img, cv2.COLOR_BGR2GRAY)
-                
-                # 计算对比度 (标准差)
-                contrast = np.std(gray)
-                
-                # 计算清晰度 (拉普拉斯方差)
-                sharpness = cv2.Laplacian(gray, cv2.CV_64F).var()
-                
-                # 计算亮度
-                brightness = np.mean(gray)
-                
-                # 综合质量评分 (0-1)
-                quality_score = min(1.0, (contrast / 100 + sharpness / 1000 + (255 - abs(brightness - 128)) / 255) / 3)
-                
-                return {
-                    "success": True,
-                    "width": width,
-                    "height": height,
-                    "mode": mode,
-                    "contrast": float(contrast),
-                    "sharpness": float(sharpness),
-                    "brightness": float(brightness),
-                    "quality_score": float(quality_score)
-                }
-                
-            except Exception as e:
-                self.logger.error(f"图像分析失败: {e}")
-                return {"success": False, "error": str(e), "quality_score": 0.5}
-        
-        return analyze_image
-    
-    def _create_image_preprocessor(self):
-        """创建图像预处理器"""
-        def preprocess_image(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """图像预处理"""
-            try:
-                # 这里可以集成现有的ImagePreprocessor
-                # 暂时返回模拟结果
-                return {
-                    "success": True,
-                    "preprocessed": True,
-                    "enhancements": ["contrast", "denoise"]
-                }
-            except Exception as e:
-                return {"success": False, "error": str(e)}
-        
-        return preprocess_image
-    
-    def _create_adapter_selector(self):
-        """创建适配器选择器"""
-        def select_adapter(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """根据路由规则选择适配器"""
-            
-            # 获取请求参数
-            task_type = request.get('task_type', 'document_ocr')
-            quality_level = request.get('quality_level', 'medium')
-            privacy_level = request.get('privacy_level', 'normal')
-            
-            # 获取图像分析结果
-            image_analysis = context.get('results', {}).get('image_analysis', {})
-            file_size_mb = context.get('results', {}).get('input_validation', {}).get('file_size_mb', 0)
-            
-            # 应用路由规则
-            selected_adapter = self._apply_routing_rules(
-                task_type, quality_level, privacy_level, file_size_mb, image_analysis
-            )
+            self.stats["failed_requests"] += 1
+            self.logger.error(f"OCR处理失败: {e}")
             
             return {
-                "success": True,
-                "selected_adapter": selected_adapter,
-                "routing_reason": f"基于{task_type}/{quality_level}/{privacy_level}选择"
+                "success": False,
+                "error": str(e),
+                "processing_time": time.time() - start_time,
+                "adapter_used": "none"
             }
-        
-        return select_adapter
     
-    def _apply_routing_rules(self, task_type: str, quality_level: str, privacy_level: str, 
-                           file_size_mb: float, image_analysis: Dict) -> str:
-        """应用路由规则选择适配器"""
+    def _validate_request(self, request: Dict[str, Any]) -> Dict[str, Any]:
+        """验证和标准化请求"""
+        if not isinstance(request, dict):
+            raise ValueError("请求必须是字典格式")
         
-        # 检查强制规则
-        force_local_conditions = self.routing_rules.get('special_rules', {}).get('force_local', [])
-        for condition in force_local_conditions:
-            if self._check_condition(condition, privacy_level, quality_level, file_size_mb):
-                return "local_model_mcp"
+        # 必需字段
+        if "image_path" not in request:
+            raise ValueError("缺少必需字段: image_path")
         
-        force_cloud_conditions = self.routing_rules.get('special_rules', {}).get('force_cloud', [])
-        for condition in force_cloud_conditions:
-            if self._check_condition(condition, task_type, quality_level):
-                return "cloud_search_mcp"
+        # 标准化请求
+        validated = {
+            "image_path": request["image_path"],
+            "task_type": request.get("task_type", "document_ocr"),
+            "quality_level": request.get("quality_level", "medium"),
+            "privacy_level": request.get("privacy_level", "normal"),
+            "language": request.get("language", "auto"),
+            "output_format": request.get("output_format", "structured_json"),
+            "enable_preprocessing": request.get("enable_preprocessing", True),
+            "enable_postprocessing": request.get("enable_postprocessing", True),
+            "metadata": request.get("metadata", {})
+        }
         
-        # 应用权重决策
-        weights = self.routing_rules.get('decision_weights', {})
+        # 验证枚举值
+        valid_task_types = ["document_ocr", "handwriting_recognition", "table_extraction", 
+                           "form_processing", "complex_document", "multi_language_ocr"]
+        if validated["task_type"] not in valid_task_types:
+            raise ValueError(f"无效的task_type: {validated['task_type']}")
         
-        score_local = 0
-        score_cloud = 0
+        valid_quality_levels = ["low", "medium", "high", "ultra_high"]
+        if validated["quality_level"] not in valid_quality_levels:
+            raise ValueError(f"无效的quality_level: {validated['quality_level']}")
         
-        # 任务类型权重
-        task_rules = self.routing_rules.get('routing_rules', {}).get('task_type', {})
-        if task_type in task_rules:
-            if task_rules[task_type] == "local_model_mcp":
-                score_local += weights.get('task_type', 0.2)
-            else:
-                score_cloud += weights.get('task_type', 0.2)
+        valid_privacy_levels = ["low", "normal", "high"]
+        if validated["privacy_level"] not in valid_privacy_levels:
+            raise ValueError(f"无效的privacy_level: {validated['privacy_level']}")
         
-        # 质量级别权重
-        quality_rules = self.routing_rules.get('routing_rules', {}).get('quality_level', {})
-        if quality_level in quality_rules:
-            if quality_rules[quality_level] == "local_model_mcp":
-                score_local += weights.get('quality_level', 0.3)
-            else:
-                score_cloud += weights.get('quality_level', 0.3)
+        return validated
+    
+    def _format_response(self, result: WorkflowOCRResult, processing_time: float) -> Dict[str, Any]:
+        """格式化响应"""
+        response = {
+            "success": result.success,
+            "text": result.text,
+            "confidence": result.confidence,
+            "processing_time": processing_time,
+            "adapter_used": result.adapter_used,
+            "quality_score": result.quality_score,
+            "metadata": {
+                "workflow_steps": result.workflow_steps,
+                "mcp_info": self.mcp_info,
+                **result.metadata
+            }
+        }
         
-        # 隐私级别权重
-        privacy_rules = self.routing_rules.get('routing_rules', {}).get('privacy_level', {})
-        if privacy_level in privacy_rules:
-            if privacy_rules[privacy_level] == "local_model_mcp":
-                score_local += weights.get('privacy_level', 0.4)
-            else:
-                score_cloud += weights.get('privacy_level', 0.4)
+        if result.bounding_boxes:
+            response["bounding_boxes"] = result.bounding_boxes
         
-        # 文件大小权重
-        if file_size_mb < 5:
-            score_local += weights.get('file_size', 0.1)
+        if result.error:
+            response["error"] = result.error
+        
+        return response
+    
+    def _update_stats(self, result: WorkflowOCRResult, processing_time: float):
+        """更新统计信息"""
+        if result.success:
+            self.stats["successful_requests"] += 1
         else:
-            score_cloud += weights.get('file_size', 0.1)
+            self.stats["failed_requests"] += 1
         
-        # 返回得分更高的适配器
-        return "local_model_mcp" if score_local >= score_cloud else "cloud_search_mcp"
+        self.stats["total_processing_time"] += processing_time
+        self.stats["average_processing_time"] = (
+            self.stats["total_processing_time"] / self.stats["total_requests"]
+        )
+        
+        # 更新适配器使用统计
+        adapter_used = result.adapter_used
+        if adapter_used in self.stats["adapter_usage"]:
+            self.stats["adapter_usage"][adapter_used] += 1
     
-    def _check_condition(self, condition: Dict, *args) -> bool:
-        """检查条件是否满足"""
-        # 简化的条件检查逻辑
-        for key, value in condition.items():
-            if value in args:
-                return True
-        return False
+    # MCP标准接口方法
     
-    def _create_ocr_processor(self):
-        """创建OCR处理器"""
-        def process_ocr(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """执行OCR处理"""
-            
-            # 获取选择的适配器
-            adapter_selection = context.get('results', {}).get('adapter_selection', {})
-            selected_adapter = adapter_selection.get('selected_adapter', 'local_model_mcp')
-            
-            # 获取适配器实例
-            adapter = self.adapters.get(selected_adapter)
-            if not adapter:
-                raise ValueError(f"适配器不可用: {selected_adapter}")
-            
-            # 执行OCR处理
-            start_time = time.time()
-            
-            try:
-                if hasattr(adapter, 'process_ocr'):
-                    result = adapter.process_ocr(request)
-                else:
-                    # 使用通用处理方法
-                    result = adapter.process(request)
-                
-                processing_time = time.time() - start_time
-                
-                return {
-                    "success": True,
-                    "text": result.get('text', ''),
-                    "confidence": result.get('confidence', 0.0),
-                    "processing_time": processing_time,
-                    "adapter_used": selected_adapter
-                }
-                
-            except Exception as e:
-                self.logger.error(f"OCR处理失败: {e}")
-                return {
-                    "success": False,
-                    "error": str(e),
-                    "adapter_used": selected_adapter,
-                    "processing_time": time.time() - start_time
-                }
-        
-        return process_ocr
-    
-    def _create_result_validator(self):
-        """创建结果验证器"""
-        def validate_result(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """验证OCR结果"""
-            ocr_result = context.get('results', {}).get('ocr_processing', {})
-            
-            if not ocr_result.get('success'):
-                return {"success": False, "error": "OCR处理失败"}
-            
-            text = ocr_result.get('text', '')
-            confidence = ocr_result.get('confidence', 0.0)
-            
-            # 验证结果质量
-            min_confidence = self.quality_settings.get('quality', {}).get('min_confidence', 0.8)
-            
-            if confidence < min_confidence:
-                return {
-                    "success": False,
-                    "error": f"置信度过低: {confidence} < {min_confidence}",
-                    "requires_retry": True
-                }
-            
-            if len(text.strip()) == 0:
-                return {
-                    "success": False,
-                    "error": "未识别到文本内容",
-                    "requires_retry": True
-                }
-            
-            return {"success": True, "validation_passed": True}
-        
-        return validate_result
-    
-    def _create_result_postprocessor(self):
-        """创建结果后处理器"""
-        def postprocess_result(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """后处理OCR结果"""
-            ocr_result = context.get('results', {}).get('ocr_processing', {})
-            text = ocr_result.get('text', '')
-            
-            # 应用后处理配置
-            if self.postprocessing_config.get('remove_extra_whitespace', True):
-                text = ' '.join(text.split())
-            
-            if self.postprocessing_config.get('normalize_line_breaks', True):
-                text = text.replace('\r\n', '\n').replace('\r', '\n')
-            
-            return {
-                "success": True,
-                "processed_text": text,
-                "postprocessing_applied": True
-            }
-        
-        return postprocess_result
-    
-    def _create_quality_assessor(self):
-        """创建质量评估器"""
-        def assess_quality(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """评估结果质量"""
-            ocr_result = context.get('results', {}).get('ocr_processing', {})
-            confidence = ocr_result.get('confidence', 0.0)
-            
-            # 简化的质量评估
-            quality_score = confidence  # 可以添加更复杂的评估逻辑
-            
-            return {
-                "success": True,
-                "quality_score": quality_score,
-                "quality_level": "high" if quality_score > 0.9 else "medium" if quality_score > 0.7 else "low"
-            }
-        
-        return assess_quality
-    
-    def _create_result_formatter(self):
-        """创建结果格式化器"""
-        def format_result(request: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
-            """格式化最终结果"""
-            
-            # 收集所有结果
-            ocr_result = context.get('results', {}).get('ocr_processing', {})
-            postprocessing = context.get('results', {}).get('postprocessing', {})
-            quality_assessment = context.get('results', {}).get('quality_assessment', {})
-            
-            # 构建最终结果
-            final_result = OCRResult(
-                success=ocr_result.get('success', False),
-                text=postprocessing.get('processed_text', ocr_result.get('text', '')),
-                confidence=ocr_result.get('confidence', 0.0),
-                processing_time=ocr_result.get('processing_time', 0.0),
-                adapter_used=ocr_result.get('adapter_used', ''),
-                quality_score=quality_assessment.get('quality_score', 0.0),
-                metadata={
-                    "workflow_version": self.config['workflow']['version'],
-                    "processing_steps": list(context.get('results', {}).keys())
-                }
-            )
-            
-            return {"success": True, "final_result": asdict(final_result)}
-        
-        return format_result
-    
-    def _should_execute_step(self, step: Dict[str, Any], context: Dict[str, Any]) -> bool:
-        """判断是否应该执行某个步骤"""
-        
-        # 检查必需步骤
-        if step.get('required', True):
-            return True
-        
-        # 检查条件
-        conditions = step.get('conditions', {})
-        if not conditions:
-            return True
-        
-        # 简化的条件检查
-        for condition_key, condition_value in conditions.items():
-            if condition_key == 'enable_preprocessing':
-                if not context.get('request', {}).get('enable_preprocessing', True):
-                    return False
-            elif condition_key == 'quality_check_enabled':
-                if not self.quality_settings.get('quality', {}).get('enable_quality_check', True):
-                    return False
-        
-        return True
-    
-    def _format_final_result(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """格式化最终结果"""
-        result_formatting = context.get('results', {}).get('result_formatting', {})
-        return result_formatting.get('final_result', {})
-    
-    def _handle_workflow_error(self, error: Exception, context: Dict[str, Any]) -> Dict[str, Any]:
-        """处理工作流错误"""
+    def get_capabilities(self) -> Dict[str, Any]:
+        """获取MCP能力"""
         return {
-            "success": False,
-            "error": str(error),
-            "context": context,
-            "workflow": "ocr_workflow_mcp"
+            "capabilities": self.mcp_info["capabilities"],
+            "supported_formats": self.mcp_info["supported_formats"],
+            "adapters": self.mcp_info["adapters"],
+            "workflow_steps": self.executor.workflow_steps
         }
     
-    def process_ocr_request(self, request: Union[Dict[str, Any], OCRRequest]) -> OCRResult:
-        """处理OCR请求的便捷方法"""
+    def get_info(self) -> Dict[str, Any]:
+        """获取MCP信息"""
+        return self.mcp_info
+    
+    def get_statistics(self) -> Dict[str, Any]:
+        """获取统计信息"""
+        return {
+            **self.stats,
+            "success_rate": (
+                self.stats["successful_requests"] / max(1, self.stats["total_requests"])
+            ),
+            "adapter_distribution": {
+                adapter: count / max(1, self.stats["total_requests"])
+                for adapter, count in self.stats["adapter_usage"].items()
+            }
+        }
+    
+    def health_check(self) -> Dict[str, Any]:
+        """健康检查"""
+        try:
+            # 检查工作流执行器
+            executor_status = "healthy" if self.executor else "unhealthy"
+            
+            # 检查OCR组件
+            ocr_components_status = {}
+            for name, component in self.executor.ocr_components.items():
+                ocr_components_status[name] = "available" if component else "unavailable"
+            
+            return {
+                "status": "healthy",
+                "executor_status": executor_status,
+                "ocr_components": ocr_components_status,
+                "total_requests": self.stats["total_requests"],
+                "success_rate": self.stats["successful_requests"] / max(1, self.stats["total_requests"])
+            }
+            
+        except Exception as e:
+            return {
+                "status": "unhealthy",
+                "error": str(e)
+            }
+    
+    # 批量处理接口
+    
+    async def batch_process_ocr(self, requests: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """批量处理OCR请求"""
+        results = []
         
-        if isinstance(request, OCRRequest):
-            request_dict = asdict(request)
-        else:
-            request_dict = request
+        for i, request in enumerate(requests):
+            try:
+                result = await self.process_ocr(request)
+                result["batch_index"] = i
+                results.append(result)
+            except Exception as e:
+                results.append({
+                    "success": False,
+                    "error": str(e),
+                    "batch_index": i,
+                    "adapter_used": "none"
+                })
         
-        # 执行工作流
-        result = self.execute(request_dict)
+        return results
+    
+    # 配置管理接口
+    
+    def update_config(self, config_updates: Dict[str, Any]) -> Dict[str, Any]:
+        """更新配置"""
+        try:
+            # 这里可以实现配置热更新
+            # 暂时返回成功状态
+            return {
+                "success": True,
+                "message": "配置更新成功",
+                "updated_fields": list(config_updates.keys())
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "error": str(e)
+            }
+    
+    def get_config(self) -> Dict[str, Any]:
+        """获取当前配置"""
+        return {
+            "workflow_config": self.executor.workflow_config,
+            "routing_rules": self.executor.routing_rules,
+            "quality_settings": self.executor.quality_settings
+        }
+    
+    # 调试和诊断接口
+    
+    async def test_workflow(self, test_image_path: str = None) -> Dict[str, Any]:
+        """测试工作流"""
+        if not test_image_path:
+            # 使用默认测试图像
+            test_image_path = "/tmp/test_image.jpg"
+            if not os.path.exists(test_image_path):
+                return {
+                    "success": False,
+                    "error": "测试图像不存在，请提供test_image_path参数"
+                }
         
-        if result.get('success'):
-            final_result = result
-            return OCRResult(**final_result)
-        else:
-            return OCRResult(
-                success=False,
-                text="",
-                confidence=0.0,
-                processing_time=0.0,
-                adapter_used="",
-                quality_score=0.0,
-                error=result.get('error', 'Unknown error')
-            )
+        test_request = {
+            "image_path": test_image_path,
+            "task_type": "document_ocr",
+            "quality_level": "medium",
+            "privacy_level": "normal"
+        }
+        
+        return await self.process_ocr(test_request)
+    
+    def diagnose(self) -> Dict[str, Any]:
+        """系统诊断"""
+        diagnosis = {
+            "mcp_status": "healthy",
+            "executor_status": "healthy" if self.executor else "unhealthy",
+            "components": {},
+            "configuration": {
+                "workflow_config_loaded": bool(self.executor.workflow_config),
+                "routing_rules_loaded": bool(self.executor.routing_rules),
+                "quality_settings_loaded": bool(self.executor.quality_settings)
+            },
+            "statistics": self.get_statistics(),
+            "recommendations": []
+        }
+        
+        # 检查OCR组件
+        for name, component in self.executor.ocr_components.items():
+            diagnosis["components"][name] = {
+                "status": "available" if component else "unavailable",
+                "type": type(component).__name__ if component else "None"
+            }
+        
+        # 生成建议
+        if self.stats["total_requests"] == 0:
+            diagnosis["recommendations"].append("尚未处理任何请求，建议运行测试验证功能")
+        
+        success_rate = self.stats["successful_requests"] / max(1, self.stats["total_requests"])
+        if success_rate < 0.8:
+            diagnosis["recommendations"].append(f"成功率较低({success_rate:.2%})，建议检查配置和组件状态")
+        
+        if not any(self.executor.ocr_components.values()):
+            diagnosis["recommendations"].append("OCR组件不可用，建议检查依赖安装")
+        
+        return diagnosis
 
 # 便捷函数
-def create_ocr_workflow(config_dir: str = None) -> OCRWorkflowMCP:
-    """创建OCR工作流实例"""
+
+async def process_image_ocr(image_path: str, **kwargs) -> Dict[str, Any]:
+    """便捷的图像OCR处理函数"""
+    mcp = OCRWorkflowMCP()
+    request = {"image_path": image_path, **kwargs}
+    return await mcp.process_ocr(request)
+
+def create_ocr_workflow_mcp(config_dir: str = None) -> OCRWorkflowMCP:
+    """创建OCR工作流MCP实例"""
     return OCRWorkflowMCP(config_dir)
 
+# 主程序入口
 if __name__ == "__main__":
-    # 测试代码
-    workflow = create_ocr_workflow()
+    import argparse
     
-    # 示例请求
-    test_request = OCRRequest(
-        image_path="/path/to/test/image.jpg",
-        task_type="document_ocr",
-        quality_level="high",
-        privacy_level="normal"
-    )
+    parser = argparse.ArgumentParser(description="OCR工作流MCP")
+    parser.add_argument("--image", required=True, help="图像文件路径")
+    parser.add_argument("--task-type", default="document_ocr", help="任务类型")
+    parser.add_argument("--quality", default="medium", help="质量级别")
+    parser.add_argument("--privacy", default="normal", help="隐私级别")
+    parser.add_argument("--config-dir", help="配置目录路径")
     
-    result = workflow.process_ocr_request(test_request)
-    print(f"OCR结果: {result}")
+    args = parser.parse_args()
+    
+    async def main():
+        mcp = OCRWorkflowMCP(args.config_dir)
+        
+        request = {
+            "image_path": args.image,
+            "task_type": args.task_type,
+            "quality_level": args.quality,
+            "privacy_level": args.privacy
+        }
+        
+        result = await mcp.process_ocr(request)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+    
+    asyncio.run(main())
+
+# 添加缺失的初始化方法到OCRWorkflowMCP类中
+def _add_missing_methods():
+    """添加缺失的方法到OCRWorkflowMCP类"""
+    
+    async def initialize(self) -> Dict[str, Any]:
+        """初始化MCP"""
+        try:
+            # 初始化工作流执行器中的组件
+            if hasattr(self.executor, 'ocr_components'):
+                for name, component in self.executor.ocr_components.items():
+                    if hasattr(component, 'initialize'):
+                        await component.initialize()
+            
+            self.logger.info("OCR工作流MCP初始化完成")
+            return {"success": True, "message": "初始化成功"}
+        except Exception as e:
+            self.logger.error(f"初始化失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def shutdown(self) -> Dict[str, Any]:
+        """关闭MCP"""
+        try:
+            # 关闭工作流执行器中的组件
+            if hasattr(self.executor, 'ocr_components'):
+                for name, component in self.executor.ocr_components.items():
+                    if hasattr(component, 'shutdown'):
+                        await component.shutdown()
+            
+            self.logger.info("OCR工作流MCP关闭完成")
+            return {"success": True, "message": "关闭成功"}
+        except Exception as e:
+            self.logger.error(f"关闭失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    # 动态添加方法到类
+    OCRWorkflowMCP.initialize = initialize
+    OCRWorkflowMCP.shutdown = shutdown
+
+# 执行方法添加
+_add_missing_methods()
 

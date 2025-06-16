@@ -1,32 +1,87 @@
 [workflow]
 name = "OCR处理工作流"
 version = "1.0.0"
-description = "智能OCR处理和文档分析工作流"
+description = "智能OCR处理工作流，支持多引擎和云边协同"
 author = "PowerAutomation Team"
 
-[dependencies]
-adapters = ["local_model_mcp", "cloud_search_mcp"]
-required_models = ["qwen", "mistral", "gemini", "claude", "pixtral"]
-
 [execution]
-timeout = 300  # 秒
-max_retries = 3
-parallel_processing = true
-batch_size = 10
-enable_preprocessing = true
-enable_postprocessing = true
-
-[monitoring]
-enable_logging = true
-log_level = "INFO"
-metrics_collection = true
-performance_tracking = true
-save_intermediate_results = false
-
-[optimization]
+# 执行超时时间(秒)
+timeout = 300
+# 重试次数
+retry_count = 2
+# 是否启用并行处理
+parallel_processing = false
+# 是否启用缓存
 enable_caching = true
-cache_ttl = 3600  # 秒
-enable_compression = true
-max_memory_usage = "2GB"
-gpu_acceleration = true
+# 缓存过期时间(秒)
+cache_ttl = 3600
+
+[adapters]
+# 可用的适配器列表
+available = ["local_model_mcp", "cloud_search_mcp"]
+# 默认适配器
+default = "local_model_mcp"
+# 适配器超时时间
+timeout = 120
+
+[adapters.local_model_mcp]
+# 本地模型适配器配置
+enabled = true
+priority = 1
+max_concurrent = 3
+# 支持的引擎
+engines = ["tesseract", "easyocr", "paddleocr", "mistral"]
+# 默认引擎
+default_engine = "tesseract"
+
+[adapters.cloud_search_mcp]
+# 云端搜索适配器配置
+enabled = true
+priority = 2
+max_concurrent = 5
+# API配置
+api_timeout = 60
+max_retries = 3
+
+[logging]
+# 日志级别
+level = "INFO"
+# 日志格式
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+# 是否启用文件日志
+enable_file_logging = true
+# 日志文件路径
+log_file = "logs/ocr_workflow.log"
+# 日志轮转大小(MB)
+max_log_size = 10
+# 保留日志文件数量
+backup_count = 5
+
+[performance]
+# 性能监控配置
+enable_monitoring = true
+# 统计信息保存间隔(秒)
+stats_save_interval = 300
+# 性能报告生成间隔(秒)
+report_interval = 3600
+
+[security]
+# 安全配置
+enable_input_validation = true
+# 允许的文件扩展名
+allowed_extensions = [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"]
+# 最大文件大小(MB)
+max_file_size = 50
+# 是否启用文件类型检查
+enable_file_type_check = true
+
+[integration]
+# 与其他MCP的集成配置
+enable_mcp_coordinator = true
+# MCP协调器地址
+coordinator_url = "http://localhost:8080"
+# 注册超时时间(秒)
+registration_timeout = 30
+# 心跳间隔(秒)
+heartbeat_interval = 60
 
