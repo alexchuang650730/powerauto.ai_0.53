@@ -15,16 +15,26 @@ from pathlib import Path
 from typing import Dict, Any, List, Optional, Union
 from dataclasses import dataclass, asdict
 
-# 导入工作流执行器
-try:
-    from ocr_workflow_executor import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
-except ImportError:
-    # 如果原始执行器导入失败，使用模拟版本
-    from ocr_workflow_executor_mock import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
-
 # 配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+# 添加当前目录到Python路径
+current_dir = Path(__file__).parent
+sys.path.insert(0, str(current_dir))
+
+# 导入工作流执行器
+try:
+    from ocr_workflow_executor_real import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+    logger.info("✅ 使用真实OCR工作流执行器")
+except ImportError as e:
+    logger.warning(f"⚠️ 真实执行器导入失败，使用模拟版本: {e}")
+    try:
+        from ocr_workflow_executor_mock import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+        logger.info("✅ 使用模拟OCR工作流执行器")
+    except ImportError:
+        from ocr_workflow_executor import OCRWorkflowExecutor, WorkflowOCRRequest, WorkflowOCRResult
+        logger.info("✅ 使用基础OCR工作流执行器")
 
 class OCRWorkflowMCP:
     """OCR工作流MCP主类 - 提供标准MCP接口"""
@@ -379,4 +389,45 @@ if __name__ == "__main__":
         print(json.dumps(result, indent=2, ensure_ascii=False))
     
     asyncio.run(main())
+
+# 添加缺失的初始化方法到OCRWorkflowMCP类中
+def _add_missing_methods():
+    """添加缺失的方法到OCRWorkflowMCP类"""
+    
+    async def initialize(self) -> Dict[str, Any]:
+        """初始化MCP"""
+        try:
+            # 初始化工作流执行器中的组件
+            if hasattr(self.executor, 'ocr_components'):
+                for name, component in self.executor.ocr_components.items():
+                    if hasattr(component, 'initialize'):
+                        await component.initialize()
+            
+            self.logger.info("OCR工作流MCP初始化完成")
+            return {"success": True, "message": "初始化成功"}
+        except Exception as e:
+            self.logger.error(f"初始化失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    async def shutdown(self) -> Dict[str, Any]:
+        """关闭MCP"""
+        try:
+            # 关闭工作流执行器中的组件
+            if hasattr(self.executor, 'ocr_components'):
+                for name, component in self.executor.ocr_components.items():
+                    if hasattr(component, 'shutdown'):
+                        await component.shutdown()
+            
+            self.logger.info("OCR工作流MCP关闭完成")
+            return {"success": True, "message": "关闭成功"}
+        except Exception as e:
+            self.logger.error(f"关闭失败: {e}")
+            return {"success": False, "error": str(e)}
+    
+    # 动态添加方法到类
+    OCRWorkflowMCP.initialize = initialize
+    OCRWorkflowMCP.shutdown = shutdown
+
+# 执行方法添加
+_add_missing_methods()
 
